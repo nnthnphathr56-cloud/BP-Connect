@@ -14,24 +14,27 @@
 
     @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&family=Sarabun:wght@300;400;500;600;700&display=swap');
 
+    /* Leaflet CSS */
+    @import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+
     /* ===== CSS Variables ===== */
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #111118;
-      --bg-card: rgba(255, 255, 255, 0.03);
-      --bg-glass: rgba(255, 255, 255, 0.05);
-      --text-primary: #ffffff;
-      --text-secondary: #a0a0b0;
-      --text-muted: #6a6a7a;
-      --accent-gold: #c9a84c;
-      --accent-gold-light: #e8d48b;
+      --bg-primary: #f5f5fa;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-glass: rgba(255, 255, 255, 0.85);
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a5e;
+      --text-muted: #888899;
+      --accent-gold: #7e57c2;
+      --accent-gold-light: #b085f5;
       --accent-silver: #b8b8c8;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-gold: rgba(201, 168, 76, 0.3);
-      --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.5);
-      --shadow-glow: 0 0 40px rgba(201, 168, 76, 0.1);
-      --gradient-gold: linear-gradient(135deg, #c9a84c, #e8d48b, #c9a84c);
-      --gradient-dark: linear-gradient(180deg, #0a0a0f 0%, #15151f 100%);
+      --border-subtle: rgba(0, 0, 0, 0.1);
+      --border-gold: rgba(126, 87, 194, 0.3);
+      --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.08);
+      --shadow-glow: 0 0 40px rgba(126, 87, 194, 0.15);
+      --gradient-gold: linear-gradient(135deg, #7e57c2, #b085f5, #7e57c2);
+      --gradient-dark: linear-gradient(180deg, #f5f5fa 0%, #e8e8f0 100%);
       --radius-sm: 8px;
       --radius-md: 12px;
       --radius-lg: 20px;
@@ -343,7 +346,8 @@
     }
 
     /* ===== LOGIN PAGE ===== */
-    #loginPage {
+    #loginPage,
+    #citizenLoginPage {
       align-items: center;
       justify-content: center;
       padding: 2rem;
@@ -448,8 +452,8 @@
 
     .btn-gold {
       background: var(--gradient-gold);
-      color: #1a1a2e;
-      box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(126, 87, 194, 0.3);
     }
 
     .btn-gold:hover {
@@ -644,6 +648,118 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1rem;
+    }
+
+    /* ===== Live Sync Indicator ===== */
+    .sync-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .sync-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #9e9e9e;
+      flex-shrink: 0;
+    }
+
+    .sync-indicator.sync-online .sync-dot {
+      background: #4caf50;
+      box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.6);
+      animation: syncPulse 2s ease-out infinite;
+    }
+
+    .sync-indicator.sync-syncing .sync-dot {
+      background: #c9a84c;
+      animation: syncSpin 0.8s linear infinite;
+    }
+
+    .sync-indicator.sync-offline .sync-dot {
+      background: #e57373;
+    }
+
+    @keyframes syncPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.5);
+      }
+
+      70% {
+        box-shadow: 0 0 0 6px rgba(76, 175, 80, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+      }
+    }
+
+    @keyframes syncSpin {
+
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scale(0.85);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    }
+
+    /* ===== Report Photo Thumbnails & Map Link ===== */
+    .report-photo-strip {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0.6rem 0;
+      flex-wrap: wrap;
+    }
+
+    .report-photo-thumb {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .report-photo-thumb:hover {
+      border-color: var(--border-gold);
+      background: rgba(201, 168, 76, 0.2);
+      transform: scale(1.08);
+    }
+
+    .report-map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.72rem;
+      color: var(--accent-gold);
+      text-decoration: none;
+      margin: 0.3rem 0;
+      border-bottom: 1px dashed rgba(201, 168, 76, 0.5);
+    }
+
+    .report-map-link:hover {
+      opacity: 0.75;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      animation: fadeIn 0.4s ease;
     }
 
     .section-title {
@@ -2439,6 +2555,8 @@
       }
     }
   </style>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 
 <body>
@@ -2694,6 +2812,8 @@
       <div class="citizen-subpage" id="citizenTracking">
         <div class="section-header">
           <h2 class="section-title">ติดตามสถานะการแจ้งปัญหา</h2>
+          <span class="sync-indicator sync-syncing"><span class="sync-dot"></span><span
+              class="sync-label">กำลังซิงค์...</span></span>
         </div>
         <div class="info-banner">
           <span class="info-banner-icon">📋</span>
@@ -2710,38 +2830,6 @@
 
         <!-- Tracking List -->
         <div class="status-list" id="citizenTrackingList">
-          <div class="status-card">
-            <span class="status-emoji">🔥</span>
-            <div class="status-info">
-              <div class="status-title">จุดไฟเผาขยะ หมู่ 5 (REF-45210)</div>
-              <div class="status-desc">เมื่อ 2 วันที่แล้ว · สำนักช่าง</div>
-            </div>
-            <span class="status-badge badge-progress">กำลังดำเนินการ</span>
-          </div>
-          <div class="status-card">
-            <span class="status-emoji">💡</span>
-            <div class="status-info">
-              <div class="status-title">ไฟฟ้าดับ ซอย ม.3 (REF-89234)</div>
-              <div class="status-desc">เมื่อ 5 วันที่แล้ว · กองช่าง</div>
-            </div>
-            <span class="status-badge badge-done">เสร็จสิ้น</span>
-          </div>
-          <div class="status-card">
-            <span class="status-emoji">🐕</span>
-            <div class="status-info">
-              <div class="status-title">สุนัขจรจัด ตลาดสด (REF-12345)</div>
-              <div class="status-desc">เมื่อ 1 วันที่แล้ว · กองสาธารณสุข</div>
-            </div>
-            <span class="status-badge badge-pending">รอตรวจสอบ</span>
-          </div>
-          <div class="status-card">
-            <span class="status-emoji">🌿</span>
-            <div class="status-info">
-              <div class="status-title">ทิ้งขยะริมทาง (REF-56789)</div>
-              <div class="status-desc">เมื่อ 1 สัปดาห์ที่แล้ว · กองสาธารณสุข</div>
-            </div>
-            <span class="status-badge badge-done">เสร็จสิ้น</span>
-          </div>
         </div>
       </div>
 
@@ -2808,9 +2896,10 @@
         <div class="section-header" style="margin-top:1.5rem;">
           <h2 class="section-title">ตารางนัดหมายและบริการ</h2>
         </div>
-        
+
         <div class="expandable-card">
-          <div class="expandable-header" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
+          <div class="expandable-header"
+            onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
             <div style="flex:1;">
               <div style="font-weight:600; font-size:0.9rem;">💉 ตารางฉีดวัคซีน</div>
             </div>
@@ -2818,17 +2907,32 @@
           </div>
           <div class="expandable-body">
             <table class="detail-table">
-              <thead><tr><th>วันที่</th><th>สถานที่</th><th>วัคซีน</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>วันที่</th>
+                  <th>สถานที่</th>
+                  <th>วัคซีน</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>15 ก.ค. 69</td><td>รพ.สต. บ้านไผ่</td><td>ไข้หวัดใหญ่</td></tr>
-                <tr><td>20 ก.ค. 69</td><td>ศาลาชุมชน ม.3</td><td>พิษสุนัขบ้า</td></tr>
+                <tr>
+                  <td>15 ก.ค. 69</td>
+                  <td>รพ.สต. บ้านไผ่</td>
+                  <td>ไข้หวัดใหญ่</td>
+                </tr>
+                <tr>
+                  <td>20 ก.ค. 69</td>
+                  <td>ศาลาชุมชน ม.3</td>
+                  <td>พิษสุนัขบ้า</td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
 
         <div class="expandable-card">
-          <div class="expandable-header" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
+          <div class="expandable-header"
+            onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
             <div style="flex:1;">
               <div style="font-weight:600; font-size:0.9rem;">🏥 ตารางออกเยี่ยมผู้ป่วย</div>
             </div>
@@ -2836,17 +2940,32 @@
           </div>
           <div class="expandable-body">
             <table class="detail-table">
-              <thead><tr><th>วันที่</th><th>พื้นที่</th><th>เจ้าหน้าที่</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>วันที่</th>
+                  <th>พื้นที่</th>
+                  <th>เจ้าหน้าที่</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>ทุกวันอังคาร</td><td>หมู่ 1 - หมู่ 3</td><td>ทีม อสม. ชุดที่ 1</td></tr>
-                <tr><td>ทุกวันพฤหัสบดี</td><td>หมู่ 4 - หมู่ 6</td><td>ทีม อสม. ชุดที่ 2</td></tr>
+                <tr>
+                  <td>ทุกวันอังคาร</td>
+                  <td>หมู่ 1 - หมู่ 3</td>
+                  <td>ทีม อสม. ชุดที่ 1</td>
+                </tr>
+                <tr>
+                  <td>ทุกวันพฤหัสบดี</td>
+                  <td>หมู่ 4 - หมู่ 6</td>
+                  <td>ทีม อสม. ชุดที่ 2</td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
 
         <div class="expandable-card">
-          <div class="expandable-header" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
+          <div class="expandable-header"
+            onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
             <div style="flex:1;">
               <div style="font-weight:600; font-size:0.9rem;">🩺 ตารางตรวจสุขภาพประจำเดือน</div>
             </div>
@@ -2854,10 +2973,24 @@
           </div>
           <div class="expandable-body">
             <table class="detail-table">
-              <thead><tr><th>กิจกรรม</th><th>วันที่/เวลา</th><th>สถานที่</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>กิจกรรม</th>
+                  <th>วันที่/เวลา</th>
+                  <th>สถานที่</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>ตรวจเบาหวาน/ความดัน</td><td>10 ส.ค. 08:00</td><td>รพ.สต.</td></tr>
-                <tr><td>ตรวจพัฒนาการเด็ก</td><td>15 ส.ค. 09:00</td><td>ศูนย์เด็กเล็กฯ</td></tr>
+                <tr>
+                  <td>ตรวจเบาหวาน/ความดัน</td>
+                  <td>10 ส.ค. 08:00</td>
+                  <td>รพ.สต.</td>
+                </tr>
+                <tr>
+                  <td>ตรวจพัฒนาการเด็ก</td>
+                  <td>15 ส.ค. 09:00</td>
+                  <td>ศูนย์เด็กเล็กฯ</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -3509,14 +3642,13 @@
         </div>
 
         <div class="map-container" id="mapContainer"
-          style="height: 300px; padding: 0; overflow: hidden; position: relative;">
+          style="height: 300px; padding: 0; overflow: hidden; position: relative; z-index: 1;">
           <div class="map-placeholder" id="mapPlaceholder"
             style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(30,30,40,0.8); z-index: 2;">
             <span class="map-placeholder-icon" style="cursor:pointer;" onclick="initMap()">📍</span>
             <span class="map-placeholder-text">กำลังโหลดแผนที่...</span>
           </div>
-          <iframe id="googleMapIframe" width="100%" height="100%" frameborder="0" style="border:0; display: none;"
-            allowfullscreen></iframe>
+          <div id="leafletMap" style="width: 100%; height: 100%; display: none; z-index: 1;"></div>
         </div>
 
         <input type="hidden" id="reportLat">
@@ -3838,6 +3970,8 @@
       <div class="officer-section" id="officerTasks">
         <div class="section-header">
           <h2 class="section-title">งานที่ได้รับมอบหมาย</h2>
+          <span class="sync-indicator sync-syncing"><span class="sync-dot"></span><span
+              class="sync-label">กำลังซิงค์...</span></span>
         </div>
 
         <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
@@ -3854,61 +3988,7 @@
           <button class="filter-chip">เสร็จสิ้น</button>
         </div>
 
-        <div class="task-card" style="animation-delay: 0.1s;">
-          <div class="task-card-header">
-            <div class="task-card-title">🕳️ ถนนชำรุด ซอย 5</div>
-            <span class="status-badge badge-urgent">เร่งด่วน</span>
-          </div>
-          <div class="task-card-body">
-            <strong>ผู้แจ้ง:</strong> นายสมศักดิ์ ใจดี<br>
-            <strong>หน่วยงาน:</strong> กองช่าง<br>
-            <strong>เริ่มดำเนินการ:</strong> 15 มิ.ย. 2569
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 60%;"></div>
-          </div>
-          <div class="task-card-footer">
-            <span class="task-card-meta">📍 ต.บ้านไผ่ อ.บ้านไผ่</span>
-            <span class="task-card-meta">⏱️ กำหนด 5 วัน</span>
-          </div>
-        </div>
-
-        <div class="task-card" style="animation-delay: 0.2s;">
-          <div class="task-card-header">
-            <div class="task-card-title">💡 ไฟฟ้าดับ หมู่ 3</div>
-            <span class="status-badge badge-done">เสร็จสิ้น</span>
-          </div>
-          <div class="task-card-body">
-            <strong>ผู้แจ้ง:</strong> นางมาลี รักสงบ<br>
-            <strong>หน่วยงาน:</strong> กองช่าง<br>
-            <strong>เสร็จสิ้น:</strong> 13 มิ.ย. 2569 (2 วัน)
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 100%; background: linear-gradient(90deg, #4caf50, #81c784);"></div>
-          </div>
-          <div class="task-card-footer">
-            <span class="task-card-meta">📍 ต.ในเมือง อ.บ้านไผ่</span>
-            <span class="task-card-meta">✅ สำเร็จ</span>
-          </div>
-        </div>
-
-        <div class="task-card" style="animation-delay: 0.3s;">
-          <div class="task-card-header">
-            <div class="task-card-title">🗑️ ขยะตกค้าง ตลาดสด</div>
-            <span class="status-badge badge-pending">รอรับงาน</span>
-          </div>
-          <div class="task-card-body">
-            <strong>ผู้แจ้ง:</strong> นายวิชัย ใสสะอาด<br>
-            <strong>หน่วยงาน:</strong> กองสาธารณสุข<br>
-            <strong>วันที่แจ้ง:</strong> 17 มิ.ย. 2569
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 0%;"></div>
-          </div>
-          <div class="task-card-footer">
-            <span class="task-card-meta">📍 ต.เมืองเพีย อ.บ้านไผ่</span>
-            <span class="task-card-meta">⏱️ ยังไม่เริ่ม</span>
-          </div>
+        <div id="officerTasksList" style="margin-top: 1rem;">
         </div>
       </div>
 
@@ -4116,58 +4196,7 @@
           <span class="section-link" onclick="switchExecSection('tracking')">ดูทั้งหมด →</span>
         </div>
 
-        <div class="expandable-card">
-          <div class="expandable-header"
-            onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
-            <div style="flex:1;">
-              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.2rem;">
-                <span style="font-weight:600; font-size:0.9rem;">🕳️ ถนนชำรุด ซอย 5</span>
-                <span class="status-badge badge-urgent">เร่งด่วน</span>
-              </div>
-              <div style="font-size:0.7rem; color:var(--text-muted);">หน่วยงาน: กองช่าง · ⏱️ เหลือ 1 วัน</div>
-            </div>
-            <span class="expand-arrow">▼</span>
-          </div>
-          <div class="expandable-body open">
-            <div class="task-card-body" style="padding:0; margin-bottom:1rem; border:none; background:transparent;">
-              ผู้รับผิดชอบ: นายสมชาย วิศวกร<br>
-              สถานะ: กำลังเทคอนกรีต ดำเนินการ 60%
-              <div class="tag-row">
-                <span class="tag tag-red">อันตรายสูง</span>
-                <span class="tag">ผู้บริหารติดตาม</span>
-              </div>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 60%;"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="expandable-card">
-          <div class="expandable-header"
-            onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
-            <div style="flex:1;">
-              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.2rem;">
-                <span style="font-weight:600; font-size:0.9rem;">🚰 น้ำประปาไม่ไหล ม.7</span>
-                <span class="status-badge badge-progress">กำลังดำเนินการ</span>
-              </div>
-              <div style="font-size:0.7rem; color:var(--text-muted);">หน่วยงาน: กองการประปา · ⏱️ เหลือ 3 วัน</div>
-            </div>
-            <span class="expand-arrow">▼</span>
-          </div>
-          <div class="expandable-body">
-            <div class="task-card-body" style="padding:0; margin-bottom:1rem; border:none; background:transparent;">
-              ผู้รับผิดชอบ: นายประเสริฐ ช่างน้ำ<br>
-              สถานะ: ตรวจสอบท่อน้ำ รอสั่งอะไหล่
-              <div class="tag-row">
-                <span class="tag tag-blue">รออะไหล่</span>
-              </div>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 35%;"></div>
-            </div>
-          </div>
-        </div>
+        <div id="execOverviewList"></div>
       </div>
 
       <!-- ===== EXEC: ติดตามปัญหา (Tracking) ===== -->
@@ -4200,95 +4229,7 @@
           <button class="filter-chip">เสร็จสิ้น</button>
         </div>
 
-        <div class="tracking-card">
-          <div class="tracking-header">
-            <div class="tracking-title">🕳️ ถนนชำรุด ซอย 5</div>
-            <span class="status-badge badge-urgent">เร่งด่วน</span>
-          </div>
-          <div class="tracking-body">
-            <strong>หน่วยงาน:</strong> กองช่าง · <strong>ผู้รับผิดชอบ:</strong> นายสมชาย วิศวกร<br>
-            <strong>สถานะ:</strong> กำลังเทคอนกรีต ดำเนินการ 60%
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 60%;"></div>
-          </div>
-          <div class="tracking-footer">
-            <span>📅 15 - 18 มิ.ย. 69</span>
-            <span>⏱️ เหลือ 1 วัน</span>
-          </div>
-        </div>
-
-        <div class="tracking-card">
-          <div class="tracking-header">
-            <div class="tracking-title">🚰 น้ำประปาไม่ไหล ม.7</div>
-            <span class="status-badge badge-progress">กำลังดำเนินการ</span>
-          </div>
-          <div class="tracking-body">
-            <strong>หน่วยงาน:</strong> กองการประปา · <strong>ผู้รับผิดชอบ:</strong> นายประเสริฐ ช่างน้ำ<br>
-            <strong>สถานะ:</strong> ตรวจสอบท่อน้ำ รอสั่งอะไหล่
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 35%;"></div>
-          </div>
-          <div class="tracking-footer">
-            <span>📅 14 - 21 มิ.ย. 69</span>
-            <span>⏱️ เหลือ 3 วัน</span>
-          </div>
-        </div>
-
-        <div class="tracking-card">
-          <div class="tracking-header">
-            <div class="tracking-title">🗑️ ขยะตกค้าง ตลาดสด</div>
-            <span class="status-badge badge-pending">รอดำเนินการ</span>
-          </div>
-          <div class="tracking-body">
-            <strong>หน่วยงาน:</strong> กองสาธารณสุข · <strong>ผู้รับผิดชอบ:</strong> ยังไม่มอบหมาย<br>
-            <strong>สถานะ:</strong> รอมอบหมายเจ้าหน้าที่
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 0%;"></div>
-          </div>
-          <div class="tracking-footer">
-            <span>📅 แจ้งเมื่อ 17 มิ.ย. 69</span>
-            <span>⏱️ ยังไม่เริ่ม</span>
-          </div>
-        </div>
-
-        <div class="tracking-card">
-          <div class="tracking-header">
-            <div class="tracking-title">💡 ไฟฟ้าดับซอย 12 ม.4</div>
-            <span class="status-badge badge-done">เสร็จสิ้น</span>
-          </div>
-          <div class="tracking-body">
-            <strong>หน่วยงาน:</strong> กองช่าง · <strong>ผู้รับผิดชอบ:</strong> นายวิชัย ช่างไฟ<br>
-            <strong>สถานะ:</strong> เปลี่ยนหลอดไฟเสร็จเรียบร้อย
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 100%; background: linear-gradient(90deg, #4caf50, #81c784);"></div>
-          </div>
-          <div class="tracking-footer">
-            <span>📅 10 - 12 มิ.ย. 69</span>
-            <span>✅ เสร็จสิ้น 2 วัน</span>
-          </div>
-        </div>
-
-        <div class="tracking-card">
-          <div class="tracking-header">
-            <div class="tracking-title">🌳 ต้นไม้ล้มขวางถนน ม.2</div>
-            <span class="status-badge badge-done">เสร็จสิ้น</span>
-          </div>
-          <div class="tracking-body">
-            <strong>หน่วยงาน:</strong> กองสาธารณสุข · <strong>ผู้รับผิดชอบ:</strong> ทีมงานภาคสนาม<br>
-            <strong>สถานะ:</strong> ตัดต้นไม้และเก็บกิ่งเสร็จ
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 100%; background: linear-gradient(90deg, #4caf50, #81c784);"></div>
-          </div>
-          <div class="tracking-footer">
-            <span>📅 8 มิ.ย. 69</span>
-            <span>✅ เสร็จภายในวัน</span>
-          </div>
-        </div>
+        <div id="execTrackingList"></div>
       </div>
 
       <!-- ===== EXEC: ประสิทธิภาพ (Performance) ===== -->
@@ -5044,7 +4985,7 @@
             <span class="map-placeholder-text">กดเพื่อแนบรูปภาพ</span>
           </div>
         </div>
-        <input type="file" id="drugsPhoto" accept="image/*" style="display:none;">
+        <input type="file" id="drugsPhoto" accept="image/*" style="display:none;" onchange="markPhotoSelected('drugs')">
       </div>
       <div class="form-group" style="display: none;">
         <!-- Hidden as citizen info is already collected -->
@@ -5100,7 +5041,7 @@
             <span class="map-placeholder-text">กดเพื่อแนบรูปภาพ</span>
           </div>
         </div>
-        <input type="file" id="envPhoto" accept="image/*" style="display:none;">
+        <input type="file" id="envPhoto" accept="image/*" style="display:none;" onchange="markPhotoSelected('env')">
       </div>
       <div class="form-group" style="display: none;">
         <!-- Hidden as citizen info is already collected -->
@@ -5161,7 +5102,8 @@
             <span class="map-placeholder-text">กดเพื่อแนบรูปภาพ</span>
           </div>
         </div>
-        <input type="file" id="pollutionPhoto" accept="image/*" style="display:none;">
+        <input type="file" id="pollutionPhoto" accept="image/*" style="display:none;"
+          onchange="markPhotoSelected('pollution')">
       </div>
       <div class="form-group" style="display: none;">
         <!-- Hidden as citizen info is already collected -->
@@ -5223,7 +5165,8 @@
             <span class="map-placeholder-text">กดเพื่อแนบรูปภาพ</span>
           </div>
         </div>
-        <input type="file" id="diseasePhoto" accept="image/*" style="display:none;">
+        <input type="file" id="diseasePhoto" accept="image/*" style="display:none;"
+          onchange="markPhotoSelected('disease')">
       </div>
       <div class="form-group" style="display: none;">
         <!-- Hidden as citizen info is already collected -->
@@ -5241,6 +5184,7 @@
        ============================================ */
 
     // ===== State Management =====
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwEl_6mMKP2RdaN_Ki5Dkl21QsGpmt8yOuFzydmhCRQMV7KQlliC56wYGQO-QBR3cnO/exec';
     let currentPage = 'homePage';
     let loginRole = '';
     let reportStep = 1;
@@ -5377,8 +5321,23 @@
       // Update dash nav
       document.querySelector('.dash-nav-title').textContent = `สวัสดี ${name}`;
 
+      // Send data to Google App Script
+      fetch(API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'citizenLogin',
+          name: name,
+          phone: phone,
+          community: community,
+          tambon: tambon
+        })
+      }).catch(err => console.error('App Script Error:', err));
+
       showToast('✅', `ยินดีต้อนรับ ${name}`);
       navigateTo('citizenDash');
+      syncReports();
     }
 
     // ===== Citizen Tab Switching =====
@@ -5560,19 +5519,374 @@
       }
     }
 
-    function submitReport() {
-      // Citizen info is collected at login
-      if (!window.citizenData) {
-        showToast('⚠️', 'ไม่พบข้อมูลประชาชน กรุณาเข้าสู่ระบบใหม่');
-        return;
+    // ===== Real-time Backend Sync =====
+    // Reports now live in the Google Sheet ("Reports" tab) and are fetched from
+    // every device, so citizens, officers, and executives all see the same data.
+    let isSyncing = false;
+    let lastSyncedAt = null;
+
+    function initLocalStorage() {
+      if (!localStorage.getItem('bp_reports')) {
+        localStorage.setItem('bp_reports', JSON.stringify([]));
+      }
+    }
+
+    function getReports() {
+      return JSON.parse(localStorage.getItem('bp_reports') || '[]');
+    }
+
+    const PROBLEM_EMOJI = {
+      'ไฟ': '🔥', 'ขยะ': '🗑️', 'น้ำ': '💧', 'ถนน': '🛣️', 'ไฟฟ้า': '💡',
+      'ยาเสพติด': '🚨', 'สิ่งแวดล้อม': '🌿', 'มลพิษ': '🏭', 'โรค': '🦠',
+      'สุนัข': '🐕', 'หมา': '🐕', 'ท่อ': '🚰'
+    };
+    function getEmojiForReport(problemType, title) {
+      const text = `${problemType || ''} ${title || ''}`;
+      for (const key in PROBLEM_EMOJI) {
+        if (text.includes(key)) return PROBLEM_EMOJI[key];
+      }
+      return '📌';
+    }
+
+    function timeAgo(dateStr) {
+      if (!dateStr) return '-';
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      const diffMs = Date.now() - d.getTime();
+      const mins = Math.floor(diffMs / 60000);
+      if (mins < 1) return 'เมื่อสักครู่';
+      if (mins < 60) return `${mins} นาทีที่แล้ว`;
+      const hrs = Math.floor(mins / 60);
+      if (hrs < 24) return `${hrs} ชั่วโมงที่แล้ว`;
+      const days = Math.floor(hrs / 24);
+      return `${days} วันที่แล้ว`;
+    }
+
+    function urgencyToKey(urgency) {
+      if (!urgency) return 'medium';
+      if (urgency.includes('เร่งด่วน')) return 'high';
+      if (urgency.includes('ไม่เร่งด่วน')) return 'low';
+      return 'medium';
+    }
+
+    function statusToKey(status) {
+      if (status === 'progress' || status === 'done' || status === 'pending') return status;
+      if (status === 'กำลังดำเนินการ') return 'progress';
+      if (status === 'เสร็จสิ้น') return 'done';
+      return 'pending';
+    }
+
+    // Converts one row coming back from the Apps Script /getReports endpoint
+    // into the shape the UI already knows how to render.
+    function normalizeServerReport(row) {
+      const photos = (row.driveLinks && row.driveLinks !== '-')
+        ? row.driveLinks.split('\n').map(s => s.trim()).filter(Boolean)
+        : [];
+      return {
+        id: row.ref,
+        title: row.title || 'ไม่ได้ระบุหัวข้อ',
+        desc: row.detail || '-',
+        dept: row.department || 'ทั่วไป',
+        status: statusToKey(row.status),
+        date: timeAgo(row.timestamp),
+        rawDate: row.timestamp,
+        urgent: urgencyToKey(row.urgency),
+        emoji: getEmojiForReport(row.problemType, row.title),
+        citizenName: row.citizenName || '-',
+        phone: row.phone || '-',
+        community: row.community || '-',
+        tambon: row.tambon || '-',
+        lat: row.lat,
+        lng: row.lng,
+        mapLink: (row.mapLink && row.mapLink !== '-') ? row.mapLink : null,
+        photos: photos
+      };
+    }
+
+    // Pulls the latest data from the Google Sheet so every role (citizen /
+    // officer / executive) stays in sync, then re-renders all dashboards.
+    async function syncReports(showSpinner) {
+      if (isSyncing) return;
+      isSyncing = true;
+      setSyncIndicator('syncing');
+      try {
+        const res = await fetch(`${API_URL}?action=getReports`);
+        const data = await res.json();
+        if (data && data.status === 'success' && Array.isArray(data.reports)) {
+          const normalized = data.reports.map(normalizeServerReport).reverse();
+          localStorage.setItem('bp_reports', JSON.stringify(normalized));
+          lastSyncedAt = new Date();
+          renderReports();
+          setSyncIndicator('online');
+        } else {
+          setSyncIndicator('offline');
+        }
+      } catch (err) {
+        console.error('Sync error:', err);
+        setSyncIndicator('offline');
+        // Fall back to whatever we already have cached locally
+        renderReports();
+      } finally {
+        isSyncing = false;
+      }
+    }
+
+    function setSyncIndicator(state) {
+      document.querySelectorAll('.sync-indicator').forEach(el => {
+        el.classList.remove('sync-online', 'sync-offline', 'sync-syncing');
+        el.classList.add(`sync-${state}`);
+        const label = el.querySelector('.sync-label');
+        if (label) {
+          if (state === 'syncing') label.textContent = 'กำลังซิงค์...';
+          else if (state === 'online') label.textContent = lastSyncedAt ? `ซิงค์ล่าสุด ${lastSyncedAt.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })}` : 'ออนไลน์';
+          else label.textContent = 'ออฟไลน์ (ใช้ข้อมูลล่าสุด)';
+        }
+      });
+    }
+
+    // Officer/executive change the status here; we update the sheet so the
+    // citizen sees the new status the moment their app syncs again.
+    async function updateReportStatus(id, newStatus) {
+      // optimistic local update so the UI feels instant
+      const reports = getReports();
+      const report = reports.find(r => r.id === id);
+      if (report) {
+        report.status = newStatus;
+        localStorage.setItem('bp_reports', JSON.stringify(reports));
+        renderReports();
       }
 
-      // Generate ref number
+      try {
+        await fetch(`${API_URL}?action=updateStatus&ref=${encodeURIComponent(id)}&status=${encodeURIComponent(newStatus)}`);
+        showToast('✅', 'อัปเดตสถานะงานเรียบร้อย');
+      } catch (err) {
+        console.error('Update status error:', err);
+        showToast('⚠️', 'อัปเดตไม่สำเร็จ ตรวจสอบอินเทอร์เน็ต');
+      }
+      // Re-sync shortly after so everyone else's view catches up too
+      setTimeout(() => syncReports(), 1000);
+    }
+
+    function photoStripHtml(r) {
+      if (!r.photos || r.photos.length === 0) return '';
+      const thumbs = r.photos.map(url => `
+        <a href="${url}" target="_blank" rel="noopener" class="report-photo-thumb" title="ดูรูปภาพขนาดเต็ม">🖼️</a>
+      `).join('');
+      return `<div class="report-photo-strip">${thumbs}</div>`;
+    }
+
+    function mapLinkHtml(r) {
+      if (!r.mapLink) return '';
+      return `<a href="${r.mapLink}" target="_blank" rel="noopener" class="report-map-link">📍 ดูพิกัดบนแผนที่</a>`;
+    }
+
+    function renderReports() {
+      const reports = getReports();
+
+      const citizenList = document.getElementById('citizenTrackingList');
+      if (citizenList) {
+        const myPhone = window.citizenData && window.citizenData.phone;
+        const myReports = myPhone ? reports.filter(r => r.phone === myPhone) : reports;
+        citizenList.innerHTML = myReports.length ? myReports.map(r => `
+          <div class="tracking-card">
+            <div class="tracking-header">
+              <div class="tracking-title">${r.emoji} ${r.title} <span style="color:var(--text-muted); font-weight:400; font-size:0.75rem;">(${r.id})</span></div>
+              ${r.urgent === 'high' ? '<span class="status-badge badge-urgent">เร่งด่วน</span>' : ''}
+              ${r.status === 'done' ? '<span class="status-badge badge-done">เสร็จสิ้น</span>' : ''}
+              ${r.status === 'progress' ? '<span class="status-badge badge-progress">กำลังดำเนินการ</span>' : ''}
+              ${r.status === 'pending' ? '<span class="status-badge badge-pending">รอตรวจสอบ</span>' : ''}
+            </div>
+            <div class="tracking-body">
+              <strong>หน่วยงาน:</strong> ${r.dept}<br>
+              <strong>รายละเอียด:</strong> ${r.desc}
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${r.status === 'done' ? '100' : r.status === 'progress' ? '50' : '5'}%; background: ${r.status === 'done' ? 'linear-gradient(90deg, #4caf50, #81c784)' : ''};"></div>
+            </div>
+            ${photoStripHtml(r)}
+            ${mapLinkHtml(r)}
+            <div class="tracking-footer">
+              <span>📅 แจ้งเมื่อ: ${r.date}</span>
+            </div>
+          </div>
+        `).join('') : `<div class="empty-state">📭 ยังไม่มีรายการที่ท่านแจ้งไว้</div>`;
+      }
+
+      const officerTasks = document.getElementById('officerTasksList');
+      if (officerTasks) {
+        officerTasks.innerHTML = reports.length ? reports.map((r, idx) => `
+          <div class="task-card" style="animation-delay: ${Math.min(idx * 0.08, 1)}s;">
+            <div class="task-card-header">
+              <div class="task-card-title">${r.emoji} ${r.title}</div>
+              ${r.urgent === 'high' ? '<span class="status-badge badge-urgent">เร่งด่วน</span>' : ''}
+              ${r.status === 'done' ? '<span class="status-badge badge-done">เสร็จสิ้น</span>' : ''}
+              ${r.status === 'progress' ? '<span class="status-badge badge-progress">กำลังดำเนินการ</span>' : ''}
+              ${r.status === 'pending' ? '<span class="status-badge badge-pending">รอรับงาน</span>' : ''}
+            </div>
+            <div class="task-card-body">
+              <strong>ผู้แจ้ง:</strong> ${r.citizenName} (${r.phone})<br>
+              <strong>รายละเอียด:</strong> ${r.desc}<br>
+              <strong>หน่วยงาน:</strong> ${r.dept}<br>
+              <strong>เวลาแจ้ง:</strong> ${r.date}
+            </div>
+            ${photoStripHtml(r)}
+            ${mapLinkHtml(r)}
+            <div class="form-group" style="margin-top:10px;">
+              <select onchange="updateReportStatus('${r.id}', this.value)" class="form-select" style="padding: 0.4rem; font-size: 0.8rem;">
+                <option value="pending" ${r.status === 'pending' ? 'selected' : ''}>รอรับงาน</option>
+                <option value="progress" ${r.status === 'progress' ? 'selected' : ''}>กำลังดำเนินการ</option>
+                <option value="done" ${r.status === 'done' ? 'selected' : ''}>เสร็จสิ้น</option>
+              </select>
+            </div>
+          </div>
+        `).join('') : `<div class="empty-state">📭 ยังไม่มีงานเข้ามา</div>`;
+      }
+
+      const execOverviewList = document.getElementById('execOverviewList');
+      if (execOverviewList) {
+        execOverviewList.innerHTML = reports.slice(0, 3).map(r => `
+        <div class="expandable-card">
+          <div class="expandable-header" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
+            <div style="flex:1;">
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.2rem;">
+                <span style="font-weight:600; font-size:0.9rem;">${r.emoji} ${r.title}</span>
+                ${r.urgent === 'high' ? '<span class="status-badge badge-urgent">เร่งด่วน</span>' : ''}
+                ${r.status === 'done' ? '<span class="status-badge badge-done">เสร็จสิ้น</span>' : ''}
+                ${r.status === 'progress' ? '<span class="status-badge badge-progress">กำลังดำเนินการ</span>' : ''}
+                ${r.status === 'pending' ? '<span class="status-badge badge-pending">รอดำเนินการ</span>' : ''}
+              </div>
+              <div style="font-size:0.7rem; color:var(--text-muted);">หน่วยงาน: ${r.dept} · แจ้งเมื่อ: ${r.date}</div>
+            </div>
+            <span class="expand-arrow">▼</span>
+          </div>
+          <div class="expandable-body">
+            <div class="task-card-body" style="padding:0; margin-bottom:1rem; border:none; background:transparent;">
+              สถานะ: ${getStatusLabel(r.status)}<br>
+              รายละเอียด: ${r.desc}
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${r.status === 'done' ? '100' : r.status === 'progress' ? '50' : '0'}%; background: ${r.status === 'done' ? 'linear-gradient(90deg, #4caf50, #81c784)' : ''};"></div>
+            </div>
+          </div>
+        </div>
+        `).join('');
+      }
+
+      const execTrackingList = document.getElementById('execTrackingList');
+      if (execTrackingList) {
+        execTrackingList.innerHTML = reports.map(r => `
+        <div class="tracking-card">
+          <div class="tracking-header">
+            <div class="tracking-title">${r.emoji} ${r.title}</div>
+            ${r.urgent === 'high' ? '<span class="status-badge badge-urgent">เร่งด่วน</span>' : ''}
+            ${r.status === 'done' ? '<span class="status-badge badge-done">เสร็จสิ้น</span>' : ''}
+            ${r.status === 'progress' ? '<span class="status-badge badge-progress">กำลังดำเนินการ</span>' : ''}
+            ${r.status === 'pending' ? '<span class="status-badge badge-pending">รอดำเนินการ</span>' : ''}
+          </div>
+          <div class="tracking-body">
+            <strong>หน่วยงาน:</strong> ${r.dept}<br>
+            <strong>สถานะ:</strong> ${getStatusLabel(r.status)}<br>
+            <strong>รายละเอียด:</strong> ${r.desc}
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${r.status === 'done' ? '100' : r.status === 'progress' ? '50' : '0'}%; background: ${r.status === 'done' ? 'linear-gradient(90deg, #4caf50, #81c784)' : ''};"></div>
+          </div>
+          ${photoStripHtml(r)}
+          ${mapLinkHtml(r)}
+          <div class="tracking-footer">
+            <span>📅 แจ้งเมื่อ: ${r.date}</span>
+          </div>
+        </div>
+        `).join('');
+      }
+    }
+
+    function getStatusLabel(status) {
+      if (status === 'pending') return 'รอตรวจสอบ';
+      if (status === 'progress') return 'กำลังดำเนินการ';
+      if (status === 'done') return 'เสร็จสิ้น';
+      return status;
+    }
+
+    async function submitReport() {
+      // Citizen info is collected at login
+      if (!window.citizenData) {
+        window.citizenData = { name: 'ประชาชนทั่วไป' };
+      }
+
+      const title = document.getElementById('reportTitle') ? document.getElementById('reportTitle').value : 'ปัญหาทั่วไป';
+      const detail = document.getElementById('reportDetail') ? document.getElementById('reportDetail').value : '';
+      const deptNode = document.getElementById('reportDept');
+      const dept = (deptNode && deptNode.selectedIndex >= 0) ? deptNode.options[deptNode.selectedIndex].text : 'ทั่วไป';
+
+      const latEl = document.getElementById('reportLat');
+      const lngEl = document.getElementById('reportLng');
+      const lat = latEl && latEl.value ? latEl.value : '-';
+      const lng = lngEl && lngEl.value ? lngEl.value : '-';
+      const mapLink = (lat !== '-' && lng !== '-') ? `https://maps.google.com/?q=${lat},${lng}` : '-';
+
       const ref = 'REF-' + String(Math.floor(Math.random() * 99999)).padStart(5, '0');
       document.getElementById('refNumber').textContent = ref;
 
+      const reports = getReports();
+      reports.unshift({
+        id: ref,
+        title: title || 'ปัญหาทั่วไป',
+        desc: detail || 'ไม่ได้ระบุรายละเอียด',
+        dept: dept,
+        status: 'pending',
+        date: 'เมื่อสักครู่',
+        urgent: 'medium',
+        emoji: '📌'
+      });
+      localStorage.setItem('bp_reports', JSON.stringify(reports));
+      renderReports();
+
+      // Convert attached photos (if any) to base64 so the backend can upload them to Drive
+      const validFiles = uploadedFiles.filter(f => f);
+      let images = [];
+      try {
+        images = await Promise.all(validFiles.map(f => fileToBase64(f)));
+      } catch (err) {
+        console.error('Image read error:', err);
+      }
+
+      // Send data to Google App Script
+      fetch(API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'submitReport',
+          ref: ref,
+          citizenName: window.citizenData ? window.citizenData.name : '-',
+          phone: window.citizenData ? window.citizenData.phone : '-',
+          community: window.citizenData ? window.citizenData.community : '-',
+          tambon: window.citizenData ? window.citizenData.tambon : '-',
+          problemType: dept || '-',
+          department: dept || '-',
+          assignee: '-',
+          title: title || 'ปัญหาทั่วไป',
+          detail: detail || 'ไม่ได้ระบุรายละเอียด',
+          urgency: urgencyLabels[selectedUrgency] || 'ปานกลาง',
+          date: new Date().toLocaleDateString('th-TH'),
+          time: new Date().toLocaleTimeString('th-TH'),
+          lat: lat,
+          lng: lng,
+          mapLink: mapLink,
+          images: images
+        })
+      }).catch(err => console.error('App Script Error:', err));
+
+      // Reset photo picker for next report
+      uploadedFiles = [];
+      const previewGrid = document.getElementById('uploadPreview');
+      if (previewGrid) previewGrid.innerHTML = '';
+
       // Show success modal
       document.getElementById('successModal').classList.add('active');
+      // Give the sheet a moment to receive the row, then pull fresh data for everyone
+      setTimeout(() => syncReports(), 1500);
     }
 
     function closeModal() {
@@ -5581,53 +5895,75 @@
       switchCitizenTab('track');
     }
 
-    // ===== Google Map & Geolocation =====
+    // ===== Leaflet Map & Geolocation =====
+    let leafletMapInstance = null;
+    let leafletMarker = null;
+
     function initMap() {
       const placeholder = document.getElementById('mapPlaceholder');
-      const iframe = document.getElementById('googleMapIframe');
+      const mapDiv = document.getElementById('leafletMap');
 
-      if (!iframe) return;
+      if (!mapDiv) return;
+      placeholder.style.display = 'none';
+      mapDiv.style.display = 'block';
 
       // Default coordinates (Ban Phai)
-      if (!iframe.src) {
-        const lat = 16.0592;
-        const lng = 102.7303;
-        document.getElementById('reportLat').value = lat;
-        document.getElementById('reportLng').value = lng;
-        iframe.src = `https://maps.google.com/maps?q=${lat},${lng}&hl=th&z=15&output=embed`;
+      let lat = parseFloat(document.getElementById('reportLat').value) || 16.0592;
+      let lng = parseFloat(document.getElementById('reportLng').value) || 102.7303;
 
-        setTimeout(() => {
-          placeholder.style.display = 'none';
-          iframe.style.display = 'block';
-        }, 800);
+      if (!leafletMapInstance) {
+        leafletMapInstance = L.map('leafletMap').setView([lat, lng], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+        }).addTo(leafletMapInstance);
+
+        leafletMarker = L.marker([lat, lng], { draggable: true }).addTo(leafletMapInstance);
+
+        leafletMarker.on('dragend', function (e) {
+          const pos = e.target.getLatLng();
+          document.getElementById('reportLat').value = pos.lat.toFixed(6);
+          document.getElementById('reportLng').value = pos.lng.toFixed(6);
+        });
+
+        leafletMapInstance.on('click', function (e) {
+          leafletMarker.setLatLng(e.latlng);
+          document.getElementById('reportLat').value = e.latlng.lat.toFixed(6);
+          document.getElementById('reportLng').value = e.latlng.lng.toFixed(6);
+        });
       } else {
-        placeholder.style.display = 'none';
-        iframe.style.display = 'block';
+        leafletMapInstance.invalidateSize();
       }
+
+      document.getElementById('reportLat').value = lat;
+      document.getElementById('reportLng').value = lng;
     }
 
     function useCurrentLocation() {
       const placeholder = document.getElementById('mapPlaceholder');
-      const iframe = document.getElementById('googleMapIframe');
+      const mapDiv = document.getElementById('leafletMap');
 
       if (navigator.geolocation) {
         placeholder.style.display = 'flex';
         placeholder.innerHTML = '<span class="map-placeholder-text">กำลังหาตำแหน่งปัจจุบัน...</span>';
-        iframe.style.display = 'none';
+        mapDiv.style.display = 'none';
 
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
-            document.getElementById('reportLat').value = lat;
-            document.getElementById('reportLng').value = lng;
+            document.getElementById('reportLat').value = lat.toFixed(6);
+            document.getElementById('reportLng').value = lng.toFixed(6);
 
-            iframe.src = `https://maps.google.com/maps?q=${lat},${lng}&hl=th&z=16&output=embed`;
+            placeholder.style.display = 'none';
+            mapDiv.style.display = 'block';
 
-            setTimeout(() => {
-              placeholder.style.display = 'none';
-              iframe.style.display = 'block';
-            }, 800);
+            if (!leafletMapInstance) {
+              initMap();
+            } else {
+              leafletMapInstance.setView([lat, lng], 16);
+              leafletMarker.setLatLng([lat, lng]);
+              leafletMapInstance.invalidateSize();
+            }
           },
           (error) => {
             showToast('⚠️', 'ไม่สามารถดึงตำแหน่งปัจจุบันได้ กรุณาอนุญาตการเข้าถึงตำแหน่ง');
@@ -5867,6 +6203,12 @@
 
     // ===== Page Load =====
     document.addEventListener('DOMContentLoaded', function () {
+      initLocalStorage();
+      renderReports();
+      syncReports();
+      // Poll the sheet so citizens / officers / executives all stay in sync
+      setInterval(syncReports, 7000);
+
       // Add staggered animation to home menu quadrants
       const quadrants = document.querySelectorAll('.menu-quadrant');
       quadrants.forEach((q, i) => {
@@ -5922,16 +6264,91 @@
     }
 
 
-    function submitTopicReport(topic, label) {
+    async function submitTopicReport(topic, label) {
+      const typeNode = document.getElementById(topic + 'Type');
+      const typeText = (typeNode && typeNode.selectedIndex > 0) ? typeNode.options[typeNode.selectedIndex].text : '-';
+      const locationEl = document.getElementById(topic + 'Location');
+      const location = locationEl ? locationEl.value : '';
+      const detailEl = document.getElementById(topic + 'Detail');
+      const detailText = detailEl ? detailEl.value : '';
+      // Some forms (drugs) use "source"; disease has an extra patient-count field
+      const sourceEl = document.getElementById(topic + 'Source');
+      const countEl = document.getElementById(topic + 'Count');
+
+      let detail = detailText || 'รับเรื่องร้องเรียนจากหัวข้อ ' + label;
+      if (location) detail += ` | สถานที่: ${location}`;
+      if (sourceEl && sourceEl.value) detail += ` | แหล่งที่มา: ${sourceEl.value}`;
+      if (countEl && countEl.value) detail += ` | จำนวนผู้ป่วยประมาณ: ${countEl.value} คน`;
+
       const ref = 'REF-' + String(Math.floor(Math.random() * 99999)).padStart(5, '0');
       document.getElementById('refNumber').textContent = ref;
+
+      const reports = getReports();
+      reports.unshift({
+        id: ref,
+        title: 'แจ้งปัญหา: ' + label,
+        desc: detail,
+        dept: 'ทั่วไป',
+        status: 'pending',
+        date: 'เมื่อสักครู่',
+        urgent: 'medium',
+        emoji: '📌'
+      });
+      localStorage.setItem('bp_reports', JSON.stringify(reports));
+      renderReports();
+
+      // Convert the attached photo (if any) to base64 so the backend can upload it to Drive
+      const photoInput = document.getElementById(topic + 'Photo');
+      let images = [];
+      if (photoInput && photoInput.files && photoInput.files.length > 0) {
+        try {
+          images = await Promise.all(Array.from(photoInput.files).map(f => fileToBase64(f)));
+        } catch (err) {
+          console.error('Image read error:', err);
+        }
+      }
+
+      // Send data to Google App Script
+      fetch(API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'submitReport',
+          ref: ref,
+          citizenName: window.citizenData ? window.citizenData.name : '-',
+          phone: window.citizenData ? window.citizenData.phone : '-',
+          community: window.citizenData ? window.citizenData.community : '-',
+          tambon: window.citizenData ? window.citizenData.tambon : '-',
+          problemType: typeText !== '-' ? typeText : topic || '-',
+          department: 'ทั่วไป',
+          assignee: '-',
+          title: 'แจ้งปัญหา: ' + label,
+          detail: detail,
+          urgency: 'ปานกลาง',
+          date: new Date().toLocaleDateString('th-TH'),
+          time: new Date().toLocaleTimeString('th-TH'),
+          lat: '-',
+          lng: '-',
+          mapLink: '-',
+          images: images
+        })
+      }).catch(err => console.error('App Script Error:', err));
+
+      // Reset the photo input for next time
+      if (photoInput) photoInput.value = '';
+
       document.getElementById('successModal').classList.add('active');
+      setTimeout(() => syncReports(), 1500);
     }
 
     // ===== UI Enhancements =====
+    let selectedUrgency = 'medium';
+    const urgencyLabels = { low: 'ไม่เร่งด่วน', medium: 'ปานกลาง', high: 'เร่งด่วน' };
     function selectUrgency(el, level) {
       document.querySelectorAll('.urgency-option').forEach(opt => opt.classList.remove('selected'));
       el.classList.add('selected');
+      selectedUrgency = level;
     }
 
     function toggleContactChip(el) {
@@ -5948,11 +6365,13 @@
         const file = files[i];
         if (file.type.startsWith('image/')) {
           uploadedFiles.push(file);
+          const slotIndex = uploadedFiles.length - 1;
 
           const reader = new FileReader();
           reader.onload = function (e) {
             const div = document.createElement('div');
             div.className = 'upload-preview-item';
+            div.dataset.uploadIndex = slotIndex;
             div.innerHTML = `
               <img src="${e.target.result}" alt="preview">
               <button type="button" class="upload-preview-remove" onclick="removeUpload(this)">✕</button>
@@ -5962,10 +6381,42 @@
           reader.readAsDataURL(file);
         }
       }
+      // Allow selecting the same file again later
+      event.target.value = '';
     }
 
     function removeUpload(btn) {
-      btn.parentElement.remove();
+      const item = btn.parentElement;
+      const idx = Number(item.dataset.uploadIndex);
+      // Mark as removed instead of splicing, so other items keep their stored index
+      uploadedFiles[idx] = null;
+      item.remove();
+    }
+
+    // Reads a File/Blob and resolves with a base64 data URL (data:image/...;base64,...)
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Shows a quick visual confirmation on the drugs/env/pollution/disease photo pickers
+    function markPhotoSelected(topic) {
+      const input = document.getElementById(topic + 'Photo');
+      const container = input ? input.previousElementSibling : null;
+      if (!container) return;
+      const icon = container.querySelector('.map-placeholder-icon');
+      const text = container.querySelector('.map-placeholder-text');
+      if (input.files && input.files.length > 0) {
+        if (icon) icon.textContent = '✅';
+        if (text) text.textContent = `แนบไฟล์แล้ว: ${input.files[0].name}`;
+      } else {
+        if (icon) icon.textContent = '📷';
+        if (text) text.textContent = 'กดเพื่อแนบรูปภาพ';
+      }
     }
 
   </script>
