@@ -1,0 +1,6 @@
+﻿    }
+
+    // ===== Real-time Backend Sync =====
+    // Reports now live in the Google Sheet ("Reports" tab) and are fetched from
+    // every device, so citizens, officers, and executives all see the same data.
+    let isSyncing = false;

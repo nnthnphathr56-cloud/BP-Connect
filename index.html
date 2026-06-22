@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 
 <head>
@@ -2423,24 +2423,29 @@
 
     /* ===== Expandable Card ===== */
     .expandable-card {
-      background: var(--bg-glass);
-      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      border: 1.5px solid #bae6fd;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.85rem;
       transition: var(--transition-smooth);
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.08);
     }
 
     .expandable-card:hover {
-      border-color: var(--border-gold);
+      border-color: #0ea5e9;
+      box-shadow: 0 4px 16px rgba(14, 165, 233, 0.18);
+      transform: translateY(-1px);
     }
 
     .expandable-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem;
+      padding: 1rem 1.1rem;
       cursor: pointer;
+      background: linear-gradient(90deg, #f0f9ff 0%, #ffffff 100%);
+      font-size: 0.95rem;
     }
 
     .expandable-body {
@@ -2865,36 +2870,10 @@
           </div>
         </div>
 
-        <!-- Report shortcuts -->
-        <div class="section-header" style="margin-top:1rem;">
-          <h2 class="section-title">แจ้งปัญหาด้านสุขภาพ</h2>
-        </div>
-        <div class="action-grid">
-          <div class="action-card highlight" onclick="navigateTo('reportDrugs')">
-            <span class="action-card-icon">💊</span>
-            <div class="action-card-title">ยาเสพติด</div>
-            <div class="action-card-desc">แจ้งเบาะแสยาเสพติด</div>
-          </div>
-          <div class="action-card" onclick="navigateTo('reportEnvironment')">
-            <span class="action-card-icon">🌿</span>
-            <div class="action-card-title">สิ่งแวดล้อม</div>
-            <div class="action-card-desc">แจ้งปัญหาสิ่งแวดล้อม</div>
-          </div>
-          <div class="action-card" onclick="navigateTo('reportPollution')">
-            <span class="action-card-icon">🏭</span>
-            <div class="action-card-title">มลพิษ</div>
-            <div class="action-card-desc">แจ้งปัญหามลพิษ</div>
-          </div>
-          <div class="action-card" onclick="navigateTo('reportDisease')">
-            <span class="action-card-icon">🦠</span>
-            <div class="action-card-title">ควบคุมโรค</div>
-            <div class="action-card-desc">แจ้งปัญหาโรคติดต่อ</div>
-          </div>
-        </div>
-
         <!-- Health Schedules -->
-        <div class="section-header" style="margin-top:1.5rem;">
-          <h2 class="section-title">ตารางนัดหมายและบริการ</h2>
+        <div class="section-header"
+          style="margin-top:1rem; background:linear-gradient(135deg,#e0f2fe,#f0fdf4); border-radius:12px; padding:0.75rem 1rem; border-left:4px solid #0ea5e9;">
+          <h2 class="section-title" style="margin:0; color:#0369a1; font-size:1.1rem;">📅 ตารางนัดหมายและบริการ</h2>
         </div>
 
         <div class="expandable-card">
@@ -5837,7 +5816,9 @@
         status: 'pending',
         date: 'เมื่อสักครู่',
         urgent: 'medium',
-        emoji: '📌'
+        emoji: '📌',
+        phone: window.citizenData ? window.citizenData.phone : '-',
+        citizenName: window.citizenData ? window.citizenData.name : '-'
       });
       localStorage.setItem('bp_reports', JSON.stringify(reports));
       renderReports();
@@ -6292,7 +6273,9 @@
         status: 'pending',
         date: 'เมื่อสักครู่',
         urgent: 'medium',
-        emoji: '📌'
+        emoji: '📌',
+        phone: window.citizenData ? window.citizenData.phone : '-',
+        citizenName: window.citizenData ? window.citizenData.name : '-'
       });
       localStorage.setItem('bp_reports', JSON.stringify(reports));
       renderReports();
