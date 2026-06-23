@@ -2709,7 +2709,7 @@
       <div class="dash-nav-left">
         <div class="dash-nav-logo">👤</div>
         <div>
-          <div class="dash-nav-title">สวัสดี ประชาชน</div>
+          <div class="dash-nav-title" id="citizenNavTitle">สวัสดี ประชาชน</div>
           <div class="dash-nav-role">Citizen Portal</div>
         </div>
       </div>
@@ -4986,54 +4986,154 @@
       <h2 class="report-header-title">🌿 แจ้งปัญหาสิ่งแวดล้อม</h2>
     </div>
     <div class="report-body">
-      <div class="info-banner">
-        <span class="info-banner-icon">🌳</span>
-        <div class="info-banner-text">
-          <strong>ร่วมดูแลสิ่งแวดล้อมในชุมชน</strong> แจ้งปัญหาเพื่อให้เทศบาลดำเนินการแก้ไข
-        </div>
+      <!-- Stepper -->
+      <div class="stepper">
+        <div class="step-dot active" id="envStepDot1">1</div>
+        <div class="step-line" id="envStepLine1"></div>
+        <div class="step-dot" id="envStepDot2">2</div>
+        <div class="step-line" id="envStepLine2"></div>
+        <div class="step-dot" id="envStepDot3">3</div>
       </div>
-      <div class="form-group">
-        <label class="form-label">ประเภทปัญหา *</label>
-        <select class="form-select" id="envType">
-          <option value="">-- เลือกประเภท --</option>
-          <option value="waste">ทิ้งขยะ/ขยะตกค้าง</option>
-          <option value="water">น้ำเสีย/น้ำเน่า</option>
-          <option value="deforest">ตัดไม้ทำลายป่า</option>
-          <option value="burn">เผาขยะในที่โล่ง</option>
-          <option value="noise">เสียงดัง/เสียงรบกวน</option>
-          <option value="other">อื่นๆ</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">สถานที่เกิดเหตุ *</label>
-        <input type="text" class="form-input" id="envLocation" placeholder="ระบุสถานที่">
-      </div>
-      <div class="form-group">
-        <label class="form-label">รายละเอียด *</label>
-        <textarea class="form-textarea" id="envDetail" placeholder="อธิบายปัญหาที่พบโดยละเอียด" rows="4"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">แนบรูปภาพ (ถ้ามี)</label>
-        <div class="map-container" onclick="document.getElementById('envPhoto').click()" style="height:100px;">
-          <div class="map-placeholder">
-            <span class="map-placeholder-icon">📷</span>
-            <span class="map-placeholder-text">กดเพื่อแนบรูปภาพ</span>
+
+      <!-- Step 1: ประเภทปัญหา -->
+      <div class="report-step env-report-step active" id="envReportStep1">
+        <h3 class="step-title">เลือกประเภทปัญหา</h3>
+        <p class="step-desc">กดเลือกหมวดหมู่ปัญหาสิ่งแวดล้อมที่ต้องการแจ้ง</p>
+
+        <div class="emoji-grid" id="envProblemTypeGrid">
+          <div class="emoji-option" data-value="tree" onclick="selectEnvProblem(this)">
+            <span class="emoji-option-icon">🌳</span>
+            <span class="emoji-option-label">ต้นไม้ล้ม/กิ่งไม้หัก</span>
+          </div>
+          <div class="emoji-option" data-value="grass" onclick="selectEnvProblem(this)">
+            <span class="emoji-option-icon">🌿</span>
+            <span class="emoji-option-label">ตัดหญ้า/วัชพืช</span>
+          </div>
+          <div class="emoji-option" data-value="canal" onclick="selectEnvProblem(this)">
+            <span class="emoji-option-icon">🌊</span>
+            <span class="emoji-option-label">คูคลองตื้นเขิน</span>
+          </div>
+          <div class="emoji-option" data-value="waste" onclick="selectEnvProblem(this)">
+            <span class="emoji-option-icon">🗑️</span>
+            <span class="emoji-option-label">ขยะตกค้าง</span>
+          </div>
+          <div class="emoji-option" data-value="water" onclick="selectEnvProblem(this)">
+            <span class="emoji-option-icon">💧</span>
+            <span class="emoji-option-label">น้ำเสีย/น้ำเน่า</span>
+          </div>
+          <div class="emoji-option" data-value="burn" onclick="selectEnvProblem(this)">
+            <span class="emoji-option-icon">🔥</span>
+            <span class="emoji-option-label">เผาขยะ/มลพิษ</span>
+          </div>
+          <div class="emoji-option" data-value="noise" onclick="selectEnvProblem(this)">
+            <span class="emoji-option-icon">🔊</span>
+            <span class="emoji-option-label">เสียงรบกวน</span>
+          </div>
+          <div class="emoji-option" data-value="deforest" onclick="selectEnvProblem(this)">
+            <span class="emoji-option-icon">🪓</span>
+            <span class="emoji-option-label">บุกรุกพื้นที่สีเขียว</span>
+          </div>
+          <div class="emoji-option" data-value="other" onclick="selectEnvProblem(this)">
+            <span class="emoji-option-icon">📌</span>
+            <span class="emoji-option-label">อื่นๆ</span>
           </div>
         </div>
-        <input type="file" id="envPhoto" accept="image/*" style="display:none;" onchange="markPhotoSelected('env')">
+
+        <div class="btn-group" style="margin-top: 1.5rem;">
+          <button class="btn btn-outline" onclick="navigateTo('citizenDash')">ยกเลิก</button>
+          <button class="btn btn-gold" onclick="goEnvReportStep(2)">ถัดไป →</button>
+        </div>
       </div>
-      <div class="form-group" style="display: none;">
-        <!-- Hidden as citizen info is already collected -->
+
+      <!-- Step 2: รายละเอียด -->
+      <div class="report-step env-report-step" id="envReportStep2">
+        <h3 class="step-title">รายละเอียดปัญหา</h3>
+        <p class="step-desc">อธิบายปัญหาที่พบ พร้อมแนบรูปภาพ (ถ้ามี)</p>
+
+        <div class="form-group">
+          <label class="form-label">หัวข้อปัญหา *</label>
+          <input type="text" class="form-input" id="envReportTitle" placeholder="เช่น กิ่งไม้หักขวางถนน" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">รายละเอียด *</label>
+          <textarea class="form-textarea" id="envReportDetail"
+            placeholder="อธิบายรายละเอียดปัญหาที่พบ ระบุขนาด ความรุนแรง และผลกระทบ" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">ระดับความเร่งด่วน</label>
+          <div class="urgency-grid">
+            <div class="urgency-option urgency-low" onclick="selectEnvUrgency(this, 'low')">
+              <span class="urgency-icon">🟡</span>
+              <span class="urgency-label">ทั่วไป</span>
+            </div>
+            <div class="urgency-option urgency-medium selected" onclick="selectEnvUrgency(this, 'medium')">
+              <span class="urgency-icon">🟠</span>
+              <span class="urgency-label">ปานกลาง</span>
+            </div>
+            <div class="urgency-option urgency-high" onclick="selectEnvUrgency(this, 'high')">
+              <span class="urgency-icon">🔴</span>
+              <span class="urgency-label">เร่งด่วน</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">แนบรูปภาพ (อัปโหลดได้หลายรูป)</label>
+          <div class="map-container" onclick="document.getElementById('envReportPhoto').click()"
+            style="height:80px; min-height:80px;">
+            <div class="map-placeholder">
+              <span class="map-placeholder-icon" style="font-size: 1.5rem;">📷</span>
+              <span class="map-placeholder-text">กดเพื่อเลือกรูปภาพ</span>
+            </div>
+          </div>
+          <input type="file" id="envReportPhoto" accept="image/*" style="display:none;" multiple
+            onchange="handleEnvFileUpload(event)">
+          <div class="upload-preview-grid" id="envUploadPreview"></div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-outline" onclick="goEnvReportStep(1)">← ย้อนกลับ</button>
+          <button class="btn btn-gold" onclick="goEnvReportStep(3)">ถัดไป →</button>
+        </div>
       </div>
-      <div class="btn-group">
-        <button class="btn btn-outline" onclick="navigateTo('citizenDash')">ยกเลิก</button>
-        <button class="btn btn-gold" onclick="submitTopicReport('env', 'สิ่งแวดล้อม')">📨 ส่งรายงาน</button>
+
+      <!-- Step 3: ตำแหน่ง/แผนที่ -->
+      <div class="report-step env-report-step" id="envReportStep3">
+        <h3 class="step-title">ตำแหน่งที่เกิดปัญหา</h3>
+        <p class="step-desc">ปักหมุดหรือกรอกที่อยู่ของพื้นที่ที่พบปัญหา</p>
+
+        <div style="margin-bottom: 1rem; text-align: right;">
+          <button type="button" class="btn btn-outline" onclick="useCurrentEnvLocation()"
+            style="display: inline-flex; align-items: center; gap: 0.5rem; width: auto; font-size: 0.9rem; padding: 0.5rem 1rem;">
+            <span>📍</span> ปักหมุดตำแหน่งปัจจุบัน
+          </button>
+        </div>
+
+        <div class="map-container" id="envMapContainer"
+          style="height: 300px; padding: 0; overflow: hidden; position: relative; z-index: 1;">
+          <div class="map-placeholder" id="envMapPlaceholder"
+            style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(30,30,40,0.8); z-index: 2;">
+            <span class="map-placeholder-icon" style="cursor:pointer;" onclick="initEnvMap()">📍</span>
+            <span class="map-placeholder-text">กำลังโหลดแผนที่...</span>
+          </div>
+          <div id="envLeafletMap" style="width: 100%; height: 100%; display: none; z-index: 1;"></div>
+        </div>
+
+        <input type="hidden" id="envReportLat">
+        <input type="hidden" id="envReportLng">
+
+        <div class="btn-group" style="margin-top: 1.5rem;">
+          <button class="btn btn-outline" onclick="goEnvReportStep(2)">← ย้อนกลับ</button>
+          <button class="btn btn-gold" onclick="submitEnvReport()">📨 ส่งแจ้งปัญหา</button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ============================================
-       REPORT: มลพิษ (Pollution)
+       REPORT: มลพิษ (Pollution) - 3-Step Form
        ============================================ -->
   <div class="page" id="reportPollutionPage">
     <div class="report-header">
@@ -5042,54 +5142,149 @@
       <h2 class="report-header-title">🏭 แจ้งปัญหามลพิษ</h2>
     </div>
     <div class="report-body">
-      <div class="info-banner">
-        <span class="info-banner-icon">⚠️</span>
-        <div class="info-banner-text">
-          <strong>แจ้งปัญหามลพิษในพื้นที่</strong> เพื่อให้เทศบาลดำเนินการตรวจสอบและแก้ไข
-        </div>
+      <!-- Stepper -->
+      <div class="stepper">
+        <div class="step-dot active" id="pollStepDot1">1</div>
+        <div class="step-line" id="pollStepLine1"></div>
+        <div class="step-dot" id="pollStepDot2">2</div>
+        <div class="step-line" id="pollStepLine2"></div>
+        <div class="step-dot" id="pollStepDot3">3</div>
       </div>
-      <div class="form-group">
-        <label class="form-label">ประเภทมลพิษ *</label>
-        <select class="form-select" id="pollutionType">
-          <option value="">-- เลือกประเภท --</option>
-          <option value="air">มลพิษทางอากาศ (ควัน ฝุ่น กลิ่นเหม็น)</option>
-          <option value="water">มลพิษทางน้ำ (น้ำเสีย สีเปลี่ยน)</option>
-          <option value="noise">มลพิษทางเสียง</option>
-          <option value="soil">มลพิษทางดิน</option>
-          <option value="chemical">สารเคมีรั่วไหล</option>
-          <option value="other">อื่นๆ</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">แหล่งที่มาของมลพิษ *</label>
-        <input type="text" class="form-input" id="pollutionSource" placeholder="เช่น โรงงาน โรงงานอุตสาหกรรม ฟาร์ม">
-      </div>
-      <div class="form-group">
-        <label class="form-label">สถานที่เกิดเหตุ *</label>
-        <input type="text" class="form-input" id="pollutionLocation" placeholder="ระบุสถานที่">
-      </div>
-      <div class="form-group">
-        <label class="form-label">รายละเอียด *</label>
-        <textarea class="form-textarea" id="pollutionDetail" placeholder="อธิบายปัญหามลพิษที่พบ ผลกระทบต่อชุมชน"
-          rows="4"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">แนบรูปภาพ (ถ้ามี)</label>
-        <div class="map-container" onclick="document.getElementById('pollutionPhoto').click()" style="height:100px;">
-          <div class="map-placeholder">
-            <span class="map-placeholder-icon">📷</span>
-            <span class="map-placeholder-text">กดเพื่อแนบรูปภาพ</span>
+
+      <!-- Step 1: ประเภทปัญหา -->
+      <div class="report-step poll-report-step active" id="pollReportStep1">
+        <h3 class="step-title">เลือกประเภทปัญหา</h3>
+        <p class="step-desc">กดเลือกหมวดหมู่ปัญหามลพิษที่ต้องการแจ้ง</p>
+
+        <div class="emoji-grid" id="pollProblemTypeGrid">
+          <div class="emoji-option" data-value="smoke" onclick="selectPollProblem(this)">
+            <span class="emoji-option-icon">🌫️</span>
+            <span class="emoji-option-label">ควัน/ฝุ่นละออง</span>
+          </div>
+          <div class="emoji-option" data-value="burn" onclick="selectPollProblem(this)">
+            <span class="emoji-option-icon">🔥</span>
+            <span class="emoji-option-label">เผาขยะ/เผาพื้นที่</span>
+          </div>
+          <div class="emoji-option" data-value="water" onclick="selectPollProblem(this)">
+            <span class="emoji-option-icon">💧</span>
+            <span class="emoji-option-label">น้ำเสีย/ปล่อยน้ำเน่า</span>
+          </div>
+          <div class="emoji-option" data-value="smell" onclick="selectPollProblem(this)">
+            <span class="emoji-option-icon">🤢</span>
+            <span class="emoji-option-label">กลิ่นเหม็นรบกวน</span>
+          </div>
+          <div class="emoji-option" data-value="noise" onclick="selectPollProblem(this)">
+            <span class="emoji-option-icon">🔊</span>
+            <span class="emoji-option-label">เสียงรบกวน</span>
+          </div>
+          <div class="emoji-option" data-value="chemical" onclick="selectPollProblem(this)">
+            <span class="emoji-option-icon">⚗️</span>
+            <span class="emoji-option-label">สารเคมีรั่วไหล</span>
+          </div>
+          <div class="emoji-option" data-value="soil" onclick="selectPollProblem(this)">
+            <span class="emoji-option-icon">🏭</span>
+            <span class="emoji-option-label">โรงงาน/มลพิษดิน</span>
+          </div>
+          <div class="emoji-option" data-value="waste" onclick="selectPollProblem(this)">
+            <span class="emoji-option-icon">🗑️</span>
+            <span class="emoji-option-label">ขยะอันตราย</span>
+          </div>
+          <div class="emoji-option" data-value="other" onclick="selectPollProblem(this)">
+            <span class="emoji-option-icon">📌</span>
+            <span class="emoji-option-label">อื่นๆ</span>
           </div>
         </div>
-        <input type="file" id="pollutionPhoto" accept="image/*" style="display:none;"
-          onchange="markPhotoSelected('pollution')">
+
+        <div class="btn-group" style="margin-top: 1.5rem;">
+          <button class="btn btn-outline" onclick="navigateTo('citizenDash')">ยกเลิก</button>
+          <button class="btn btn-gold" onclick="goPollReportStep(2)">ถัดไป →</button>
+        </div>
       </div>
-      <div class="form-group" style="display: none;">
-        <!-- Hidden as citizen info is already collected -->
+
+      <!-- Step 2: รายละเอียด -->
+      <div class="report-step poll-report-step" id="pollReportStep2">
+        <h3 class="step-title">รายละเอียดปัญหา</h3>
+        <p class="step-desc">อธิบายปัญหาที่พบ พร้อมแนบรูปภาพ (ถ้ามี)</p>
+
+        <div class="form-group">
+          <label class="form-label">หัวข้อปัญหา *</label>
+          <input type="text" class="form-input" id="pollReportTitle" placeholder="เช่น ควันดำจากโรงงานใกล้บ้าน"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">รายละเอียด *</label>
+          <textarea class="form-textarea" id="pollReportDetail"
+            placeholder="อธิบายรายละเอียดปัญหาที่พบ ระบุความรุนแรง แหล่งที่มา และผลกระทบต่อชุมชน" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">ระดับความเร่งด่วน</label>
+          <div class="urgency-grid">
+            <div class="urgency-option urgency-low" onclick="selectPollUrgency(this, 'low')">
+              <span class="urgency-icon">🟡</span>
+              <span class="urgency-label">ทั่วไป</span>
+            </div>
+            <div class="urgency-option urgency-medium selected" onclick="selectPollUrgency(this, 'medium')">
+              <span class="urgency-icon">🟠</span>
+              <span class="urgency-label">ปานกลาง</span>
+            </div>
+            <div class="urgency-option urgency-high" onclick="selectPollUrgency(this, 'high')">
+              <span class="urgency-icon">🔴</span>
+              <span class="urgency-label">เร่งด่วน</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">แนบรูปภาพ (อัปโหลดได้หลายรูป)</label>
+          <div class="map-container" onclick="document.getElementById('pollReportPhoto').click()"
+            style="height:80px; min-height:80px;">
+            <div class="map-placeholder">
+              <span class="map-placeholder-icon" style="font-size: 1.5rem;">📷</span>
+              <span class="map-placeholder-text">กดเพื่อเลือกรูปภาพ</span>
+            </div>
+          </div>
+          <input type="file" id="pollReportPhoto" accept="image/*" style="display:none;" multiple
+            onchange="handlePollFileUpload(event)">
+          <div class="upload-preview-grid" id="pollUploadPreview"></div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-outline" onclick="goPollReportStep(1)">← ย้อนกลับ</button>
+          <button class="btn btn-gold" onclick="goPollReportStep(3)">ถัดไป →</button>
+        </div>
       </div>
-      <div class="btn-group">
-        <button class="btn btn-outline" onclick="navigateTo('citizenDash')">ยกเลิก</button>
-        <button class="btn btn-gold" onclick="submitTopicReport('pollution', 'มลพิษ')">📨 ส่งรายงาน</button>
+
+      <!-- Step 3: ตำแหน่ง/แผนที่ -->
+      <div class="report-step poll-report-step" id="pollReportStep3">
+        <h3 class="step-title">ตำแหน่งที่เกิดปัญหา</h3>
+        <p class="step-desc">ปักหมุดหรือกรอกที่อยู่ของพื้นที่ที่พบปัญหา</p>
+
+        <div style="margin-bottom: 1rem; text-align: right;">
+          <button type="button" class="btn btn-outline" onclick="useCurrentPollLocation()"
+            style="display: inline-flex; align-items: center; gap: 0.5rem; width: auto; font-size: 0.9rem; padding: 0.5rem 1rem;">
+            <span>📍</span> ปักหมุดตำแหน่งปัจจุบัน
+          </button>
+        </div>
+
+        <div class="map-container" id="pollMapContainer"
+          style="height: 300px; padding: 0; overflow: hidden; position: relative; z-index: 1;">
+          <div class="map-placeholder" id="pollMapPlaceholder"
+            style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(30,30,40,0.8); z-index: 2;">
+            <span class="map-placeholder-icon" style="cursor:pointer;" onclick="initPollMap()">📍</span>
+            <span class="map-placeholder-text">กำลังโหลดแผนที่...</span>
+          </div>
+          <div id="pollLeafletMap" style="width: 100%; height: 100%; display: none; z-index: 1;"></div>
+        </div>
+
+        <input type="hidden" id="pollReportLat">
+        <input type="hidden" id="pollReportLng">
+
+        <div class="btn-group" style="margin-top: 1.5rem;">
+          <button class="btn btn-outline" onclick="goPollReportStep(2)">← ย้อนกลับ</button>
+          <button class="btn btn-gold" onclick="submitPollReport()">📨 ส่งแจ้งปัญหา</button>
+        </div>
       </div>
     </div>
   </div>
@@ -5199,6 +5394,24 @@
           resetReportForm();
           break;
 
+        case 'reportEnvironment':
+          showPage('reportEnvironmentPage');
+          resetEnvReportForm();
+          break;
+
+        case 'reportDrugs':
+          showPage('reportDrugsPage');
+          break;
+
+        case 'reportPollution':
+          showPage('reportPollutionPage');
+          resetPollReportForm();
+          break;
+
+        case 'reportDisease':
+          showPage('reportDiseasePage');
+          break;
+
         case 'statsDash':
           showPage('statsDash');
           setTimeout(() => {
@@ -5298,7 +5511,7 @@
       window.citizenData = { name, phone, community, tambon };
 
       // Update dash nav
-      document.querySelector('.dash-nav-title').textContent = `สวัสดี ${name}`;
+      document.getElementById('citizenNavTitle').textContent = `สวัสดี ${name}`;
 
       // Send data to Google App Script
       fetch(API_URL, {
@@ -5787,6 +6000,10 @@
       return status;
     }
 
+    // Urgency state (declared here so submitReport and submitTopicReport can reference it)
+    let selectedUrgency = 'medium';
+    const urgencyLabels = { low: 'ไม่เร่งด่วน', medium: 'ปานกลาง', high: 'เร่งด่วน' };
+
     async function submitReport() {
       // Citizen info is collected at login
       if (!window.citizenData) {
@@ -5873,7 +6090,7 @@
     function closeModal() {
       document.getElementById('successModal').classList.remove('active');
       navigateTo('citizenDash');
-      switchCitizenTab('track');
+      switchCitizenTab('tracking');
     }
 
     // ===== Leaflet Map & Geolocation =====
@@ -6326,8 +6543,6 @@
     }
 
     // ===== UI Enhancements =====
-    let selectedUrgency = 'medium';
-    const urgencyLabels = { low: 'ไม่เร่งด่วน', medium: 'ปานกลาง', high: 'เร่งด่วน' };
     function selectUrgency(el, level) {
       document.querySelectorAll('.urgency-option').forEach(opt => opt.classList.remove('selected'));
       el.classList.add('selected');
@@ -6401,7 +6616,521 @@
         if (text) text.textContent = 'กดเพื่อแนบรูปภาพ';
       }
     }
+    // ===== Environment Report Form Logic =====
+    let envReportStep = 1;
+    let selectedEnvProblemType = null;
 
+    function resetEnvReportForm() {
+      envReportStep = 1;
+      selectedEnvProblemType = null;
+      updateEnvReportStepper();
+      document.querySelectorAll('.env-report-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('envReportStep1').classList.add('active');
+      document.querySelectorAll('#envProblemTypeGrid .emoji-option').forEach(e => e.classList.remove('selected'));
+      const canvas = document.getElementById('envLeafletMap');
+      const placeholder = document.getElementById('envMapPlaceholder');
+      if (canvas) canvas.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'flex';
+      selectedEnvUrgency = 'medium';
+      document.querySelectorAll('#envReportStep2 .urgency-option').forEach(opt => opt.classList.remove('selected'));
+      const defaultUrgency = document.querySelector('#envReportStep2 .urgency-medium');
+      if (defaultUrgency) defaultUrgency.classList.add('selected');
+      uploadedEnvFiles = [];
+      const preview = document.getElementById('envUploadPreview');
+      if (preview) preview.innerHTML = '';
+      const latEl = document.getElementById('envReportLat');
+      const lngEl = document.getElementById('envReportLng');
+      if (latEl) latEl.value = '';
+      if (lngEl) lngEl.value = '';
+      const titleEl = document.getElementById('envReportTitle');
+      const detailEl = document.getElementById('envReportDetail');
+      if (titleEl) titleEl.value = '';
+      if (detailEl) detailEl.value = '';
+    }
+
+    function selectEnvProblem(el) {
+      document.querySelectorAll('#envProblemTypeGrid .emoji-option').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedEnvProblemType = el.getAttribute('data-value');
+    }
+
+    function goEnvReportStep(step) {
+      if (step > envReportStep) {
+        if (envReportStep === 1 && !selectedEnvProblemType) {
+          showToast('⚠️', 'กรุณาเลือกประเภทปัญหา');
+          return;
+        }
+      }
+      envReportStep = step;
+      updateEnvReportStepper();
+      document.querySelectorAll('.env-report-step').forEach(s => s.classList.remove('active'));
+      const stepEl = document.getElementById(`envReportStep${step}`);
+      if (stepEl) stepEl.classList.add('active');
+      if (step === 3) initEnvMap();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateEnvReportStepper() {
+      for (let i = 1; i <= 3; i++) {
+        const dot = document.getElementById(`envStepDot${i}`);
+        const line = document.getElementById(`envStepLine${i}`);
+        if (!dot) continue;
+        dot.classList.remove('active', 'done');
+        if (i < envReportStep) {
+          dot.classList.add('done');
+          dot.textContent = '✓';
+        } else if (i === envReportStep) {
+          dot.classList.add('active');
+          dot.textContent = i;
+        } else {
+          dot.textContent = i;
+        }
+        if (line) line.classList.toggle('active', i < envReportStep);
+      }
+    }
+
+    let selectedEnvUrgency = 'medium';
+    function selectEnvUrgency(el, level) {
+      document.querySelectorAll('#envReportStep2 .urgency-option').forEach(opt => opt.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedEnvUrgency = level;
+    }
+
+    let uploadedEnvFiles = [];
+    function handleEnvFileUpload(event) {
+      const files = event.target.files;
+      const previewGrid = document.getElementById('envUploadPreview');
+      if (!previewGrid) return;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith('image/')) {
+          uploadedEnvFiles.push(file);
+          const slotIndex = uploadedEnvFiles.length - 1;
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const div = document.createElement('div');
+            div.className = 'upload-preview-item';
+            div.dataset.uploadIndex = slotIndex;
+            div.innerHTML = `<img src="${e.target.result}" alt="preview"><button type="button" class="upload-preview-remove" onclick="removeEnvUpload(this)">✕</button>`;
+            previewGrid.appendChild(div);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+      event.target.value = '';
+    }
+
+    function removeEnvUpload(btn) {
+      const item = btn.parentElement;
+      const idx = Number(item.dataset.uploadIndex);
+      uploadedEnvFiles[idx] = null;
+      item.remove();
+    }
+
+    let envLeafletMapInstance = null;
+    let envLeafletMarker = null;
+
+    function initEnvMap() {
+      const placeholder = document.getElementById('envMapPlaceholder');
+      const mapDiv = document.getElementById('envLeafletMap');
+      if (!mapDiv) return;
+      placeholder.style.display = 'none';
+      mapDiv.style.display = 'block';
+      let lat = parseFloat(document.getElementById('envReportLat').value) || 16.0592;
+      let lng = parseFloat(document.getElementById('envReportLng').value) || 102.7303;
+
+      if (!envLeafletMapInstance) {
+        envLeafletMapInstance = L.map('envLeafletMap').setView([lat, lng], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+        }).addTo(envLeafletMapInstance);
+        envLeafletMarker = L.marker([lat, lng], { draggable: true }).addTo(envLeafletMapInstance);
+        envLeafletMarker.on('dragend', function (e) {
+          const pos = e.target.getLatLng();
+          document.getElementById('envReportLat').value = pos.lat.toFixed(6);
+          document.getElementById('envReportLng').value = pos.lng.toFixed(6);
+        });
+        envLeafletMapInstance.on('click', function (e) {
+          envLeafletMarker.setLatLng(e.latlng);
+          document.getElementById('envReportLat').value = e.latlng.lat.toFixed(6);
+          document.getElementById('envReportLng').value = e.latlng.lng.toFixed(6);
+        });
+      } else {
+        envLeafletMapInstance.invalidateSize();
+      }
+      document.getElementById('envReportLat').value = lat;
+      document.getElementById('envReportLng').value = lng;
+    }
+
+    function useCurrentEnvLocation() {
+      const placeholder = document.getElementById('envMapPlaceholder');
+      const mapDiv = document.getElementById('envLeafletMap');
+      if (navigator.geolocation) {
+        placeholder.style.display = 'flex';
+        placeholder.innerHTML = '<span class="map-placeholder-text">กำลังหาตำแหน่งปัจจุบัน...</span>';
+        mapDiv.style.display = 'none';
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            document.getElementById('envReportLat').value = lat.toFixed(6);
+            document.getElementById('envReportLng').value = lng.toFixed(6);
+            placeholder.style.display = 'none';
+            mapDiv.style.display = 'block';
+            if (!envLeafletMapInstance) {
+              initEnvMap();
+            } else {
+              envLeafletMapInstance.setView([lat, lng], 16);
+              envLeafletMarker.setLatLng([lat, lng]);
+              envLeafletMapInstance.invalidateSize();
+            }
+          },
+          (error) => {
+            showToast('⚠️', 'ไม่สามารถดึงตำแหน่งปัจจุบันได้ กรุณาอนุญาตการเข้าถึงตำแหน่ง');
+            placeholder.innerHTML = '<span class="map-placeholder-icon" onclick="initEnvMap()" style="cursor:pointer;">📍</span><span class="map-placeholder-text">กดเพื่อเปิดแผนที่</span>';
+          }
+        );
+      } else {
+        showToast('⚠️', 'เบราว์เซอร์ของคุณไม่รองรับการระบุตำแหน่ง');
+      }
+    }
+
+    async function submitEnvReport() {
+      if (!window.citizenData) {
+        window.citizenData = { name: 'ประชาชนทั่วไป' };
+      }
+      const title = document.getElementById('envReportTitle') ? document.getElementById('envReportTitle').value : 'ปัญหาสิ่งแวดล้อม';
+      const detail = document.getElementById('envReportDetail') ? document.getElementById('envReportDetail').value : '';
+
+      const problemTypeNode = document.querySelector('#envProblemTypeGrid .emoji-option.selected');
+      let problemLabel = selectedEnvProblemType;
+      if (problemTypeNode) {
+        problemLabel = problemTypeNode.querySelector('.emoji-option-label').innerText;
+      }
+      const dept = 'กองสาธารณสุขและสิ่งแวดล้อม';
+
+      const latEl = document.getElementById('envReportLat');
+      const lngEl = document.getElementById('envReportLng');
+      const lat = latEl && latEl.value ? latEl.value : '-';
+      const lng = lngEl && lngEl.value ? lngEl.value : '-';
+      const mapLink = (lat !== '-' && lng !== '-') ? `https://maps.google.com/?q=${lat},${lng}` : '-';
+
+      const ref = 'REF-' + String(Math.floor(Math.random() * 99999)).padStart(5, '0');
+      document.getElementById('refNumber').textContent = ref;
+
+      const reports = getReports();
+      reports.unshift({
+        id: ref,
+        title: title || 'ปัญหาสิ่งแวดล้อม',
+        desc: detail || 'ไม่ได้ระบุรายละเอียด',
+        dept: dept,
+        status: 'pending',
+        date: 'เมื่อสักครู่',
+        urgent: selectedEnvUrgency,
+        emoji: '🌿',
+        phone: window.citizenData ? window.citizenData.phone : '-',
+        citizenName: window.citizenData ? window.citizenData.name : '-'
+      });
+      localStorage.setItem('bp_reports', JSON.stringify(reports));
+      renderReports();
+
+      const validFiles = uploadedEnvFiles.filter(f => f);
+      let images = [];
+      try {
+        images = await Promise.all(validFiles.map(f => fileToBase64(f)));
+      } catch (err) {
+        console.error('Image read error:', err);
+      }
+
+      const ENV_API_URL = 'https://script.google.com/macros/s/AKfycbznMsEai9aTrLQvma4GRWF1k2whzqhKFgpkgB2LRE68DMYE8pmxtWYlf1s8ERRDFThZ/exec';
+      fetch(ENV_API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'submitReport',
+          category: 'environment',
+          ref: ref,
+          citizenName: window.citizenData ? window.citizenData.name : '-',
+          phone: window.citizenData ? window.citizenData.phone : '-',
+          community: window.citizenData ? window.citizenData.community : '-',
+          tambon: window.citizenData ? window.citizenData.tambon : '-',
+          problemType: problemLabel || '-',
+          department: dept,
+          assignee: '-',
+          title: title || 'ปัญหาสิ่งแวดล้อม',
+          detail: detail || 'ไม่ได้ระบุรายละเอียด',
+          urgency: urgencyLabels[selectedEnvUrgency] || 'ปานกลาง',
+          date: new Date().toLocaleDateString('th-TH'),
+          time: new Date().toLocaleTimeString('th-TH'),
+          lat: lat,
+          lng: lng,
+          mapLink: mapLink,
+          images: images
+        })
+      }).catch(err => console.error('App Script Error:', err));
+
+      resetEnvReportForm();
+      document.getElementById('successModal').classList.add('active');
+      setTimeout(() => syncReports(), 1500);
+    }
+
+    // ===== Pollution 3-Step Report =====
+    let pollReportStep = 1;
+    let selectedPollProblemType = null;
+    let selectedPollUrgencyLevel = 'medium';
+    let uploadedPollFiles = [];
+    let pollLeafletMapInstance = null;
+    let pollLeafletMarker = null;
+
+    function resetPollReportForm() {
+      pollReportStep = 1;
+      selectedPollProblemType = null;
+      selectedPollUrgencyLevel = 'medium';
+      updatePollReportStepper();
+      document.querySelectorAll('.poll-report-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('pollReportStep1').classList.add('active');
+      document.querySelectorAll('#pollProblemTypeGrid .emoji-option').forEach(e => e.classList.remove('selected'));
+      const canvas = document.getElementById('pollLeafletMap');
+      const placeholder = document.getElementById('pollMapPlaceholder');
+      if (canvas) canvas.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'flex';
+      document.querySelectorAll('#pollReportStep2 .urgency-option').forEach(opt => opt.classList.remove('selected'));
+      const defaultUrgency = document.querySelector('#pollReportStep2 .urgency-medium');
+      if (defaultUrgency) defaultUrgency.classList.add('selected');
+      uploadedPollFiles = [];
+      const preview = document.getElementById('pollUploadPreview');
+      if (preview) preview.innerHTML = '';
+      const latEl = document.getElementById('pollReportLat');
+      const lngEl = document.getElementById('pollReportLng');
+      if (latEl) latEl.value = '';
+      if (lngEl) lngEl.value = '';
+      const titleEl = document.getElementById('pollReportTitle');
+      const detailEl = document.getElementById('pollReportDetail');
+      if (titleEl) titleEl.value = '';
+      if (detailEl) detailEl.value = '';
+    }
+
+    function selectPollProblem(el) {
+      document.querySelectorAll('#pollProblemTypeGrid .emoji-option').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedPollProblemType = el.getAttribute('data-value');
+    }
+
+    function goPollReportStep(step) {
+      if (step > pollReportStep) {
+        if (pollReportStep === 1 && !selectedPollProblemType) {
+          showToast('⚠️', 'กรุณาเลือกประเภทปัญหา');
+          return;
+        }
+      }
+      pollReportStep = step;
+      updatePollReportStepper();
+      document.querySelectorAll('.poll-report-step').forEach(s => s.classList.remove('active'));
+      const stepEl = document.getElementById(`pollReportStep${step}`);
+      if (stepEl) stepEl.classList.add('active');
+      if (step === 3) initPollMap();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updatePollReportStepper() {
+      for (let i = 1; i <= 3; i++) {
+        const dot = document.getElementById(`pollStepDot${i}`);
+        const line = document.getElementById(`pollStepLine${i}`);
+        if (!dot) continue;
+        dot.classList.remove('active', 'done');
+        if (i < pollReportStep) {
+          dot.classList.add('done');
+          dot.textContent = '✓';
+        } else if (i === pollReportStep) {
+          dot.classList.add('active');
+          dot.textContent = i;
+        } else {
+          dot.textContent = i;
+        }
+        if (line) line.classList.toggle('active', i < pollReportStep);
+      }
+    }
+
+    function selectPollUrgency(el, level) {
+      document.querySelectorAll('#pollReportStep2 .urgency-option').forEach(opt => opt.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedPollUrgencyLevel = level;
+    }
+
+    function handlePollFileUpload(event) {
+      const files = event.target.files;
+      const previewGrid = document.getElementById('pollUploadPreview');
+      if (!previewGrid) return;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith('image/')) {
+          uploadedPollFiles.push(file);
+          const slotIndex = uploadedPollFiles.length - 1;
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const div = document.createElement('div');
+            div.className = 'upload-preview-item';
+            div.dataset.uploadIndex = slotIndex;
+            div.innerHTML = `<img src="${e.target.result}" alt="preview"><button type="button" class="upload-preview-remove" onclick="removePollUpload(this)">✕</button>`;
+            previewGrid.appendChild(div);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+      event.target.value = '';
+    }
+
+    function removePollUpload(btn) {
+      const item = btn.parentElement;
+      const idx = Number(item.dataset.uploadIndex);
+      uploadedPollFiles[idx] = null;
+      item.remove();
+    }
+
+    function initPollMap() {
+      const placeholder = document.getElementById('pollMapPlaceholder');
+      const mapDiv = document.getElementById('pollLeafletMap');
+      if (!mapDiv) return;
+      placeholder.style.display = 'none';
+      mapDiv.style.display = 'block';
+      let lat = parseFloat(document.getElementById('pollReportLat').value) || 16.0592;
+      let lng = parseFloat(document.getElementById('pollReportLng').value) || 102.7303;
+      if (!pollLeafletMapInstance) {
+        pollLeafletMapInstance = L.map('pollLeafletMap').setView([lat, lng], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+        }).addTo(pollLeafletMapInstance);
+        pollLeafletMarker = L.marker([lat, lng], { draggable: true }).addTo(pollLeafletMapInstance);
+        pollLeafletMarker.on('dragend', function (e) {
+          const pos = e.target.getLatLng();
+          document.getElementById('pollReportLat').value = pos.lat.toFixed(6);
+          document.getElementById('pollReportLng').value = pos.lng.toFixed(6);
+        });
+        pollLeafletMapInstance.on('click', function (e) {
+          pollLeafletMarker.setLatLng(e.latlng);
+          document.getElementById('pollReportLat').value = e.latlng.lat.toFixed(6);
+          document.getElementById('pollReportLng').value = e.latlng.lng.toFixed(6);
+        });
+      } else {
+        pollLeafletMapInstance.invalidateSize();
+      }
+      document.getElementById('pollReportLat').value = lat;
+      document.getElementById('pollReportLng').value = lng;
+    }
+
+    function useCurrentPollLocation() {
+      const placeholder = document.getElementById('pollMapPlaceholder');
+      const mapDiv = document.getElementById('pollLeafletMap');
+      if (navigator.geolocation) {
+        placeholder.style.display = 'flex';
+        placeholder.innerHTML = '<span class="map-placeholder-text">กำลังหาตำแหน่งปัจจุบัน...</span>';
+        mapDiv.style.display = 'none';
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            document.getElementById('pollReportLat').value = lat.toFixed(6);
+            document.getElementById('pollReportLng').value = lng.toFixed(6);
+            placeholder.style.display = 'none';
+            mapDiv.style.display = 'block';
+            if (!pollLeafletMapInstance) {
+              initPollMap();
+            } else {
+              pollLeafletMapInstance.setView([lat, lng], 16);
+              pollLeafletMarker.setLatLng([lat, lng]);
+              pollLeafletMapInstance.invalidateSize();
+            }
+          },
+          () => {
+            showToast('⚠️', 'ไม่สามารถดึงตำแหน่งปัจจุบันได้ กรุณาอนุญาตการเข้าถึงตำแหน่ง');
+            placeholder.innerHTML = '<span class="map-placeholder-icon" onclick="initPollMap()" style="cursor:pointer;">📍</span><span class="map-placeholder-text">กดเพื่อเปิดแผนที่</span>';
+          }
+        );
+      } else {
+        showToast('⚠️', 'เบราว์เซอร์ของคุณไม่รองรับการระบุตำแหน่ง');
+      }
+    }
+
+    async function submitPollReport() {
+      if (!window.citizenData) {
+        window.citizenData = { name: 'ประชาชนทั่วไป' };
+      }
+      const title = document.getElementById('pollReportTitle').value || 'ปัญหามลพิษ';
+      const detail = document.getElementById('pollReportDetail').value || '';
+
+      const problemTypeNode = document.querySelector('#pollProblemTypeGrid .emoji-option.selected');
+      let problemLabel = selectedPollProblemType;
+      if (problemTypeNode) {
+        problemLabel = problemTypeNode.querySelector('.emoji-option-label').innerText;
+      }
+      const dept = 'กองสาธารณสุขและสิ่งแวดล้อม';
+
+      const latEl = document.getElementById('pollReportLat');
+      const lngEl = document.getElementById('pollReportLng');
+      const lat = latEl && latEl.value ? latEl.value : '-';
+      const lng = lngEl && lngEl.value ? lngEl.value : '-';
+      const mapLink = (lat !== '-' && lng !== '-') ? `https://maps.google.com/?q=${lat},${lng}` : '-';
+
+      const ref = 'REF-' + String(Math.floor(Math.random() * 99999)).padStart(5, '0');
+      document.getElementById('refNumber').textContent = ref;
+
+      const reports = getReports();
+      reports.unshift({
+        id: ref,
+        title: title,
+        desc: detail || 'ไม่ได้ระบุรายละเอียด',
+        dept: dept,
+        status: 'pending',
+        date: 'เมื่อสักครู่',
+        urgent: selectedPollUrgencyLevel,
+        emoji: '🏭',
+        phone: window.citizenData ? window.citizenData.phone : '-',
+        citizenName: window.citizenData ? window.citizenData.name : '-'
+      });
+      localStorage.setItem('bp_reports', JSON.stringify(reports));
+      renderReports();
+
+      const validFiles = uploadedPollFiles.filter(f => f);
+      let images = [];
+      try {
+        images = await Promise.all(validFiles.map(f => fileToBase64(f)));
+      } catch (err) {
+        console.error('Image read error:', err);
+      }
+
+      const POLL_API_URL = 'https://script.google.com/macros/s/AKfycbxAKWOtHwQPPBqMhvWfnEqkiCDlbePqWLeSoUU3NC-FRHehCyEJVPWgwinteWd3ceaP/exec';
+      fetch(POLL_API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'submitReport',
+          category: 'pollution',
+          ref: ref,
+          citizenName: window.citizenData ? window.citizenData.name : '-',
+          phone: window.citizenData ? window.citizenData.phone : '-',
+          community: window.citizenData ? window.citizenData.community : '-',
+          problemType: problemLabel,
+          title: title,
+          detail: detail,
+          urgency: urgencyLabels[selectedPollUrgencyLevel] || 'ปานกลาง',
+          department: dept,
+          assignee: '-',
+          tambon: window.citizenData ? window.citizenData.tambon : '-',
+          date: new Date().toLocaleDateString('th-TH'),
+          time: new Date().toLocaleTimeString('th-TH'),
+          lat: lat,
+          lng: lng,
+          mapLink: mapLink,
+          images: images
+        })
+      }).catch(err => console.error('App Script Error:', err));
+
+      resetPollReportForm();
+      document.getElementById('successModal').classList.add('active');
+      setTimeout(() => syncReports(), 1500);
+    }
   </script>
 </body>
 
