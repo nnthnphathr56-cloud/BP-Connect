@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="description" content="ระบบรับแจ้งปัญหาและติดตามสถานะ สำหรับประชาชน เจ้าหน้าที่ และผู้บริหาร">
   <title>ระบบรับแจ้งปัญหา | Government Issue Reporting</title>
   <style>
@@ -2559,6 +2559,465 @@
         gap: 0.6rem;
       }
     }
+
+    /* ============================================
+       โหมดผู้สูงอายุ - Elderly-Friendly Overrides
+       ============================================ */
+
+    /* ─── ตัวแปรหลัก ─── */
+    :root {
+      /* พื้นหลังสีขาว / ครีม อ่านง่าย */
+      --bg-primary: #fafaf7;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-glass: rgba(255, 255, 255, 0.97);
+
+      /* ตัวอักษรเข้มชัด คอนทราสต์สูง */
+      --text-primary: #1a1a1a;
+      --text-secondary: #333333;
+      --text-muted: #555555;
+
+      /* เน้น accent สีน้ำเงินเข้ม อ่านง่ายกว่าทอง */
+      --accent-gold: #1565c0;
+      --accent-gold-light: #1976d2;
+
+      /* เส้นขอบชัดเจน */
+      --border-subtle: rgba(0, 0, 0, 0.18);
+      --border-gold: rgba(21, 101, 192, 0.45);
+
+      /* เงาเบา */
+      --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.10);
+      --shadow-glow: 0 0 20px rgba(21, 101, 192, 0.12);
+
+      /* gradient ไม่เข้ม */
+      --gradient-gold: linear-gradient(135deg, #1565c0, #1976d2);
+      --gradient-dark: linear-gradient(180deg, #fafaf7 0%, #f0f0ea 100%);
+
+      /* มุมโค้งใหญ่ขึ้น → ปุ่มกว้าง จับง่าย */
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-xl: 30px;
+    }
+
+    /* ─── ขนาดตัวอักษรโดยรวม ─── */
+    html {
+      font-size: 19px;
+    }
+
+    /* ใหญ่ขึ้นจาก 16px */
+
+    body {
+      background: var(--gradient-dark);
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    /* ─── ชื่อระบบ / title หน้าแรก ─── */
+    .home-title {
+      font-size: 1.9rem !important;
+    }
+
+    .home-subtitle {
+      font-size: 1.05rem !important;
+      color: #444 !important;
+      font-weight: 500 !important;
+      letter-spacing: 0 !important;
+    }
+
+    /* ─── เมนูวงกลม: ข้อความใหญ่ขึ้น, ไม่ตัดขอบ ─── */
+    .quadrant-icon {
+      font-size: 2.8rem !important;
+    }
+
+    .quadrant-label {
+      font-size: 1.05rem !important;
+      color: #1a1a1a !important;
+    }
+
+    .quadrant-desc {
+      font-size: 0.85rem !important;
+      color: #444 !important;
+    }
+
+    .circle-center span {
+      font-size: 0.75rem !important;
+      color: #1565c0 !important;
+    }
+
+    /* ─── การ์ดเมนูหน้าแรก ─── */
+    .menu-quadrant {
+      background: #ffffff !important;
+    }
+
+    .menu-quadrant:hover {
+      background: #e3f0ff !important;
+    }
+
+    /* ─── ปุ่มใหญ่ขึ้น แตะง่าย ─── */
+    .btn {
+      padding: 1rem 1.6rem !important;
+      font-size: 1rem !important;
+      border-radius: var(--radius-md) !important;
+      min-height: 52px;
+    }
+
+    .btn-gold {
+      background: var(--gradient-gold) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(21, 101, 192, 0.30) !important;
+    }
+
+    .btn-back {
+      font-size: 0.95rem !important;
+      padding: 0.75rem 1.4rem !important;
+    }
+
+    /* ─── Input fields ─── */
+    .form-label {
+      font-size: 1rem !important;
+      color: #222 !important;
+      font-weight: 600 !important;
+    }
+
+    .form-input {
+      font-size: 1.05rem !important;
+      padding: 0.95rem 1.1rem !important;
+      border: 2px solid #aaa !important;
+      background: #ffffff !important;
+      color: #111 !important;
+      min-height: 52px;
+    }
+
+    .form-input:focus {
+      border-color: #1565c0 !important;
+      box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.18) !important;
+    }
+
+    .form-input::placeholder {
+      color: #888 !important;
+    }
+
+    .form-hint {
+      font-size: 0.85rem !important;
+      color: #555 !important;
+    }
+
+    /* ─── Login card ─── */
+    .login-card {
+      background: #ffffff !important;
+      border: 2px solid #ddd !important;
+    }
+
+    .login-title {
+      font-size: 1.4rem !important;
+      color: #1565c0 !important;
+    }
+
+    .login-subtitle {
+      font-size: 0.95rem !important;
+      color: #555 !important;
+    }
+
+    /* ─── Navbar & Tab Bar ─── */
+    .dash-nav {
+      background: #1a3a6b !important;
+      border-bottom: 2px solid #0d2b52 !important;
+      padding: 1rem 1.5rem !important;
+    }
+
+    .dash-nav-title {
+      font-size: 1.1rem !important;
+      color: #ffffff !important;
+    }
+
+    .dash-nav-role {
+      font-size: 0.8rem !important;
+      color: #cce0ff !important;
+    }
+
+    .tab-bar {
+      background: #1a3a6b !important;
+      border-top: 2px solid #0d2b52 !important;
+      padding: 0.7rem 0.5rem calc(0.7rem + env(safe-area-inset-bottom)) !important;
+    }
+
+    .tab-item {
+      min-width: 70px !important;
+      padding: 0.5rem 0.9rem !important;
+      color: #cce0ff !important;
+    }
+
+    .tab-item.active {
+      color: #ffffff !important;
+    }
+
+    .tab-icon {
+      font-size: 1.6rem !important;
+    }
+
+    .tab-label {
+      font-size: 0.78rem !important;
+    }
+
+    /* ─── Action Cards ─── */
+    .action-card {
+      background: #ffffff !important;
+      border: 2px solid #d0d8e8 !important;
+      padding: 1.4rem 1rem !important;
+    }
+
+    .action-card:hover {
+      background: #e8f0fe !important;
+      border-color: #1565c0 !important;
+    }
+
+    .action-card-icon {
+      font-size: 2.4rem !important;
+    }
+
+    .action-card-label {
+      font-size: 0.95rem !important;
+      color: #1a1a1a !important;
+      font-weight: 600 !important;
+    }
+
+    .action-card-desc {
+      font-size: 0.78rem !important;
+      color: #444 !important;
+    }
+
+    /* ─── Status / Report Cards ─── */
+    .status-card {
+      background: #ffffff !important;
+      border: 1.5px solid #d0d8e8 !important;
+      padding: 1rem 1.1rem !important;
+    }
+
+    .status-emoji {
+      font-size: 1.7rem !important;
+    }
+
+    .status-title {
+      font-size: 1rem !important;
+      color: #1a1a1a !important;
+      font-weight: 600 !important;
+    }
+
+    .status-desc {
+      font-size: 0.82rem !important;
+      color: #555 !important;
+    }
+
+    /* badge ── อ่านง่าย */
+    .status-badge {
+      font-size: 0.78rem !important;
+      padding: 0.35rem 0.75rem !important;
+      border-radius: 10px !important;
+      font-weight: 700 !important;
+    }
+
+    .badge-pending {
+      background: #fff3cd !important;
+      color: #6d4c00 !important;
+      border: 1.5px solid #e6a800 !important;
+    }
+
+    .badge-progress {
+      background: #d0e8ff !important;
+      color: #003d85 !important;
+      border: 1.5px solid #1565c0 !important;
+    }
+
+    .badge-done {
+      background: #d4edda !important;
+      color: #155724 !important;
+      border: 1.5px solid #28a745 !important;
+    }
+
+    .badge-urgent {
+      background: #fde8e8 !important;
+      color: #7b1a1a !important;
+      border: 1.5px solid #e53935 !important;
+    }
+
+    /* ─── Section Headers & Titles ─── */
+    .section-title {
+      font-size: 1.2rem !important;
+      color: #1a1a1a !important;
+    }
+
+    .section-link {
+      font-size: 0.88rem !important;
+    }
+
+    /* ─── Stat Cards ─── */
+    .stat-card {
+      background: #ffffff !important;
+      border: 1.5px solid #d0d8e8 !important;
+      padding: 1rem !important;
+    }
+
+    .stat-number {
+      font-size: 2rem !important;
+    }
+
+    .stat-label {
+      font-size: 0.82rem !important;
+      color: #444 !important;
+    }
+
+    /* ─── Expandable Cards (ตารางสุขภาพ) ─── */
+    .expandable-card {
+      border: 2px solid #b3d0f0 !important;
+    }
+
+    .expandable-header {
+      font-size: 1rem !important;
+      background: #eaf3ff !important;
+      padding: 1.1rem 1.2rem !important;
+    }
+
+    .expand-arrow {
+      font-size: 1rem !important;
+      color: #1565c0 !important;
+    }
+
+    /* table ─── */
+    .detail-table th,
+    .detail-table td {
+      font-size: 0.9rem !important;
+      padding: 0.6rem 0.7rem !important;
+    }
+
+    .detail-table th {
+      background: #d8ecff !important;
+      color: #0d2b52 !important;
+    }
+
+    /* ─── Info Banner ─── */
+    .info-banner {
+      background: #e8f4fd !important;
+      border: 1.5px solid #90caf9 !important;
+      padding: 1rem !important;
+    }
+
+    .info-banner-icon {
+      font-size: 1.6rem !important;
+    }
+
+    .info-banner-text {
+      font-size: 0.95rem !important;
+      color: #0d2b52 !important;
+    }
+
+    /* ─── Form Sections ─── */
+    .form-section-title {
+      font-size: 1.05rem !important;
+      color: #1565c0 !important;
+    }
+
+    /* ─── Urgency ─── */
+    .urgency-icon {
+      font-size: 1.9rem !important;
+    }
+
+    .urgency-label {
+      font-size: 0.88rem !important;
+    }
+
+    .urgency-option {
+      padding: 1rem 0.6rem !important;
+    }
+
+    /* ─── Contact chips ─── */
+    .contact-chip {
+      font-size: 0.88rem !important;
+      padding: 0.6rem 1rem !important;
+    }
+
+    /* ─── Report Header / หัวหน้าแจ้งปัญหา ─── */
+    .report-header {
+      background: #1a3a6b !important;
+      border-bottom: 3px solid #0d2b52 !important;
+      padding: 1rem 1.4rem !important;
+    }
+
+    .report-header-title {
+      font-size: 1.25rem !important;
+      font-weight: 700 !important;
+      color: #ffffff !important;
+    }
+
+    /* ปุ่มกลับใน report header */
+    .report-header .btn-outline,
+    .report-header .btn {
+      background: rgba(255, 255, 255, 0.15) !important;
+      color: #ffffff !important;
+      border: 2px solid rgba(255, 255, 255, 0.5) !important;
+      font-size: 1rem !important;
+      padding: 0.6rem 1.1rem !important;
+      border-radius: 12px !important;
+      font-weight: 600 !important;
+      min-height: 44px;
+    }
+
+    .report-header .btn-outline:hover,
+    .report-header .btn:hover {
+      background: rgba(255, 255, 255, 0.28) !important;
+      border-color: #ffffff !important;
+    }
+
+    /* ─── Sub-Tab Bar (แถบเมนูย่อย) ─── */
+    .sub-tabs {
+      background: #f0f4ff !important;
+      border: 2px solid #b3c6f0 !important;
+      border-radius: 16px !important;
+      padding: 0.4rem !important;
+      gap: 0.3rem !important;
+    }
+
+    .sub-tab {
+      font-size: 0.95rem !important;
+      font-weight: 600 !important;
+      color: #333 !important;
+      padding: 0.65rem 1.05rem !important;
+      border-radius: 12px !important;
+      border: 1.5px solid transparent !important;
+      background: transparent !important;
+      min-height: 44px;
+      white-space: nowrap;
+    }
+
+    .sub-tab.active {
+      background: #1565c0 !important;
+      color: #ffffff !important;
+      border-color: #0d47a1 !important;
+      box-shadow: 0 2px 8px rgba(21, 101, 192, 0.30) !important;
+    }
+
+    .sub-tab:hover:not(.active) {
+      background: #d8e8ff !important;
+      color: #1565c0 !important;
+      border-color: #90b8f8 !important;
+    }
+
+    /* ─── Sync Indicator ─── */
+    .sync-label {
+      font-size: 0.8rem !important;
+    }
+
+    /* ─── Toast notification ─── */
+    .toast {
+      font-size: 0.95rem !important;
+      padding: 1rem 1.5rem !important;
+    }
+
+    .toast-icon {
+      font-size: 1.4rem !important;
+    }
+
+    /* ─── ยกเลิกการ zoom-block เพื่อให้ผู้สูงอายุ pinch-zoom ได้ ─── */
+    /* (จัดการผ่าน meta viewport ด้านล่าง) */
   </style>
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -3435,8 +3894,7 @@
   <div class="page" id="reportPage">
     <!-- Header -->
     <div class="report-header">
-      <button class="btn btn-outline" onclick="navigateTo('citizenDash')"
-        style="padding:0.4rem 0.8rem; font-size:0.8rem;">← กลับ</button>
+      <button class="btn btn-outline" onclick="navigateTo('citizenDash')" style="">← กลับ</button>
       <h2 class="report-header-title">แจ้งปัญหา</h2>
     </div>
 
@@ -4925,8 +5383,7 @@
        ============================================ -->
   <div class="page" id="reportDrugsPage">
     <div class="report-header">
-      <button class="btn btn-outline" onclick="navigateTo('citizenDash')"
-        style="padding:0.4rem 0.8rem; font-size:0.8rem;">← กลับ</button>
+      <button class="btn btn-outline" onclick="navigateTo('citizenDash')" style="">← กลับ</button>
       <h2 class="report-header-title">💊 แจ้งเบาะแสยาเสพติด</h2>
     </div>
     <div class="report-body">
@@ -4981,8 +5438,7 @@
        ============================================ -->
   <div class="page" id="reportEnvironmentPage">
     <div class="report-header">
-      <button class="btn btn-outline" onclick="navigateTo('citizenDash')"
-        style="padding:0.4rem 0.8rem; font-size:0.8rem;">← กลับ</button>
+      <button class="btn btn-outline" onclick="navigateTo('citizenDash')" style="">← กลับ</button>
       <h2 class="report-header-title">🌿 แจ้งปัญหาสิ่งแวดล้อม</h2>
     </div>
     <div class="report-body">
@@ -5137,8 +5593,7 @@
        ============================================ -->
   <div class="page" id="reportPollutionPage">
     <div class="report-header">
-      <button class="btn btn-outline" onclick="navigateTo('citizenDash')"
-        style="padding:0.4rem 0.8rem; font-size:0.8rem;">← กลับ</button>
+      <button class="btn btn-outline" onclick="navigateTo('citizenDash')" style="">← กลับ</button>
       <h2 class="report-header-title">🏭 แจ้งปัญหามลพิษ</h2>
     </div>
     <div class="report-body">
@@ -5294,8 +5749,7 @@
        ============================================ -->
   <div class="page" id="reportDiseasePage">
     <div class="report-header">
-      <button class="btn btn-outline" onclick="navigateTo('citizenDash')"
-        style="padding:0.4rem 0.8rem; font-size:0.8rem;">← กลับ</button>
+      <button class="btn btn-outline" onclick="navigateTo('citizenDash')" style="">← กลับ</button>
       <h2 class="report-header-title">🦠 แจ้งปัญหาโรคติดต่อ</h2>
     </div>
     <div class="report-body">
