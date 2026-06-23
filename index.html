@@ -3185,7 +3185,6 @@
         <button class="sub-tab active" onclick="switchCitizenTab('main')">หน้าหลัก</button>
         <button class="sub-tab" onclick="switchCitizenTab('tracking')">ติดตามสถานะ</button>
         <button class="sub-tab" onclick="navigateTo('reportPage')">แจ้งปัญหา</button>
-        <button class="sub-tab" onclick="switchCitizenTab('garbage')">ตารางเก็บขยะ</button>
         <button class="sub-tab" onclick="switchCitizenTab('satisfaction')">ให้คะแนนความพึงพอใจ</button>
       </div>
 
@@ -3205,33 +3204,43 @@
         <div class="action-grid">
           <div class="action-card" onclick="switchCitizenTab('health')">
             <span class="action-card-icon">💚</span>
-            <div class="action-card-title">สุขภาพ</div>
+            <div class="action-card-title">ส่งเสริมสุขภาพ</div>
             <div class="action-card-desc">ข้อมูลสาธารณสุข</div>
           </div>
           <div class="action-card highlight" onclick="switchCitizenTab('drugs')">
-            <span class="action-card-icon">💊</span>
-            <div class="action-card-title">ยาเสพติด</div>
-            <div class="action-card-desc">แจ้งเบาะแสยาเสพติด</div>
+            <span class="action-card-icon">🧹</span>
+            <div class="action-card-title">งานรักษาความสะอาด</div>
+            <div class="action-card-desc">แจ้งปัญหาความสะอาด</div>
           </div>
           <div class="action-card" onclick="switchCitizenTab('env')">
             <span class="action-card-icon">🌿</span>
-            <div class="action-card-title">สิ่งแวดล้อม</div>
+            <div class="action-card-title">สุขาภิบาลและอนามัยสิ่งแวดล้อม</div>
             <div class="action-card-desc">แจ้งปัญหาสิ่งแวดล้อม</div>
           </div>
           <div class="action-card" onclick="switchCitizenTab('pollution')">
-            <span class="action-card-icon">🏭</span>
-            <div class="action-card-title">มลพิษ</div>
-            <div class="action-card-desc">แจ้งปัญหามลพิษ</div>
+            <span class="action-card-icon">🏢</span>
+            <div class="action-card-title">ศูนย์บริการ</div>
+            <div class="action-card-desc">บริการประชาชน</div>
           </div>
           <div class="action-card" onclick="switchCitizenTab('disease')">
             <span class="action-card-icon">🦠</span>
-            <div class="action-card-title">ควบคุมโรค</div>
+            <div class="action-card-title">ป้องกันและควบคุมโรค</div>
             <div class="action-card-desc">แจ้งปัญหาโรคติดต่อ</div>
           </div>
           <div class="action-card" onclick="switchCitizenTab('alerts')">
             <span class="action-card-icon">🔔</span>
             <div class="action-card-title">แจ้งเตือนจากเทศบาล</div>
             <div class="action-card-desc">ข่าวสารและประกาศ</div>
+          </div>
+          <div class="action-card" onclick="switchCitizenTab('vet')">
+            <span class="action-card-icon">🐾</span>
+            <div class="action-card-title">สัตวแพทย์</div>
+            <div class="action-card-desc">บริการด้านสัตว์และสัตวแพทย์</div>
+          </div>
+          <div class="action-card" onclick="switchCitizenTab('garbage')">
+            <span class="action-card-icon">🗑️</span>
+            <div class="action-card-title">ตารางเก็บขยะ</div>
+            <div class="action-card-desc">ตารางเก็บขยะประจำสัปดาห์</div>
           </div>
           <div class="action-card" onclick="switchCitizenTab('services')">
             <span class="action-card-icon">📄</span>
@@ -3240,36 +3249,7 @@
           </div>
         </div>
 
-        <div class="section-header">
-          <h2 class="section-title">รายงานล่าสุด</h2>
-          <span class="section-link" onclick="switchCitizenTab('health')">ดูทั้งหมด →</span>
-        </div>
-        <div class="status-list" id="citizenRecentList">
-          <div class="status-card">
-            <span class="status-emoji">🕳️</span>
-            <div class="status-info">
-              <div class="status-title">ถนนชำรุด ซอย 5</div>
-              <div class="status-desc">แจ้งเมื่อ 2 วันที่แล้ว · สำนักงานช่าง</div>
-            </div>
-            <span class="status-badge badge-progress">กำลังดำเนินการ</span>
-          </div>
-          <div class="status-card">
-            <span class="status-emoji">💡</span>
-            <div class="status-info">
-              <div class="status-title">ไฟฟ้าดับ ม.3</div>
-              <div class="status-desc">แจ้งเมื่อ 5 วันที่แล้ว · กองช่าง</div>
-            </div>
-            <span class="status-badge badge-done">เสร็จสิ้น</span>
-          </div>
-          <div class="status-card">
-            <span class="status-emoji">🗑️</span>
-            <div class="status-info">
-              <div class="status-title">ขยะตกค้าง ตลาดสด</div>
-              <div class="status-desc">แจ้งเมื่อ 1 วันที่แล้ว · กองสาธารณสุข</div>
-            </div>
-            <span class="status-badge badge-pending">รอดำเนินการ</span>
-          </div>
-        </div>
+
       </div>
 
       <!-- Tracking Tab -->
@@ -3308,6 +3288,27 @@
             <strong>ข้อมูลสุขภาพชุมชน</strong> ติดตามสถานการณ์สาธารณสุขในพื้นที่ของท่าน
           </div>
         </div>
+
+        <!-- Health Categories (Expandable turned Action Grid) -->
+        <div class="action-grid" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+          <div class="action-card" onclick="showToast('🧒', 'ตารางฉีดวัคซีน ข้อมูลโภชนาการ และคลินิกเด็ก')">
+            <span class="action-card-icon">🧒</span>
+            <div class="action-card-title">เด็กและเยาวชน</div>
+          </div>
+          <div class="action-card" onclick="showToast('🧓', 'ตารางตรวจสุขภาพ กิจกรรมชมรม และเยี่ยมบ้านผู้ป่วย')">
+            <span class="action-card-icon">🧓</span>
+            <div class="action-card-title">ผู้สูงอายุ</div>
+          </div>
+          <div class="action-card" onclick="showToast('🤒', 'คลินิก NCDs บริการรับยา และประสานส่งต่อฉุกเฉิน')">
+            <span class="action-card-icon">🤒</span>
+            <div class="action-card-title">ผู้ป่วย</div>
+          </div>
+          <div class="action-card" onclick="showToast('👨‍👩‍👧‍👦', 'คัดกรองความเสี่ยง วัคซีนตามฤดูกาล และข่าวสาร')">
+            <span class="action-card-icon">👨‍👩‍👧‍👦</span>
+            <div class="action-card-title">บุคคลทั่วไป</div>
+          </div>
+        </div>
+
 
         <!-- Health Stats -->
         <div class="stats-grid">
@@ -3693,6 +3694,45 @@
         </div>
       </div>
 
+      <!-- Veterinary Tab -->
+      <div class="citizen-subpage" id="citizenVet">
+        <div class="section-header">
+          <h2 class="section-title">บริการสัตวแพทย์</h2>
+        </div>
+        <div class="action-grid" style="margin-top: 1.5rem;">
+          <div class="action-card" onclick="showToast('🐾', 'บริการด้านสัตว์และสัตวแพทย์')">
+            <span class="action-card-icon">🐾</span>
+            <div class="action-card-title">ด้านสัตว์และสัตวแพทย์</div>
+          </div>
+          <div class="action-card" onclick="showToast('💉', 'บริการฉีดวัคซีนสัตว์เลี้ยง')">
+            <span class="action-card-icon">💉</span>
+            <div class="action-card-title">ฉีดวัคซีนสัตว์เลี้ยง</div>
+          </div>
+          <div class="action-card" onclick="showToast('🐕', 'ควบคุมประชากรสัตว์จรจัด')">
+            <span class="action-card-icon">🐕</span>
+            <div class="action-card-title">ควบคุมประชากรสัตว์จรจัด</div>
+          </div>
+          <div class="action-card" onclick="showToast('🏥', 'คลินิกสัตวแพทย์เทศบาล')">
+            <span class="action-card-icon">🏥</span>
+            <div class="action-card-title">คลินิกสัตวแพทย์เทศบาล</div>
+          </div>
+        </div>
+
+        <div class="section-header" style="margin-top: 2rem;">
+          <h2 class="section-title">แจ้งปัญหาเกี่ยวกับสัตว์</h2>
+        </div>
+        <div class="action-grid" style="margin-top: 1.5rem;">
+          <div class="action-card" onclick="showToast('🐕', 'ระบบแจ้งปัญหาสัตว์จรจัดกำลังเปิดให้บริการเร็วๆ นี้')">
+            <span class="action-card-icon">🐕</span>
+            <div class="action-card-title">แจ้งสัตว์จรจัด</div>
+          </div>
+          <div class="action-card" onclick="showToast('⚠️', 'ระบบแจ้งโรคในสัตว์กำลังเปิดให้บริการเร็วๆ นี้')">
+            <span class="action-card-icon">⚠️</span>
+            <div class="action-card-title">แจ้งโรคในสัตว์</div>
+          </div>
+        </div>
+      </div>
+
       <!-- Garbage Collection Schedule Tab -->
       <div class="citizen-subpage" id="citizenGarbage">
         <div class="section-header">
@@ -3876,10 +3916,6 @@
       <button class="tab-item" onclick="navigateTo('reportPage')">
         <span class="tab-icon">🚨</span>
         <span class="tab-label">แจ้งปัญหา</span>
-      </button>
-      <button class="tab-item" onclick="switchCitizenTab('garbage')">
-        <span class="tab-icon">🗑️</span>
-        <span class="tab-label">เก็บขยะ</span>
       </button>
       <button class="tab-item" onclick="switchCitizenTab('satisfaction')">
         <span class="tab-icon">⭐</span>
@@ -6004,8 +6040,9 @@
         'pollution': { page: 'citizenPollution', tabIdx: 0, subTabIdx: -1 },
         'disease': { page: 'citizenDisease', tabIdx: 0, subTabIdx: -1 },
         'alerts': { page: 'citizenAlerts', tabIdx: 0, subTabIdx: -1 },
-        'garbage': { page: 'citizenGarbage', tabIdx: 3, subTabIdx: 3 },
-        'satisfaction': { page: 'citizenSatisfaction', tabIdx: 4, subTabIdx: 4 },
+        'vet': { page: 'citizenVet', tabIdx: 0, subTabIdx: -1 },
+        'garbage': { page: 'citizenGarbage', tabIdx: 0, subTabIdx: -1 },
+        'satisfaction': { page: 'citizenSatisfaction', tabIdx: 3, subTabIdx: 3 },
         'services': { page: 'citizenServices', tabIdx: 0, subTabIdx: -1 }
       };
 
