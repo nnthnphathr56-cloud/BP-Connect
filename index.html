@@ -347,10 +347,383 @@
 
     /* ===== LOGIN PAGE ===== */
     #loginPage,
-    #citizenLoginPage {
+    #citizenLoginPage,
+    #officerSelectPage {
       align-items: center;
       justify-content: center;
       padding: 2rem;
+    }
+
+    /* ===== Officer Department Select Page ===== */
+    .officer-select-container {
+      width: min(520px, 95vw);
+      animation: scaleIn 0.6s ease forwards;
+    }
+
+    .officer-select-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .officer-select-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1rem;
+      background: var(--gradient-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 0 25px rgba(126, 87, 194, 0.2);
+    }
+
+    .officer-select-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent-gold-light);
+    }
+
+    .officer-select-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .dept-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .dept-card {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .dept-card:hover {
+      border-color: var(--accent-gold);
+      background: rgba(126, 87, 194, 0.08);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(126, 87, 194, 0.15);
+    }
+
+    .dept-card:active {
+      transform: scale(0.96);
+    }
+
+    .dept-card-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .dept-card-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .dept-card-badge {
+      font-size: 0.62rem;
+      color: var(--accent-gold);
+      background: rgba(126, 87, 194, 0.12);
+      border-radius: 20px;
+      padding: 0.15rem 0.5rem;
+      font-weight: 500;
+    }
+
+    .dept-card-desc {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      text-align: center;
+      padding: 0 0.2rem;
+    }
+
+    .dept-card-stats {
+      display: flex;
+      gap: 0.4rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 0.1rem;
+    }
+
+    .dept-stat-chip {
+      font-size: 0.6rem;
+      background: rgba(0,0,0,0.05);
+      border-radius: 10px;
+      padding: 0.1rem 0.45rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .dept-stat-chip.highlight {
+      background: rgba(126, 87, 194, 0.1);
+      color: var(--accent-gold);
+    }
+
+    /* ===== Subpage Back Bar ===== */
+    .subpage-back-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .subpage-back-btn {
+      background: none;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.4rem 0.85rem;
+      font-size: 0.8rem;
+      font-family: 'Prompt', sans-serif;
+      color: var(--accent-gold);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .subpage-back-btn:hover {
+      background: rgba(126, 87, 194, 0.08);
+      border-color: var(--accent-gold);
+    }
+
+    .subpage-back-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* ===== Health Modal Panels ===== */
+    .health-modal-panel {
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      animation: scaleIn 0.3s ease forwards;
+    }
+
+    .health-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      background: linear-gradient(135deg, rgba(126,87,194,0.15), rgba(176,133,245,0.08));
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent-gold-light);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .health-modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-muted);
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .health-modal-close:hover {
+      background: rgba(0,0,0,0.08);
+      color: var(--text-primary);
+    }
+
+    .health-modal-body {
+      padding: 1rem;
+    }
+
+    .health-info-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .health-info-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .health-info-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .health-info-label {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+
+    .health-info-value {
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .health-stat-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .health-stat-mini {
+      background: rgba(255,255,255,0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.5rem 0.3rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .hsm-num {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .hsm-label {
+      font-size: 0.58rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    /* ===== Officer Dashboard Dept Info Banner ===== */
+    .dept-info-banner {
+      background: linear-gradient(135deg, rgba(126,87,194,0.12), rgba(176,133,245,0.08));
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+    }
+
+    .dept-info-banner-icon {
+      font-size: 2.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .dept-info-banner-body {
+      flex: 1;
+    }
+
+    .dept-info-banner-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-gold-light);
+      margin-bottom: 0.2rem;
+    }
+
+    .dept-info-banner-desc {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.55rem;
+      line-height: 1.5;
+    }
+
+    .dept-info-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .dept-info-tag {
+      font-size: 0.65rem;
+      background: rgba(126, 87, 194, 0.12);
+      color: var(--accent-gold);
+      border-radius: 20px;
+      padding: 0.15rem 0.6rem;
+      font-weight: 500;
+      border: 1px solid rgba(126,87,194,0.2);
+    }
+
+    .dept-info-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+
+    .dept-info-stat {
+      background: rgba(255,255,255,0.6);
+      border-radius: var(--radius-md);
+      padding: 0.5rem 0.4rem;
+      text-align: center;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .dept-info-stat-num {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    .dept-info-stat-num.red { color: #e53935; }
+    .dept-info-stat-num.green { color: #43a047; }
+
+    .dept-info-stat-label {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    /* Login page: selected dept display */
+    .dept-display-box {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(126, 87, 194, 0.08);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .dept-display-icon {
+      font-size: 1.3rem;
+    }
+
+    .dept-display-text {
+      flex: 1;
+    }
+
+    .dept-display-label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .dept-display-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--accent-gold-light);
     }
 
     .login-container {
@@ -431,6 +804,21 @@
 
     .form-input::placeholder {
       color: var(--text-muted);
+    }
+
+    select.form-input {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888899' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-color: rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+    }
+
+    select.form-input option {
+      background: #ffffff;
+      color: var(--text-primary);
     }
 
     .btn {
@@ -3059,7 +3447,7 @@
           <span class="quadrant-desc">บริหารจัดการ</span>
         </div>
         <!-- Bottom Left - เจ้าหน้าที่ -->
-        <div class="menu-quadrant q-bottom-left" id="menuOfficer" onclick="navigateTo('login', 'officer')">
+        <div class="menu-quadrant q-bottom-left" id="menuOfficer" onclick="navigateTo('officerSelect')">
           <span class="quadrant-icon">🛡️</span>
           <span class="quadrant-label">เจ้าหน้าที่</span>
           <span class="quadrant-desc">ดำเนินการ</span>
@@ -3078,6 +3466,75 @@
   </div>
 
   <!-- ============================================
+       OFFICER DEPARTMENT SELECT PAGE
+       ============================================ -->
+  <div class="page" id="officerSelectPage">
+    <div class="officer-select-container">
+      <div class="officer-select-header">
+        <div class="officer-select-icon">🛡️</div>
+        <h2 class="officer-select-title">เข้าสู่ระบบเจ้าหน้าที่</h2>
+        <p class="officer-select-subtitle">เลือกฝ่ายงานของท่านเพื่อเข้าใช้งานระบบ</p>
+      </div>
+
+      <div class="dept-grid">
+
+        <div class="dept-card" onclick="selectOfficerDept('ฝ่ายงานรักษาความสะอาด', '🧹')">
+          <div class="dept-card-icon">🧹</div>
+          <div class="dept-card-name">ฝ่ายงาน<br>รักษาความสะอาด</div>
+          <div class="dept-card-badge">Cleaning</div>
+        </div>
+
+        <div class="dept-card" onclick="selectOfficerDept('ฝ่ายงานส่งเสริมสุขภาพ', '💊')">
+          <div class="dept-card-icon">💊</div>
+          <div class="dept-card-name">ฝ่ายงาน<br>ส่งเสริมสุขภาพ</div>
+          <div class="dept-card-badge">Health Promotion</div>
+        </div>
+
+        <div class="dept-card" onclick="selectOfficerDept('ฝ่ายงานป้องกันและควบคุมโรค', '🦠')">
+          <div class="dept-card-icon">🦠</div>
+          <div class="dept-card-name">ฝ่ายงานป้องกัน<br>และควบคุมโรค</div>
+          <div class="dept-card-badge">Disease Control</div>
+        </div>
+
+        <div class="dept-card" onclick="selectOfficerDept('ฝ่ายงานสัตวแพทย์', '🐾')">
+          <div class="dept-card-icon">🐾</div>
+          <div class="dept-card-name">ฝ่ายงาน<br>สัตวแพทย์</div>
+          <div class="dept-card-badge">Veterinary</div>
+        </div>
+
+        <div class="dept-card" onclick="selectOfficerDept('ฝ่ายงานศูนย์บริการ', '🏢')">
+          <div class="dept-card-icon">🏢</div>
+          <div class="dept-card-name">ฝ่ายงาน<br>ศูนย์บริการ</div>
+          <div class="dept-card-badge">Service Center</div>
+        </div>
+
+        <div class="dept-card" onclick="selectOfficerDept('ฝ่ายงานสุขาภิบาลและอนามัยสิ่งแวดล้อม', '🌿')">
+          <div class="dept-card-icon">🌿</div>
+          <div class="dept-card-name">สุขาภิบาล<br>และอนามัยสิ่งแวดล้อม</div>
+          <div class="dept-card-badge">Sanitation</div>
+        </div>
+
+        <div class="dept-card" onclick="selectOfficerDept('กองช่าง', '🔧')">
+          <div class="dept-card-icon">🔧</div>
+          <div class="dept-card-name">กองช่าง</div>
+          <div class="dept-card-badge">Engineering</div>
+        </div>
+
+        <div class="dept-card" onclick="selectOfficerDept('ป้องกันและบรรเทาสาธารณภัย', '🚒')">
+          <div class="dept-card-icon">🚒</div>
+          <div class="dept-card-name">ป้องกันและบรรเทา<br>สาธารณภัย</div>
+          <div class="dept-card-badge">Disaster Prevention</div>
+        </div>
+
+      </div>
+
+      <button class="btn btn-back btn-full" onclick="navigateTo('home')">
+        ← กลับหน้าหลัก
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================
        LOGIN PAGE
        ============================================ -->
   <div class="page" id="loginPage">
@@ -3089,6 +3546,15 @@
           <p class="login-subtitle" id="loginSubtitle">กรุณากรอกข้อมูลเพื่อเข้าใช้งาน</p>
         </div>
         <form id="loginForm" onsubmit="handleLogin(event)">
+          <div id="officerDeptDisplay" style="display:none;">
+            <div class="dept-display-box">
+              <div class="dept-display-icon" id="loginDeptIcon">🛡️</div>
+              <div class="dept-display-text">
+                <span class="dept-display-label">ฝ่ายงาน</span>
+                <span class="dept-display-name" id="loginDeptName">-</span>
+              </div>
+            </div>
+          </div>
           <div class="form-group">
             <label class="form-label" for="loginName">ชื่อผู้ใช้</label>
             <input type="text" class="form-input" id="loginName" placeholder="กรอกชื่อผู้ใช้" required>
@@ -3100,8 +3566,8 @@
           <button type="submit" class="btn btn-gold btn-full" id="loginSubmitBtn">
             เข้าสู่ระบบ
           </button>
-          <button type="button" class="btn btn-back btn-full" onclick="navigateTo('home')">
-            ← กลับหน้าหลัก
+          <button type="button" class="btn btn-back btn-full" id="loginBackBtn" onclick="loginRole === 'officer' ? navigateTo('officerSelect') : navigateTo('home')">
+            ← กลับ
           </button>
         </form>
       </div>
@@ -3130,21 +3596,52 @@
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label" for="citizenCommunity">ชุมชน/หมู่บ้าน *</label>
+              <label class="form-label" for="citizenCommunity">ถนน/หมู่บ้าน *</label>
               <input type="text" class="form-input" id="citizenCommunity" placeholder="ระบุชุมชน" required>
             </div>
             <div class="form-group">
-              <label class="form-label" for="citizenTambon">ตำบล *</label>
+              <label class="form-label" for="citizenTambon">ชุมชน *</label>
               <select class="form-select" id="citizenTambon" required>
-                <option value="">-- เลือกตำบล --</option>
-                <option value="ตำบลบ้านไผ่">ตำบลบ้านไผ่</option>
-                <option value="ตำบลในเมือง">ตำบลในเมือง</option>
-                <option value="ตำบลเมืองเพีย">ตำบลเมืองเพีย</option>
-                <option value="ตำบลบ้านลาน">ตำบลบ้านลาน</option>
-                <option value="ตำบลแคนเหนือ">ตำบลแคนเหนือ</option>
-                <option value="ตำบลหินตั้ง">ตำบลหินตั้ง</option>
-                <option value="ตำบลหนองน้ำใส">ตำบลหนองน้ำใส</option>
-                <option value="ตำบลหัวหนอง">ตำบลหัวหนอง</option>
+                <option value="">-- เลือกชุมชน --</option>
+                <option value="ตำบลบ้านไผ่">ชุมชนตลาด 1, 2, 3</option>
+                <option value="ตำบลในเมือง">ชุมชนส่วนราชการ</option>
+                <option value="ตำบลเมืองเพีย">ชุมชน บ.ข.ส.</option>
+                <option value="ตำบลบ้านลาน">ชุมชนศาลเจ้า</option>
+                <option value="ตำบลแคนเหนือ">ชุมชนศาลเจ้า 2</option>
+                <option value="ตำบลหินตั้ง">ชุมชนพระธรรมสาร</option>
+                <option value="ตำบลหนองน้ำใส">ชุมชนโนนสว่าง</option>
+                <option value="ตำบลหัวหนอง">ชุมชนโนนสะอาด</option>
+                <option value="ตำบลหัวหนอง">ชุมชนบ้านข่าพัฒนา</option>
+                <option value="ตำบลหัวหนอง">ชุมชนศรีบุญเรือง</option>
+                <option value="ตำบลหัวหนอง">ชุมชนหมู่ 4 พัฒนา</option>
+                <option value="ตำบลหัวหนอง">ชุมชนปอบิด</option>
+                <option value="ตำบลหัวหนอง">ชุมชนแสงทองประชาสรรค์</option>
+                <option value="ตำบลหัวหนอง">ชุมชนขนมจีน</option>
+                <option value="ตำบลหัวหนอง">ชุมชนซอยยิ่งยง</option>
+                <option value="ตำบลหัวหนอง">ชุมชนสมประสงค์พัฒนา</option>
+                <option value="ตำบลหัวหนอง">ชุมชนสมหวังสังวาลย์</option>
+                <option value="ตำบลหัวหนอง">ชุมชนสมหวังสังวาลย์ 2</option>
+                <option value="ตำบลหัวหนอง">ชุมชนศรีหมอนพัฒนา</option>
+                <option value="ตำบลหัวหนอง">ชุมชนหมู่ 1 พัฒนา</option>
+                <option value="ตำบลหัวหนอง">ชุมชนกกแดง</option>
+                <option value="ตำบลหัวหนอง">ชุมชนบ้านไผ่เก่า</option>
+                <option value="ตำบลหัวหนอง">ชุมชนบ้านไผ่พัฒนา</option>
+                <option value="ตำบลหัวหนอง">ชุมชนโนนสวรรค์</option>
+                <option value="ตำบลหัวหนอง">ชุมชนสุมนามัย</option>
+                <option value="ตำบลหัวหนอง">ชุมชนคุ้มจัดสรร</option>
+                <option value="ตำบลหัวหนอง">ชุมชนห้วยทราย</option>
+                <option value="ตำบลหัวหนอง">ชุมชนหนองลุมพุก</option>
+                <option value="ตำบลหัวหนอง">ชุมชนคลองชลประทาน</option>
+                <option value="ตำบลหัวหนอง">ชุมชนหลักสิบสี่</option>
+                <option value="ตำบลหัวหนอง">ชุมชนเจ้าเงาะ</option>
+                <option value="ตำบลหัวหนอง">ชุมชนหนองแคน</option>
+                <option value="ตำบลหัวหนอง">ชุมชนแก้วทรานี</option>
+                <option value="ตำบลหัวหนอง">ชุมชนศิริพัฒนา</option>
+                <option value="ตำบลหัวหนอง">ชุมชนอยู่เย็นเป็นสุข</option>
+                <option value="ตำบลหัวหนอง">ชุมชนประปาบ้านไผ่</option>
+                <option value="ตำบลหัวหนอง">ชุมชนมิตรภาพซอย 4</option>
+                <option value="ตำบลหัวหนอง">ชุมชนโชคชัย</option>
+                <option value="ตำบลหัวหนอง">ชุมชนมิตรภาพประชาสรรค์</option>
               </select>
             </div>
           </div>
@@ -3217,7 +3714,7 @@
             <div class="action-card-title">สุขาภิบาลและอนามัยสิ่งแวดล้อม</div>
             <div class="action-card-desc">แจ้งปัญหาสิ่งแวดล้อม</div>
           </div>
-          <div class="action-card" onclick="switchCitizenTab('pollution')">
+          <div class="action-card" onclick="switchCitizenTab('services')">
             <span class="action-card-icon">🏢</span>
             <div class="action-card-title">ศูนย์บริการ</div>
             <div class="action-card-desc">บริการประชาชน</div>
@@ -3306,6 +3803,18 @@
           <div class="action-card" onclick="showToast('👨‍👩‍👧‍👦', 'คัดกรองความเสี่ยง วัคซีนตามฤดูกาล และข่าวสาร')">
             <span class="action-card-icon">👨‍👩‍👧‍👦</span>
             <div class="action-card-title">บุคคลทั่วไป</div>
+          </div>
+          <div class="action-card" onclick="switchCitizenTab('diabetes')">
+            <span class="action-card-icon">🩸</span>
+            <div class="action-card-title">ผู้ป่วยเบาหวาน<br>และความดันโลหิต</div>
+          </div>
+          <div class="action-card" onclick="switchCitizenTab('bedridden')">
+            <span class="action-card-icon">🛏️</span>
+            <div class="action-card-title">ผู้ป่วยติดเตียง<br>และผู้อัมพาต</div>
+          </div>
+          <div class="action-card" onclick="switchCitizenTab('vaccine')">
+            <span class="action-card-icon">💉</span>
+            <div class="action-card-title">ผู้ต้องการ<br>รับวัคซีน</div>
           </div>
         </div>
 
@@ -3476,48 +3985,48 @@
         </div>
       </div>
 
-      <!-- Drugs Tab -->
+      <!-- Cleaning Tab -->
       <div class="citizen-subpage" id="citizenDrugs">
         <div class="section-header">
-          <h2 class="section-title">ข้อมูลยาเสพติด</h2>
+          <h2 class="section-title">ข้อมูลงานทำความสะอาด</h2>
         </div>
         <div class="info-banner">
-          <span class="info-banner-icon">💊</span>
+          <span class="info-banner-icon">🧹</span>
           <div class="info-banner-text">
-            <strong>สถานการณ์ยาเสพติด</strong> ติดตามและเฝ้าระวังปัญหายาเสพติดในชุมชน
+            <strong>งานรักษาความสะอาด</strong> ติดตามการทำความสะอาดและความเป็นระเบียบในชุมชน
           </div>
         </div>
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-number" style="color:#ef4444;">15</div>
-            <div class="stat-label">พื้นที่เฝ้าระวัง</div>
+            <div class="stat-number" style="color:#3b82f6;">15</div>
+            <div class="stat-label">พื้นที่ดูแลความสะอาด</div>
           </div>
           <div class="stat-card">
             <div class="stat-number" style="color:#f59e0b;">42</div>
-            <div class="stat-label">แจ้งเบาะแสสะสม</div>
+            <div class="stat-label">แจ้งปัญหาความสะอาดสะสม</div>
           </div>
           <div class="stat-card">
             <div class="stat-number" style="color:#22c55e;">28</div>
-            <div class="stat-label">เข้าสู่การบำบัด</div>
+            <div class="stat-label">ดำเนินการแก้ไขแล้ว</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number" style="color:#3b82f6;">5</div>
-            <div class="stat-label">กิจกรรมรณรงค์</div>
+            <div class="stat-number" style="color:#a855f7;">5</div>
+            <div class="stat-label">กิจกรรม Big Cleaning</div>
           </div>
         </div>
         <div class="section-header" style="margin-top:1rem;">
-          <h2 class="section-title">บริการแจ้งเบาะแส</h2>
+          <h2 class="section-title">บริการแจ้งปัญหาความสะอาด</h2>
         </div>
         <div class="action-grid">
           <div class="action-card highlight" onclick="navigateTo('reportDrugs')">
-            <span class="action-card-icon">🚨</span>
-            <div class="action-card-title">แจ้งเบาะแสยาเสพติด</div>
-            <div class="action-card-desc">ข้อมูลของท่านจะถูกเก็บเป็นความลับสูงสุด</div>
+            <span class="action-card-icon">🧹</span>
+            <div class="action-card-title">รายงานทำความสะอาด</div>
+            <div class="action-card-desc">ติดตามการทำความสะอาดในชุมชน</div>
           </div>
           <div class="action-card highlight" onclick="navigateTo('reportDrugs')">
             <span class="action-card-icon">🏘️</span>
-            <div class="action-card-title">รายงานแหล่งมั่วสุม</div>
-            <div class="action-card-desc">แจ้งพิกัดจุดเสี่ยงแหล่งมั่วสุมในชุมชน</div>
+            <div class="action-card-title">แจ้งจุดสะสมขยะ/สิ่งปฏิกูล</div>
+            <div class="action-card-desc">แจ้งพิกัดจุดที่ต้องทำความสะอาดในชุมชน</div>
           </div>
         </div>
       </div>
@@ -3879,28 +4388,155 @@
           <h2 class="section-title">บริการประชาชน</h2>
         </div>
         <div class="action-grid">
-          <div class="action-card">
+          <div class="action-card" onclick="showToast('📑', 'บริการคำร้องทั่วไป: ติดต่อสำนักงานเทศบาล ในเวลาราชการ')">
             <span class="action-card-icon">📑</span>
             <div class="action-card-title">คำร้องทั่วไป</div>
             <div class="action-card-desc">ยื่นเอกสาร</div>
           </div>
-          <div class="action-card">
+          <div class="action-card" onclick="showToast('🏠', 'บริการทะเบียนบ้าน: ติดต่อฝ่ายทะเบียน โทร 043-272-xxx')">
             <span class="action-card-icon">🏠</span>
             <div class="action-card-title">ทะเบียนบ้าน</div>
             <div class="action-card-desc">บริการทะเบียน</div>
           </div>
-          <div class="action-card">
+          <div class="action-card" onclick="showToast('💰', 'ชำระภาษีโรงเรือน ภาษีที่ดิน ที่สำนักงานเทศบาล หรือออนไลน์')">
             <span class="action-card-icon">💰</span>
             <div class="action-card-title">ภาษี</div>
             <div class="action-card-desc">ชำระภาษี</div>
           </div>
-          <div class="action-card">
+          <div class="action-card" onclick="showToast('📞', 'สายด่วนเทศบาล 043-272-xxx | สายด่วนกลาง 1132')">
             <span class="action-card-icon">📞</span>
             <div class="action-card-title">ติดต่อ</div>
             <div class="action-card-desc">สายด่วน 1132</div>
           </div>
         </div>
       </div>
+
+      <!-- ===== ผู้ป่วยเบาหวานและความดันโลหิต ===== -->
+      <div class="citizen-subpage" id="citizenDiabetes">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('health')">← ข้อมูลสุขภาพ</button>
+          <span class="subpage-back-title">ผู้ป่วยเบาหวานและความดันโลหิต</span>
+        </div>
+        <div class="info-banner" style="background:linear-gradient(135deg,#fde8e8,#fff5f5);">
+          <span class="info-banner-icon">🩸</span>
+          <div class="info-banner-text">
+            <strong>คลินิกเบาหวานและความดันโลหิต</strong> บริการตรวจ รักษา และติดตามผู้ป่วยโรคเรื้อรังอย่างต่อเนื่อง
+          </div>
+        </div>
+        <div class="health-stat-mini-grid" style="margin:1rem 0;">
+          <div class="health-stat-mini"><span class="hsm-num" style="color:#e53935;">248</span><span class="hsm-label">ผู้ป่วยเบาหวานในพื้นที่</span></div>
+          <div class="health-stat-mini"><span class="hsm-num" style="color:#1976d2;">312</span><span class="hsm-label">ผู้ป่วยความดันในพื้นที่</span></div>
+          <div class="health-stat-mini"><span class="hsm-num" style="color:#43a047;">91%</span><span class="hsm-label">ควบคุมได้ตามเกณฑ์</span></div>
+        </div>
+        <div class="health-info-row"><div class="health-info-icon">📋</div><div><div class="health-info-label">บริการที่มีให้</div><div class="health-info-value">ตรวจระดับน้ำตาลในเลือด · วัดความดันโลหิต · รับยาต่อเนื่อง · ปรึกษาแพทย์</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">📅</div><div><div class="health-info-label">วัน/เวลาบริการ</div><div class="health-info-value">ทุกวันอังคาร–พฤหัสบดี เวลา 08.00–12.00 น.</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">📍</div><div><div class="health-info-label">สถานที่</div><div class="health-info-value">คลินิกเบาหวาน รพ.สต. บ้านไผ่ อาคาร 2 ชั้น 1</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">⚠️</div><div><div class="health-info-label">ข้อแนะนำก่อนมา</div><div class="health-info-value">งดอาหารก่อนเจาะเลือดอย่างน้อย <strong>8 ชั่วโมง</strong> นำบัตรประชาชนและสมุดประจำตัวผู้ป่วยมาด้วยทุกครั้ง</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">📞</div><div><div class="health-info-label">เบอร์ติดต่อ</div><div class="health-info-value">รพ.สต. บ้านไผ่ โทร 043-272-xxx กด 2 (คลินิก NCD)</div></div></div>
+        <div class="expandable-card" style="margin-top:1rem;">
+          <div class="expandable-header" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
+            <div style="flex:1;font-weight:600;font-size:0.9rem;">📊 ตารางนัดหมาย – เบาหวาน/ความดัน</div>
+            <span class="expand-arrow">▼</span>
+          </div>
+          <div class="expandable-body">
+            <table class="detail-table">
+              <thead><tr><th>วันที่</th><th>รายการ</th><th>สถานที่</th></tr></thead>
+              <tbody>
+                <tr><td>1 ก.ค. 69</td><td>เจาะเลือด HbA1c</td><td>รพ.สต. บ้านไผ่</td></tr>
+                <tr><td>8 ก.ค. 69</td><td>รับยาต่อเนื่อง</td><td>รพ.สต. บ้านไผ่</td></tr>
+                <tr><td>15 ก.ค. 69</td><td>วัดความดันโลหิต</td><td>คลินิกชุมชน</td></tr>
+                <tr><td>22 ก.ค. 69</td><td>ปรึกษาโภชนาการ</td><td>รพ.สต. บ้านไผ่</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <button class="btn btn-gold btn-full" style="margin-top:1rem;" onclick="showToast('📞', 'ติดต่อ รพ.สต. บ้านไผ่ โทร 043-272-xxx')">📞 นัดหมาย / สอบถามข้อมูล</button>
+      </div>
+
+      <!-- ===== ผู้ป่วยติดเตียงและผู้อัมพาต ===== -->
+      <div class="citizen-subpage" id="citizenBedridden">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('health')">← ข้อมูลสุขภาพ</button>
+          <span class="subpage-back-title">ผู้ป่วยติดเตียงและผู้อัมพาต</span>
+        </div>
+        <div class="info-banner" style="background:linear-gradient(135deg,#ede7f6,#f3e5f5);">
+          <span class="info-banner-icon">🛏️</span>
+          <div class="info-banner-text">
+            <strong>บริการดูแลผู้ป่วยที่บ้าน</strong> ทีมสาธารณสุขเยี่ยมบ้านพร้อมให้บริการทางการแพทย์เบื้องต้น
+          </div>
+        </div>
+        <div class="health-stat-mini-grid" style="margin:1rem 0;">
+          <div class="health-stat-mini"><span class="hsm-num" style="color:#7b1fa2;">37</span><span class="hsm-label">ผู้ป่วยติดเตียงในพื้นที่</span></div>
+          <div class="health-stat-mini"><span class="hsm-num" style="color:#1565c0;">14</span><span class="hsm-label">ผู้อัมพาตในพื้นที่</span></div>
+          <div class="health-stat-mini"><span class="hsm-num" style="color:#2e7d32;">100%</span><span class="hsm-label">ได้รับการเยี่ยมบ้าน</span></div>
+        </div>
+        <div class="health-info-row"><div class="health-info-icon">🏠</div><div><div class="health-info-label">บริการเยี่ยมบ้าน</div><div class="health-info-value">ทำแผล · กายภาพบำบัด · วัดสัญญาณชีพ · ดูแลแผลกดทับ · ให้คำปรึกษาผู้ดูแล</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">📅</div><div><div class="health-info-label">รอบการเยี่ยมบ้าน</div><div class="health-info-value">สัปดาห์ละ 1–2 ครั้ง ตามระดับความรุนแรงของอาการ</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">🚗</div><div><div class="health-info-label">บริการรับ-ส่ง</div><div class="health-info-value">มีรถรับ-ส่งผู้ป่วยสำหรับนัดพิเศษ <strong>แจ้งล่วงหน้าอย่างน้อย 1 วัน</strong></div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">🧰</div><div><div class="health-info-label">อุปกรณ์ที่ให้ยืม</div><div class="health-info-value">รถเข็นวีลแชร์ · ไม้ค้ำยัน · เตียงผู้ป่วย (กรณีขาดแคลน)</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">📝</div><div><div class="health-info-label">วิธีลงทะเบียน</div><div class="health-info-value">แจ้งชื่อ-ที่อยู่ผู้ป่วย ผ่านปุ่มด้านล่าง หรือติดต่อเจ้าหน้าที่สาธารณสุขโดยตรง</div></div></div>
+        <div class="expandable-card" style="margin-top:1rem;">
+          <div class="expandable-header" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
+            <div style="flex:1;font-weight:600;font-size:0.9rem;">📋 รายการเยี่ยมบ้านล่าสุด</div>
+            <span class="expand-arrow">▼</span>
+          </div>
+          <div class="expandable-body">
+            <table class="detail-table">
+              <thead><tr><th>วันที่</th><th>บริการ</th><th>สถานะ</th></tr></thead>
+              <tbody>
+                <tr><td>20 มิ.ย. 69</td><td>ทำแผลกดทับ</td><td>✅ เสร็จ</td></tr>
+                <tr><td>22 มิ.ย. 69</td><td>กายภาพบำบัด</td><td>✅ เสร็จ</td></tr>
+                <tr><td>25 มิ.ย. 69</td><td>วัดสัญญาณชีพ</td><td>⏳ นัด</td></tr>
+                <tr><td>29 มิ.ย. 69</td><td>ให้คำปรึกษา</td><td>⏳ นัด</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <button class="btn btn-gold btn-full" style="margin-top:1rem;" onclick="showToast('📞', 'ติดต่อเจ้าหน้าที่สาธารณสุข โทร 043-272-xxx')">📞 ขอรับบริการเยี่ยมบ้าน</button>
+      </div>
+
+      <!-- ===== ผู้ต้องการรับวัคซีน ===== -->
+      <div class="citizen-subpage" id="citizenVaccineService">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('health')">← ข้อมูลสุขภาพ</button>
+          <span class="subpage-back-title">บริการรับวัคซีน</span>
+        </div>
+        <div class="info-banner" style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);">
+          <span class="info-banner-icon">💉</span>
+          <div class="info-banner-text">
+            <strong>บริการฉีดวัคซีน</strong> ครอบคลุมทุกกลุ่มอายุ ฟรีสำหรับผู้มีสิทธิ์ในเขตเทศบาล
+          </div>
+        </div>
+        <div class="health-stat-mini-grid" style="margin:1rem 0;">
+          <div class="health-stat-mini"><span class="hsm-num" style="color:#00897b;">98.2%</span><span class="hsm-label">อัตราวัคซีนพื้นฐาน</span></div>
+          <div class="health-stat-mini"><span class="hsm-num" style="color:#f57c00;">245</span><span class="hsm-label">ฉีดวัคซีนเดือนนี้</span></div>
+          <div class="health-stat-mini"><span class="hsm-num" style="color:#c62828;">18</span><span class="hsm-label">นัดหมายรออยู่</span></div>
+        </div>
+        <div class="health-info-row"><div class="health-info-icon">💊</div><div><div class="health-info-label">วัคซีนที่มีให้บริการ</div><div class="health-info-value">ไข้หวัดใหญ่ · โควิด-19 · คอตีบ-บาดทะยัก · ตับอักเสบบี · MMR · HPV (หญิงอายุ 9–26 ปี)</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">📅</div><div><div class="health-info-label">วัน/เวลาบริการ</div><div class="health-info-value">ทุกวันจันทร์ และ วันศุกร์ เวลา 08.30–12.00 น.</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">📍</div><div><div class="health-info-label">สถานที่</div><div class="health-info-value">คลินิกวัคซีน รพ.สต. บ้านไผ่ ห้อง 103 และศูนย์บริการสาธารณสุข</div></div></div>
+        <div class="health-info-row"><div class="health-info-icon">📋</div><div><div class="health-info-label">เอกสารที่ต้องนำมา</div><div class="health-info-value">บัตรประชาชน · สมุดวัคซีน (ถ้ามี) · ใบส่งต่อ (กรณีมีโรคประจำตัว)</div></div></div>
+        <div class="expandable-card" style="margin-top:1rem;">
+          <div class="expandable-header" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-arrow').classList.toggle('open')">
+            <div style="flex:1;font-weight:600;font-size:0.9rem;">💉 ตารางฉีดวัคซีนเดือนนี้</div>
+            <span class="expand-arrow">▼</span>
+          </div>
+          <div class="expandable-body">
+            <table class="detail-table">
+              <thead><tr><th>วันที่</th><th>วัคซีน</th><th>กลุ่มเป้าหมาย</th></tr></thead>
+              <tbody>
+                <tr><td>1 ก.ค. 69</td><td>ไข้หวัดใหญ่</td><td>ผู้สูงอายุ 60+ ปี</td></tr>
+                <tr><td>4 ก.ค. 69</td><td>โควิด-19 (Booster)</td><td>บุคคลทั่วไป</td></tr>
+                <tr><td>8 ก.ค. 69</td><td>HPV เข็ม 2</td><td>หญิงอายุ 9–26 ปี</td></tr>
+                <tr><td>11 ก.ค. 69</td><td>คอตีบ-บาดทะยัก</td><td>เด็กอายุ 4–6 ปี</td></tr>
+                <tr><td>15 ก.ค. 69</td><td>ตับอักเสบบี</td><td>ทั่วไป</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <button class="btn btn-gold btn-full" style="margin-top:1rem;" onclick="showToast('💉', 'นัดหมายฉีดวัคซีน ติดต่อ รพ.สต. บ้านไผ่')">💉 นัดหมายรับวัคซีน</button>
+      </div>
+
     </div>
 
     <!-- Bottom Tab Bar -->
@@ -4328,6 +4964,17 @@
 
       <!-- Overview -->
       <div class="officer-section active" id="officerOverview">
+
+        <!-- Department Info Banner (populated dynamically on login) -->
+        <div class="dept-info-banner" id="deptInfoBanner">
+          <div class="dept-info-banner-icon" id="deptInfoIcon">🛡️</div>
+          <div class="dept-info-banner-body">
+            <div class="dept-info-banner-title" id="deptInfoTitle">ฝ่ายงานเจ้าหน้าที่</div>
+            <div class="dept-info-banner-desc" id="deptInfoDesc">ข้อมูลฝ่ายงาน</div>
+            <div class="dept-info-tags" id="deptInfoTags"></div>
+            <div class="dept-info-stats-row" id="deptInfoStats"></div>
+          </div>
+        </div>
 
         <div class="daily-summary">
           <div class="daily-summary-title">📈 สรุปผลงานวันนี้ (21 มิ.ย.)</div>
@@ -5410,43 +6057,43 @@
       <h3 class="modal-title">ส่งเรื่องสำเร็จ!</h3>
       <p class="modal-text">ระบบได้รับข้อมูลการแจ้งปัญหาของท่านเรียบร้อยแล้ว<br>หมายเลขอ้างอิง: <strong
           id="refNumber">REF-00001</strong><br>ท่านสามารถแจ้งปัญหาเพิ่มเติมได้ที่เมนู "แจ้งปัญหา"</p>
-      <button class="btn btn-gold btn-full" onclick="closeModal()">กลับหน้าหลัก</button>
+      <button class="btn btn-gold btn-full" onclick="closeModal()">📋 ดูสถานะการแจ้งเรื่อง</button>
     </div>
   </div>
 
   <!-- ============================================
-       REPORT: ยาเสพติด (Drugs)
+       REPORT: งานทำความสะอาด (Cleaning)
        ============================================ -->
   <div class="page" id="reportDrugsPage">
     <div class="report-header">
       <button class="btn btn-outline" onclick="navigateTo('citizenDash')" style="">← กลับ</button>
-      <h2 class="report-header-title">💊 แจ้งเบาะแสยาเสพติด</h2>
+      <h2 class="report-header-title">🧹 รายงานทำความสะอาด</h2>
     </div>
     <div class="report-body">
       <div class="info-banner">
-        <span class="info-banner-icon">🚨</span>
+        <span class="info-banner-icon">🧹</span>
         <div class="info-banner-text">
-          <strong>ข้อมูลของท่านจะถูกเก็บเป็นความลับ</strong> และส่งต่อหน่วยงานที่เกี่ยวข้องโดยตรง
+          <strong>แจ้งปัญหาความสะอาด</strong> ข้อมูลของท่านจะถูกส่งต่อหน่วยงานที่เกี่ยวข้องเพื่อดำเนินการ
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">ประเภทการแจ้ง *</label>
         <select class="form-select" id="drugsType">
           <option value="">-- เลือกประเภท --</option>
-          <option value="sell">พบเห็นการซื้อขาย</option>
-          <option value="use">พบเห็นการเสพ/มั่วสุม</option>
-          <option value="produce">พบแหล่งผลิต</option>
-          <option value="suspect">พฤติกรรมน่าสงสัย</option>
+          <option value="trash">ขยะตกค้าง/ไม่ได้จัดเก็บ</option>
+          <option value="cleaning">ต้องการทำความสะอาดพื้นที่</option>
+          <option value="overgrown">หญ้ารก/วัชพืชรกร้าง</option>
+          <option value="littering">การทิ้งสิ่งปฏิกูลไม่ถูกที่</option>
           <option value="other">อื่นๆ</option>
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">สถานที่/บริเวณที่พบเหตุ *</label>
+        <label class="form-label">สถานที่/บริเวณที่พบปัญหา *</label>
         <input type="text" class="form-input" id="drugsLocation" placeholder="ระบุสถานที่ เช่น ซอย หมู่บ้าน ถนน">
       </div>
       <div class="form-group">
         <label class="form-label">รายละเอียดเพิ่มเติม *</label>
-        <textarea class="form-textarea" id="drugsDetail" placeholder="อธิบายสิ่งที่พบเห็น เช่น ช่วงเวลา ลักษณะบุคคล"
+        <textarea class="form-textarea" id="drugsDetail" placeholder="อธิบายสิ่งที่พบเห็น เช่น ลักษณะปัญหา ปริมาณ"
           rows="4"></textarea>
       </div>
       <div class="form-group">
@@ -5464,7 +6111,7 @@
       </div>
       <div class="btn-group">
         <button class="btn btn-outline" onclick="navigateTo('citizenDash')">ยกเลิก</button>
-        <button class="btn btn-gold" onclick="submitTopicReport('drugs', 'ยาเสพติด')">📨 ส่งแจ้งเบาะแส</button>
+        <button class="btn btn-gold" onclick="submitTopicReport('drugs', 'งานทำความสะอาด')">📨 ส่งรายงาน</button>
       </div>
     </div>
   </div>
@@ -5864,6 +6511,10 @@
           showPage('homePage');
           break;
 
+        case 'officerSelect':
+          showPage('officerSelectPage');
+          break;
+
         case 'login':
           loginRole = role || 'officer';
           setupLoginPage(loginRole);
@@ -5940,19 +6591,124 @@
       const title = document.getElementById('loginTitle');
       const subtitle = document.getElementById('loginSubtitle');
 
+      const deptDisplay = document.getElementById('officerDeptDisplay');
       if (role === 'executive') {
         icon.textContent = '👔';
         title.textContent = 'เข้าสู่ระบบผู้บริหาร';
         subtitle.textContent = 'กรุณากรอกข้อมูลเพื่อเข้าใช้งานระบบบริหาร';
+        if (deptDisplay) deptDisplay.style.display = 'none';
       } else {
-        icon.textContent = '🛡️';
+        const deptName = (window.selectedOfficerDept) || '';
+        const deptIcon = (window.selectedOfficerDeptIcon) || '🛡️';
+        icon.textContent = deptIcon;
         title.textContent = 'เข้าสู่ระบบเจ้าหน้าที่';
-        subtitle.textContent = 'กรุณากรอกข้อมูลเพื่อเข้าใช้งานระบบเจ้าหน้าที่';
+        subtitle.textContent = 'กรุณากรอกข้อมูลเพื่อเข้าใช้งานระบบ';
+        if (deptDisplay) deptDisplay.style.display = 'block';
+        const nameEl = document.getElementById('loginDeptName');
+        const iconEl = document.getElementById('loginDeptIcon');
+        if (nameEl) nameEl.textContent = deptName || '-';
+        if (iconEl) iconEl.textContent = deptIcon;
       }
 
       // Clear form
       document.getElementById('loginName').value = '';
       document.getElementById('loginPass').value = '';
+    }
+
+    const DEPT_INFO = {
+      'ฝ่ายงานรักษาความสะอาด': {
+        icon: '🧹',
+        desc: 'รับผิดชอบงานจัดเก็บขยะมูลฝอย ทำความสะอาดพื้นที่สาธารณะ กำจัดสิ่งปฏิกูล และดูแลความสะอาดของถนนและชุมชนในเขตเทศบาล',
+        tags: ['จัดเก็บขยะ', 'ทำความสะอาดถนน', 'กำจัดสิ่งปฏิกูล', 'พื้นที่สาธารณะ'],
+        pending: 5, inProgress: 3, done: 18
+      },
+      'ฝ่ายงานส่งเสริมสุขภาพ': {
+        icon: '💊',
+        desc: 'ดูแลและส่งเสริมสุขภาพประชาชนในชุมชน จัดกิจกรรมตรวจสุขภาพประจำปี รณรงค์ฉีดวัคซีน และให้บริการคลินิกสุขภาพเบื้องต้น',
+        tags: ['ตรวจสุขภาพ', 'รณรงค์วัคซีน', 'คลินิกชุมชน', 'ส่งเสริมสุขภาพ'],
+        pending: 3, inProgress: 2, done: 24
+      },
+      'ฝ่ายงานป้องกันและควบคุมโรค': {
+        icon: '🦠',
+        desc: 'เฝ้าระวังและควบคุมการระบาดของโรคติดต่อในพื้นที่ สอบสวนโรค พ่นยาฆ่าเชื้อ และประสานงานกับหน่วยสาธารณสุขจังหวัด',
+        tags: ['เฝ้าระวังโรค', 'สอบสวนการระบาด', 'พ่นยาฆ่าเชื้อ', 'โรคติดต่อ'],
+        pending: 2, inProgress: 1, done: 11
+      },
+      'ฝ่ายงานสัตวแพทย์': {
+        icon: '🐾',
+        desc: 'ให้บริการด้านสัตวแพทย์แก่ประชาชน ฉีดวัคซีนป้องกันโรคพิษสุนัขบ้า จับสัตว์จรจัด ตรวจและรักษาสัตว์เลี้ยงของชุมชน',
+        tags: ['ฉีดวัคซีนสัตว์', 'จับสัตว์จรจัด', 'ตรวจโรคสัตว์', 'โรคพิษสุนัขบ้า'],
+        pending: 4, inProgress: 2, done: 9
+      },
+      'ฝ่ายงานศูนย์บริการ': {
+        icon: '🏢',
+        desc: 'เป็นศูนย์กลางรับเรื่องร้องเรียนและให้บริการประชาชน ประสานงานระหว่างฝ่ายต่างๆ ติดตามผลการดำเนินงาน และแจ้งกลับประชาชน',
+        tags: ['รับเรื่องร้องเรียน', 'บริการประชาชน', 'ประสานหน่วยงาน', 'ติดตามผล'],
+        pending: 7, inProgress: 4, done: 31
+      },
+      'ฝ่ายงานสุขาภิบาลและอนามัยสิ่งแวดล้อม': {
+        icon: '🌿',
+        desc: 'ตรวจสอบมาตรฐานสุขอนามัยร้านอาหาร ควบคุมคุณภาพน้ำและอากาศ บำบัดน้ำเสีย และดูแลสิ่งแวดล้อมในเขตเทศบาล',
+        tags: ['ตรวจอาหาร', 'บำบัดน้ำเสีย', 'ควบคุมมลภาวะ', 'คุณภาพน้ำ'],
+        pending: 3, inProgress: 2, done: 15
+      },
+      'กองช่าง': {
+        icon: '🔧',
+        desc: 'รับผิดชอบงานซ่อมแซมถนนและสาธารณูปโภค ดูแลระบบไฟฟ้าสาธารณะ งานก่อสร้างและพัฒนาโครงสร้างพื้นฐานของเทศบาล',
+        tags: ['ซ่อมถนน', 'ไฟฟ้าสาธารณะ', 'งานก่อสร้าง', 'โครงสร้างพื้นฐาน'],
+        pending: 8, inProgress: 5, done: 22
+      },
+      'ป้องกันและบรรเทาสาธารณภัย': {
+        icon: '🚒',
+        desc: 'ป้องกันและระงับอัคคีภัย ช่วยเหลือผู้ประสบภัยพิบัติ กู้ภัยฉุกเฉิน และเตรียมความพร้อมรับมือสาธารณภัยในพื้นที่',
+        tags: ['ดับเพลิง', 'ช่วยเหลืออุทกภัย', 'กู้ภัยฉุกเฉิน', 'บรรเทาสาธารณภัย'],
+        pending: 1, inProgress: 1, done: 7
+      }
+    };
+
+    function updateDeptInfoBanner(dept) {
+      const info = DEPT_INFO[dept];
+      if (!info) return;
+      const iconEl   = document.getElementById('deptInfoIcon');
+      const titleEl  = document.getElementById('deptInfoTitle');
+      const descEl   = document.getElementById('deptInfoDesc');
+      const tagsEl   = document.getElementById('deptInfoTags');
+      const statsEl  = document.getElementById('deptInfoStats');
+      if (iconEl)  iconEl.textContent  = info.icon;
+      if (titleEl) titleEl.textContent = dept;
+      if (descEl)  descEl.textContent  = info.desc;
+      if (tagsEl)  tagsEl.innerHTML = info.tags.map(t => `<span class="dept-info-tag">${t}</span>`).join('');
+      if (statsEl) statsEl.innerHTML = `
+        <div class="dept-info-stat">
+          <div class="dept-info-stat-num red">${info.pending}</div>
+          <div class="dept-info-stat-label">งานรอดำเนินการ</div>
+        </div>
+        <div class="dept-info-stat">
+          <div class="dept-info-stat-num" style="color:#1976d2;">${info.inProgress}</div>
+          <div class="dept-info-stat-label">กำลังดำเนินการ</div>
+        </div>
+        <div class="dept-info-stat">
+          <div class="dept-info-stat-num green">${info.done}</div>
+          <div class="dept-info-stat-label">เสร็จสิ้นแล้ว</div>
+        </div>
+      `;
+    }
+
+    const OFFICER_CREDS = {
+      'ฝ่ายงานรักษาความสะอาด':            '0937107114A',
+      'ฝ่ายงานส่งเสริมสุขภาพ':             '0937107114S',
+      'ฝ่ายงานป้องกันและควบคุมโรค':        '0937107114T',
+      'ฝ่ายงานสัตวแพทย์':                  '0937107114P',
+      'ฝ่ายงานศูนย์บริการ':                '0937107114U',
+      'ฝ่ายงานสุขาภิบาลและอนามัยสิ่งแวดล้อม': '0937107114C',
+      'กองช่าง':                           '0937107114R',
+      'ป้องกันและบรรเทาสาธารณภัย':         '0937107114K'
+    };
+
+    function selectOfficerDept(dept, icon) {
+      window.selectedOfficerDept = dept;
+      window.selectedOfficerDeptIcon = icon || '🛡️';
+      navigateTo('login', 'officer');
     }
 
     function handleLogin(e) {
@@ -5975,12 +6731,22 @@
           showToast('❌', 'ชื่อผู้ใช้หรือรหัสผ่านผู้บริหารไม่ถูกต้อง');
         }
       } else {
-        if (name === '0937107114' && pass === '0937107114S') {
-          document.getElementById('officerName').textContent = `สวัสดี ${name}`;
+        const dept = window.selectedOfficerDept || '';
+        if (!dept) {
+          showToast('⚠️', 'กรุณาเลือกฝ่ายงานก่อน');
+          navigateTo('officerSelect');
+          return;
+        }
+        const expectedPass = OFFICER_CREDS[dept];
+        if (name === '0937107114' && pass === expectedPass) {
+          window.officerDept = dept;
+          const deptIcon = window.selectedOfficerDeptIcon || '🛡️';
+          document.getElementById('officerName').textContent = `${deptIcon} ${dept}`;
+          updateDeptInfoBanner(dept);
           navigateTo('officerDash');
-          showToast('✅', `ยินดีต้อนรับ ${name}`);
+          showToast('✅', `ยินดีต้อนรับ | ${dept}`);
         } else {
-          showToast('❌', 'ชื่อผู้ใช้หรือรหัสผ่านเจ้าหน้าที่ไม่ถูกต้อง');
+          showToast('❌', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
         }
       }
     }
@@ -6043,19 +6809,25 @@
         'vet': { page: 'citizenVet', tabIdx: 0, subTabIdx: -1 },
         'garbage': { page: 'citizenGarbage', tabIdx: 0, subTabIdx: -1 },
         'satisfaction': { page: 'citizenSatisfaction', tabIdx: 3, subTabIdx: 3 },
-        'services': { page: 'citizenServices', tabIdx: 0, subTabIdx: -1 }
+        'services': { page: 'citizenServices', tabIdx: 0, subTabIdx: -1 },
+        'diabetes':  { page: 'citizenDiabetes',       tabIdx: 0, subTabIdx: -1 },
+        'bedridden': { page: 'citizenBedridden',       tabIdx: 0, subTabIdx: -1 },
+        'vaccine':   { page: 'citizenVaccineService',  tabIdx: 0, subTabIdx: -1 }
       };
 
       const config = tabMap[tabName];
       if (config) {
-        document.getElementById(config.page).classList.add('active');
+        const pageEl = document.getElementById(config.page);
+        if (!pageEl) { console.warn('switchCitizenTab: page not found:', config.page); return; }
+        pageEl.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
         const subTabs = document.querySelectorAll('#citizenTabs .sub-tab');
         if (config.subTabIdx >= 0 && subTabs[config.subTabIdx]) subTabs[config.subTabIdx].classList.add('active');
 
         const tabItems = document.querySelectorAll('#citizenTabBar .tab-item');
         if (tabItems[config.tabIdx]) tabItems[config.tabIdx].classList.add('active');
-        else tabItems[0].classList.add('active');
+        else if (tabItems[0]) tabItems[0].classList.add('active');
       }
     }
 
@@ -6112,20 +6884,40 @@
     function resetReportForm() {
       reportStep = 1;
       selectedProblemType = null;
+      selectedUrgency = 'medium';
       updateReportStepper();
 
       // Show step 1
       document.querySelectorAll('.report-step').forEach(s => s.classList.remove('active'));
-      document.getElementById('reportStep1').classList.add('active');
+      const step1 = document.getElementById('reportStep1');
+      if (step1) step1.classList.add('active');
 
-      // Reset emoji selections
-      document.querySelectorAll('.emoji-option').forEach(e => e.classList.remove('selected'));
+      // Reset emoji selections (scoped to this form only)
+      const problemGrid = document.getElementById('problemTypeGrid');
+      if (problemGrid) problemGrid.querySelectorAll('.emoji-option').forEach(e => e.classList.remove('selected'));
+
+      // Reset urgency chips
+      const step2 = document.getElementById('reportStep2');
+      if (step2) step2.querySelectorAll('.urgency-option').forEach(u => {
+        u.classList.remove('selected');
+        if (u.getAttribute('data-value') === 'medium') u.classList.add('selected');
+      });
+
+      // Reset text fields
+      ['reportTitle', 'reportDetail', 'reportAssignee'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+
+      // Reset upload preview
+      const preview = document.getElementById('uploadPreview');
+      if (preview) preview.innerHTML = '';
 
       // Reset map
-      const canvas = document.getElementById('mapCanvas');
+      const mapDiv = document.getElementById('leafletMap');
       const placeholder = document.getElementById('mapPlaceholder');
-      canvas.style.display = 'none';
-      placeholder.style.display = 'block';
+      if (mapDiv) mapDiv.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'block';
     }
 
     function selectProblem(el) {
@@ -6220,7 +7012,7 @@
 
     const PROBLEM_EMOJI = {
       'ไฟ': '🔥', 'ขยะ': '🗑️', 'น้ำ': '💧', 'ถนน': '🛣️', 'ไฟฟ้า': '💡',
-      'ยาเสพติด': '🚨', 'สิ่งแวดล้อม': '🌿', 'มลพิษ': '🏭', 'โรค': '🦠',
+      'งานทำความสะอาด': '🧹', 'สิ่งแวดล้อม': '🌿', 'มลพิษ': '🏭', 'โรค': '🦠',
       'สุนัข': '🐕', 'หมา': '🐕', 'ท่อ': '🚰'
     };
     function getEmojiForReport(problemType, title) {
@@ -6523,7 +7315,7 @@
         dept: dept,
         status: 'pending',
         date: 'เมื่อสักครู่',
-        urgent: 'medium',
+        urgent: selectedUrgency || 'medium',
         emoji: '📌',
         phone: window.citizenData ? window.citizenData.phone : '-',
         citizenName: window.citizenData ? window.citizenData.name : '-'
@@ -6552,9 +7344,9 @@
           phone: window.citizenData ? window.citizenData.phone : '-',
           community: window.citizenData ? window.citizenData.community : '-',
           tambon: window.citizenData ? window.citizenData.tambon : '-',
-          problemType: dept || '-',
+          problemType: selectedProblemType || dept || '-',
           department: dept || '-',
-          assignee: '-',
+          assignee: (document.getElementById('reportAssignee') ? document.getElementById('reportAssignee').value : '') || '-',
           title: title || 'ปัญหาทั่วไป',
           detail: detail || 'ไม่ได้ระบุรายละเอียด',
           urgency: urgencyLabels[selectedUrgency] || 'ปานกลาง',
@@ -7035,7 +7827,8 @@
 
     // ===== UI Enhancements =====
     function selectUrgency(el, level) {
-      document.querySelectorAll('.urgency-option').forEach(opt => opt.classList.remove('selected'));
+      const container = el.closest('#reportStep2') || el.parentElement;
+      container.querySelectorAll('.urgency-option').forEach(opt => opt.classList.remove('selected'));
       el.classList.add('selected');
       selectedUrgency = level;
     }
