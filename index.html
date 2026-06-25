@@ -447,8 +447,7 @@
 
     /* ===== LOGIN PAGE ===== */
     #loginPage,
-    #citizenLoginPage,
-    #officerSelectPage {
+    #citizenLoginPage {
       align-items: center;
       justify-content: center;
       padding: 2rem;
@@ -609,7 +608,201 @@
       color: var(--text-primary);
     }
 
-    /* ===== Health Modal Panels ===== */
+    /* ===== Health Assessment Forms ===== */
+    .assess-wrap { padding-bottom: 2rem; }
+    .assess-part-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+      background: rgba(126,87,194,0.1);
+      border-radius: 20px;
+      padding: 0.2rem 0.65rem;
+      margin-bottom: 0.5rem;
+    }
+    .assess-instruction {
+      background: #fffbe6;
+      border: 1px solid #ffe58f;
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    .assess-meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .assess-table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background: #fff;
+    }
+    .assess-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+      min-width: 600px;
+    }
+    .assess-table th, .assess-table td {
+      border: 1px solid var(--border-subtle);
+      padding: 0.45rem 0.35rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .assess-table th {
+      background: rgba(126,87,194,0.08);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .assess-table .row-label {
+      text-align: left;
+      min-width: 140px;
+      font-weight: 500;
+      background: #fafafa;
+    }
+    .assess-table .row-desc {
+      text-align: left;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      min-width: 160px;
+    }
+    .assess-table select, .assess-table input[type="text"], .assess-table input[type="number"], .assess-table input[type="date"] {
+      width: 100%;
+      max-width: 90px;
+      padding: 0.25rem;
+      font-size: 0.7rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      font-family: 'Prompt', sans-serif;
+    }
+    .assess-question {
+      background: #fff;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      margin-bottom: 0.65rem;
+    }
+    .assess-question-text {
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin-bottom: 0.55rem;
+      line-height: 1.45;
+    }
+    .assess-radio-group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.35rem;
+    }
+    .assess-radio-opt {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .assess-radio-opt input { accent-color: var(--accent-gold); }
+    .assess-result-box {
+      background: linear-gradient(135deg, rgba(126,87,194,0.1), rgba(176,133,245,0.06));
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .assess-result-score {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+    }
+    .assess-result-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+    .assess-result-desc {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.4rem;
+      line-height: 1.5;
+    }
+    .assess-ref-pair {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      min-width: 180px;
+    }
+    .assess-ref-item {
+      text-align: center;
+      flex: 1;
+      min-width: 82px;
+      max-width: 96px;
+    }
+    .assess-ref-item img,
+    .assess-ref-item svg {
+      width: 88px;
+      height: 88px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      background: #fff;
+      display: block;
+      margin: 0 auto;
+    }
+    .assess-ref-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+    .assess-ref-label.abnormal { color: #c62828; }
+    .assess-diet-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.78rem;
+    }
+    .assess-diet-row:last-child { border-bottom: none; }
+    .assess-diet-cols {
+      display: grid;
+      grid-template-columns: 1fr 50px 50px 50px 50px;
+      gap: 0.35rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .assess-std-table { font-size: 0.68rem; }
+    .assess-std-table td.pass { background: #e8f5e9; color: #2e7d32; font-weight: 600; }
+    .assess-std-table td.fail { background: #ffebee; color: #c62828; font-weight: 600; }
+    .assess-sign-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 600px) {
+      .assess-meta-row, .assess-sign-row { grid-template-columns: 1fr; }
+      .assess-radio-group { grid-template-columns: repeat(2, 1fr); }
+      .assess-diet-row { grid-template-columns: 1fr; }
+      .assess-diet-cols { display: none; }
+    }
+
+    /* ===== Subpage Back Bar (continued) ===== */
     .health-modal-panel {
       background: var(--bg-glass);
       backdrop-filter: blur(16px);
@@ -3556,7 +3749,7 @@
           <span class="quadrant-desc">บริหารงานอนามัย</span>
         </div>
         <!-- Bottom Left - พยาบาล -->
-        <div class="menu-quadrant q-bottom-left" id="menuOfficer" onclick="navigateTo('officerSelect')">
+        <div class="menu-quadrant q-bottom-left" id="menuOfficer" onclick="navigateTo('login', 'officer')">
           <span class="quadrant-icon">⚕️</span>
           <span class="quadrant-label">พยาบาล</span>
           <span class="quadrant-desc">ดูแลสุขภาพ</span>
@@ -3571,75 +3764,6 @@
       <div class="circle-center">
         <span>เลือก<br>บทบาท</span>
       </div>
-    </div>
-  </div>
-
-  <!-- ============================================
-       OFFICER DEPARTMENT SELECT PAGE
-       ============================================ -->
-  <div class="page" id="officerSelectPage">
-    <div class="officer-select-container">
-      <div class="officer-select-header">
-        <div class="officer-select-icon">⚕️</div>
-        <h2 class="officer-select-title">เข้าสู่ระบบพยาบาล/ครูอนามัย</h2>
-        <p class="officer-select-subtitle">เลือกหน่วยงานอนามัยของท่านเพื่อเข้าใช้งาน</p>
-      </div>
-
-      <div class="dept-grid">
-
-        <div class="dept-card" onclick="selectOfficerDept('ห้องพยาบาลโรงเรียน', '🏥')">
-          <div class="dept-card-icon">🏥</div>
-          <div class="dept-card-name">ห้องพยาบาล<br>โรงเรียน</div>
-          <div class="dept-card-badge">School Clinic</div>
-        </div>
-
-        <div class="dept-card" onclick="selectOfficerDept('ส่งเสริมสุขภาพนักเรียน', '💚')">
-          <div class="dept-card-icon">💚</div>
-          <div class="dept-card-name">ส่งเสริม<br>สุขภาพนักเรียน</div>
-          <div class="dept-card-badge">Health Promotion</div>
-        </div>
-
-        <div class="dept-card" onclick="selectOfficerDept('ป้องกันและควบคุมโรค', '🦠')">
-          <div class="dept-card-icon">🦠</div>
-          <div class="dept-card-name">ป้องกันและ<br>ควบคุมโรค</div>
-          <div class="dept-card-badge">Disease Control</div>
-        </div>
-
-        <div class="dept-card" onclick="selectOfficerDept('อนามัยสิ่งแวดล้อม', '🌿')">
-          <div class="dept-card-icon">🌿</div>
-          <div class="dept-card-name">อนามัย<br>สิ่งแวดล้อม</div>
-          <div class="dept-card-badge">Sanitation</div>
-        </div>
-
-        <div class="dept-card" onclick="selectOfficerDept('โภชนาการและอาหาร', '🍎')">
-          <div class="dept-card-icon">🍎</div>
-          <div class="dept-card-name">โภชนาการ<br>และอาหาร</div>
-          <div class="dept-card-badge">Nutrition</div>
-        </div>
-
-        <div class="dept-card" onclick="selectOfficerDept('สุขภาพจิตนักเรียน', '🧠')">
-          <div class="dept-card-icon">🧠</div>
-          <div class="dept-card-name">สุขภาพจิต<br>นักเรียน</div>
-          <div class="dept-card-badge">Mental Health</div>
-        </div>
-
-        <div class="dept-card" onclick="selectOfficerDept('บันทึกข้อมูลสุขภาพ', '📋')">
-          <div class="dept-card-icon">📋</div>
-          <div class="dept-card-name">บันทึกข้อมูล<br>สุขภาพ</div>
-          <div class="dept-card-badge">Health Records</div>
-        </div>
-
-        <div class="dept-card" onclick="selectOfficerDept('ปฐมพยาบาลฉุกเฉิน', '🚑')">
-          <div class="dept-card-icon">🚑</div>
-          <div class="dept-card-name">ปฐมพยาบาล<br>ฉุกเฉิน</div>
-          <div class="dept-card-badge">First Aid</div>
-        </div>
-
-      </div>
-
-      <button class="btn btn-back btn-full" onclick="navigateTo('home')">
-        ← กลับหน้าหลัก
-      </button>
     </div>
   </div>
 
@@ -3675,7 +3799,7 @@
           <button type="submit" class="btn btn-gold btn-full" id="loginSubmitBtn">
             เข้าสู่ระบบ
           </button>
-          <button type="button" class="btn btn-back btn-full" id="loginBackBtn" onclick="loginRole === 'officer' ? navigateTo('officerSelect') : navigateTo('home')">
+          <button type="button" class="btn btn-back btn-full" id="loginBackBtn" onclick="navigateTo('home')">
             ← กลับ
           </button>
         </form>
@@ -3781,54 +3905,117 @@
           <h2 class="section-title">บริการงานอนามัย</h2>
         </div>
         <div class="action-grid">
-          <div class="action-card highlight" onclick="navigateTo('reportPage')">
-            <span class="action-card-icon">🩹</span>
-            <div class="action-card-title">ปฐมพยาบาล</div>
-            <div class="action-card-desc">แจ้งอาการเจ็บป่วย</div>
+          <div class="action-card highlight" onclick="switchCitizenTab('assessDisease')">
+            <span class="action-card-icon">🔍</span>
+            <div class="action-card-title">สำรวจโรค/ความผิดปกติ</div>
+            <div class="action-card-desc">สำรวจโรคหรือความผิดปกติของร่างกาย</div>
           </div>
-          <div class="action-card" onclick="switchCitizenTab('health')">
-            <span class="action-card-icon">💚</span>
-            <div class="action-card-title">ส่งเสริมสุขภาพ</div>
-            <div class="action-card-desc">ข้อมูลสุขภาพนักเรียน</div>
+          <div class="action-card" onclick="switchCitizenTab('assessVision')">
+            <span class="action-card-icon">👁️</span>
+            <div class="action-card-title">สายตาและการได้ยิน</div>
+            <div class="action-card-desc">แบบสำรวจภาวะสายตาและการได้ยิน</div>
           </div>
-          <div class="action-card" onclick="switchCitizenTab('vaccine')">
-            <span class="action-card-icon">💉</span>
-            <div class="action-card-title">วัคซีนนักเรียน</div>
-            <div class="action-card-desc">ตารางฉีดวัคซีน</div>
+          <div class="action-card" onclick="switchCitizenTab('assessOral')">
+            <span class="action-card-icon">🦷</span>
+            <div class="action-card-title">ภาวะในช่องปาก</div>
+            <div class="action-card-desc">แบบสำรวจภาวะในช่องปากด้วยตนเอง</div>
           </div>
-          <div class="action-card" onclick="switchCitizenTab('drugs')">
-            <span class="action-card-icon">🧹</span>
-            <div class="action-card-title">อนามัยสิ่งแวดล้อม</div>
-            <div class="action-card-desc">ความสะอาดในโรงเรียน</div>
+          <div class="action-card" onclick="switchCitizenTab('assessGrowth')">
+            <span class="action-card-icon">📏</span>
+            <div class="action-card-title">การเจริญเติบโต</div>
+            <div class="action-card-desc">การประเมินการเจริญเติบโตด้วยตนเอง</div>
           </div>
-          <div class="action-card" onclick="switchCitizenTab('disease')">
-            <span class="action-card-icon">🦠</span>
-            <div class="action-card-title">ป้องกันโรคติดต่อ</div>
-            <div class="action-card-desc">แจ้งอาการโรคติดต่อ</div>
+          <div class="action-card" onclick="switchCitizenTab('assessFitness')">
+            <span class="action-card-icon">🏃</span>
+            <div class="action-card-title">สมรรถภาพทางกาย</div>
+            <div class="action-card-desc">การทดสอบสมรรถภาพทางกายเพื่อสุขภาพ</div>
           </div>
-          <div class="action-card" onclick="switchCitizenTab('alerts')">
-            <span class="action-card-icon">🔔</span>
-            <div class="action-card-title">ประกาศโรงเรียน</div>
-            <div class="action-card-desc">ข่าวสารสุขภาพ</div>
+          <div class="action-card" onclick="switchCitizenTab('assessLiteracy')">
+            <span class="action-card-icon">📚</span>
+            <div class="action-card-title">ความรอบรู้ด้านสุขภาพ</div>
+            <div class="action-card-desc">แบบประเมินความรอบรู้ด้านสุขภาพ</div>
           </div>
-          <div class="action-card" onclick="switchCitizenTab('diabetes')">
-            <span class="action-card-icon">🍎</span>
-            <div class="action-card-title">โภชนาการ</div>
-            <div class="action-card-desc">อาหารกลางวัน</div>
+          <div class="action-card" onclick="switchCitizenTab('assessDiet')">
+            <span class="action-card-icon">🥗</span>
+            <div class="action-card-title">พฤติกรรมการบริโภค</div>
+            <div class="action-card-desc">แบบประเมินพฤติกรรมการบริโภคอาหาร อายุ 14–18 ปี</div>
           </div>
-          <div class="action-card" onclick="switchCitizenTab('bedridden')">
-            <span class="action-card-icon">🧠</span>
-            <div class="action-card-title">สุขภาพจิต</div>
-            <div class="action-card-desc">ปรึกษาสุขภาพจิต</div>
+          <div class="action-card" onclick="switchCitizenTab('assessHappiness')">
+            <span class="action-card-icon">😊</span>
+            <div class="action-card-title">แบบประเมินความสุข</div>
+            <div class="action-card-desc">ประเมินความสุขและสุขภาพจิต</div>
           </div>
           <div class="action-card" onclick="switchCitizenTab('services')">
             <span class="action-card-icon">📄</span>
             <div class="action-card-title">บริการอื่นๆ</div>
             <div class="action-card-desc">ลาป่วย · ใบรับรองแพทย์</div>
           </div>
+          <div class="action-card" onclick="switchCitizenTab('health')">
+            <span class="action-card-icon">💚</span>
+            <div class="action-card-title">ข้อมูลสุขภาพ</div>
+            <div class="action-card-desc">ตารางบริการ · ประกาศสาธารณสุข</div>
+          </div>
         </div>
 
 
+      </div>
+
+      <!-- ===== Health Assessment Subpages ===== -->
+      <div class="citizen-subpage" id="citizenAssessDisease">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title" id="assessTitle-disease"></span>
+        </div>
+        <div id="assessMount-disease" class="assess-wrap"></div>
+      </div>
+      <div class="citizen-subpage" id="citizenAssessVision">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title" id="assessTitle-vision"></span>
+        </div>
+        <div id="assessMount-vision" class="assess-wrap"></div>
+      </div>
+      <div class="citizen-subpage" id="citizenAssessOral">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title" id="assessTitle-oral"></span>
+        </div>
+        <div id="assessMount-oral" class="assess-wrap"></div>
+      </div>
+      <div class="citizen-subpage" id="citizenAssessGrowth">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title" id="assessTitle-growth"></span>
+        </div>
+        <div id="assessMount-growth" class="assess-wrap"></div>
+      </div>
+      <div class="citizen-subpage" id="citizenAssessFitness">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title" id="assessTitle-fitness"></span>
+        </div>
+        <div id="assessMount-fitness" class="assess-wrap"></div>
+      </div>
+      <div class="citizen-subpage" id="citizenAssessLiteracy">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title" id="assessTitle-literacy"></span>
+        </div>
+        <div id="assessMount-literacy" class="assess-wrap"></div>
+      </div>
+      <div class="citizen-subpage" id="citizenAssessDiet">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title" id="assessTitle-diet"></span>
+        </div>
+        <div id="assessMount-diet" class="assess-wrap"></div>
+      </div>
+      <div class="citizen-subpage" id="citizenAssessHappiness">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title" id="assessTitle-happiness"></span>
+        </div>
+        <div id="assessMount-happiness" class="assess-wrap"></div>
       </div>
 
       <!-- Tracking Tab -->
@@ -3847,8 +4034,8 @@
 
         <!-- Search tracking -->
         <div style="margin-bottom: 1.5rem;">
-          <input type="text" class="form-input" placeholder="🔍 ค้นหาด้วยหมายเลขแจ้งเจ็บป่วย (REF-XXXXX)..."
-            style="width: 100%;">
+          <input type="text" class="form-input" id="trackingSearchInput" placeholder="🔍 ค้นหาด้วยหมายเลขแจ้งเจ็บป่วย (REF-XXXXX)..."
+            style="width: 100%;" oninput="filterTrackingList(this.value)">
         </div>
 
         <!-- Tracking List -->
@@ -3858,6 +4045,10 @@
 
       <!-- Health Tab -->
       <div class="citizen-subpage" id="citizenHealth">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title">ข้อมูลสุขภาพนักเรียน</span>
+        </div>
         <div class="section-header">
           <h2 class="section-title">ข้อมูลสุขภาพนักเรียน</h2>
         </div>
@@ -3897,6 +4088,22 @@
           <div class="action-card" onclick="switchCitizenTab('vaccine')">
             <span class="action-card-icon">💉</span>
             <div class="action-card-title">ผู้ต้องการ<br>รับวัคซีน</div>
+          </div>
+          <div class="action-card" onclick="switchCitizenTab('drugs')">
+            <span class="action-card-icon">🧹</span>
+            <div class="action-card-title">อนามัยสิ่งแวดล้อม</div>
+          </div>
+          <div class="action-card" onclick="switchCitizenTab('env')">
+            <span class="action-card-icon">🌿</span>
+            <div class="action-card-title">สิ่งแวดล้อม</div>
+          </div>
+          <div class="action-card" onclick="switchCitizenTab('pollution')">
+            <span class="action-card-icon">🏭</span>
+            <div class="action-card-title">มลพิษ</div>
+          </div>
+          <div class="action-card" onclick="switchCitizenTab('disease')">
+            <span class="action-card-icon">🦠</span>
+            <div class="action-card-title">ควบคุมโรค</div>
           </div>
         </div>
 
@@ -4069,6 +4276,10 @@
 
       <!-- Cleaning Tab -->
       <div class="citizen-subpage" id="citizenDrugs">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('health')">← ข้อมูลสุขภาพ</button>
+          <span class="subpage-back-title">อนามัยสิ่งแวดล้อมในโรงเรียน</span>
+        </div>
         <div class="section-header">
           <h2 class="section-title">อนามัยสิ่งแวดล้อมในโรงเรียน</h2>
         </div>
@@ -4115,6 +4326,10 @@
 
       <!-- Environment Tab -->
       <div class="citizen-subpage" id="citizenEnv">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('health')">← ข้อมูลสุขภาพ</button>
+          <span class="subpage-back-title">ข้อมูลสิ่งแวดล้อม</span>
+        </div>
         <div class="section-header">
           <h2 class="section-title">ข้อมูลสิ่งแวดล้อม</h2>
         </div>
@@ -4156,6 +4371,10 @@
 
       <!-- Pollution Tab -->
       <div class="citizen-subpage" id="citizenPollution">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('health')">← ข้อมูลสุขภาพ</button>
+          <span class="subpage-back-title">ข้อมูลมลพิษ</span>
+        </div>
         <div class="section-header">
           <h2 class="section-title">ข้อมูลมลพิษ</h2>
         </div>
@@ -4197,6 +4416,10 @@
 
       <!-- Disease Control Tab -->
       <div class="citizen-subpage" id="citizenDisease">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('health')">← ข้อมูลสุขภาพ</button>
+          <span class="subpage-back-title">ข้อมูลควบคุมโรค</span>
+        </div>
         <div class="section-header">
           <h2 class="section-title">ข้อมูลควบคุมโรค</h2>
         </div>
@@ -4466,21 +4689,25 @@
 
       <!-- Services Tab -->
       <div class="citizen-subpage" id="citizenServices">
+        <div class="subpage-back-bar">
+          <button class="subpage-back-btn" onclick="switchCitizenTab('main')">← หน้าหลัก</button>
+          <span class="subpage-back-title">บริการนักเรียน</span>
+        </div>
         <div class="section-header">
           <h2 class="section-title">บริการนักเรียน</h2>
         </div>
         <div class="action-grid">
-          <div class="action-card" onclick="showToast('📑', 'บริการใบลาป่วย: ติดต่อห้องพยาบาลโรงเรียน')">
+          <div class="action-card" onclick="navigateTo('reportPage')">
             <span class="action-card-icon">📑</span>
             <div class="action-card-title">ใบลาป่วย</div>
-            <div class="action-card-desc">ขอใบลาป่วย</div>
+            <div class="action-card-desc">แจ้งลาป่วย / ขอใบลา</div>
           </div>
-          <div class="action-card" onclick="showToast('🏥', 'บริการใบรับรองแพทย์: ติดต่อห้องพยาบาลโรงเรียน')">
+          <div class="action-card" onclick="navigateTo('reportPage')">
             <span class="action-card-icon">🏥</span>
             <div class="action-card-title">ใบรับรองแพทย์</div>
-            <div class="action-card-desc">ขอใบรับรอง</div>
+            <div class="action-card-desc">ขอใบรับรองแพทย์</div>
           </div>
-          <div class="action-card" onclick="showToast('💊', 'บริการยาสำหรับนักเรียน: ติดต่อห้องพยาบาลโรงเรียน')">
+          <div class="action-card" onclick="navigateTo('reportPage')">
             <span class="action-card-icon">💊</span>
             <div class="action-card-title">ยาประจำตัว</div>
             <div class="action-card-desc">แจ้งยาที่ต้องกิน</div>
@@ -6606,10 +6833,6 @@
           showPage('homePage');
           break;
 
-        case 'officerSelect':
-          showPage('officerSelectPage');
-          break;
-
         case 'login':
           loginRole = role || 'officer';
           setupLoginPage(loginRole);
@@ -6693,16 +6916,10 @@
         subtitle.textContent = 'กรุณากรอกข้อมูลเพื่อเข้าใช้งานระบบบริหาร';
         if (deptDisplay) deptDisplay.style.display = 'none';
       } else {
-        const deptName = (window.selectedOfficerDept) || '';
-        const deptIcon = (window.selectedOfficerDeptIcon) || '🛡️';
-        icon.textContent = deptIcon;
-        title.textContent = 'เข้าสู่ระบบพยาบาล';
-        subtitle.textContent = 'กรุณากรอกข้อมูลเพื่อเข้าใช้งานระบบ';
-        if (deptDisplay) deptDisplay.style.display = 'block';
-        const nameEl = document.getElementById('loginDeptName');
-        const iconEl = document.getElementById('loginDeptIcon');
-        if (nameEl) nameEl.textContent = deptName || '-';
-        if (iconEl) iconEl.textContent = deptIcon;
+        icon.textContent = '⚕️';
+        title.textContent = 'เข้าสู่ระบบพยาบาล/ครูอนามัย';
+        subtitle.textContent = 'กรุณากรอกชื่อผู้ใช้และรหัสผ่านเพื่อเข้าใช้งาน';
+        if (deptDisplay) deptDisplay.style.display = 'none';
       }
 
       // Clear form
@@ -6789,22 +7006,9 @@
       `;
     }
 
-    const OFFICER_CREDS = {
-      'ห้องพยาบาลโรงเรียน':       '0937107114A',
-      'ส่งเสริมสุขภาพนักเรียน':    '0937107114S',
-      'ป้องกันและควบคุมโรค':       '0937107114T',
-      'อนามัยสิ่งแวดล้อม':         '0937107114C',
-      'โภชนาการและอาหาร':          '0937107114P',
-      'สุขภาพจิตนักเรียน':         '0937107114U',
-      'บันทึกข้อมูลสุขภาพ':         '0937107114R',
-      'ปฐมพยาบาลฉุกเฉิน':          '0937107114K'
-    };
-
-    function selectOfficerDept(dept, icon) {
-      window.selectedOfficerDept = dept;
-      window.selectedOfficerDeptIcon = icon || '🛡️';
-      navigateTo('login', 'officer');
-    }
+    const OFFICER_USER = '0937107114';
+    const OFFICER_PASS = '0937107114S';
+    const OFFICER_DEPT = 'ส่งเสริมสุขภาพนักเรียน';
 
     function handleLogin(e) {
       e.preventDefault();
@@ -6826,16 +7030,11 @@
           showToast('❌', 'ชื่อผู้ใช้หรือรหัสผ่านผู้บริหารไม่ถูกต้อง');
         }
       } else {
-        const dept = window.selectedOfficerDept || '';
-        if (!dept) {
-          showToast('⚠️', 'กรุณาเลือกฝ่ายงานก่อน');
-          navigateTo('officerSelect');
-          return;
-        }
-        const expectedPass = OFFICER_CREDS[dept];
-        if (name === '0937107114' && pass === expectedPass) {
+        if (name === OFFICER_USER && pass === OFFICER_PASS) {
+          const dept = OFFICER_DEPT;
           window.officerDept = dept;
-          const deptIcon = window.selectedOfficerDeptIcon || '🛡️';
+          window.selectedOfficerDept = dept;
+          const deptIcon = (DEPT_INFO[dept] && DEPT_INFO[dept].icon) || '⚕️';
           document.getElementById('officerName').textContent = `${deptIcon} ${dept}`;
           updateDeptInfoBanner(dept);
           navigateTo('officerDash');
@@ -6905,6 +7104,14 @@
         'garbage': { page: 'citizenGarbage', tabIdx: 0, subTabIdx: -1 },
         'satisfaction': { page: 'citizenSatisfaction', tabIdx: 3, subTabIdx: 3 },
         'services': { page: 'citizenServices', tabIdx: 0, subTabIdx: -1 },
+        'assessDisease': { page: 'citizenAssessDisease', tabIdx: 0, subTabIdx: -1 },
+        'assessVision': { page: 'citizenAssessVision', tabIdx: 0, subTabIdx: -1 },
+        'assessOral': { page: 'citizenAssessOral', tabIdx: 0, subTabIdx: -1 },
+        'assessGrowth': { page: 'citizenAssessGrowth', tabIdx: 0, subTabIdx: -1 },
+        'assessFitness': { page: 'citizenAssessFitness', tabIdx: 0, subTabIdx: -1 },
+        'assessLiteracy': { page: 'citizenAssessLiteracy', tabIdx: 0, subTabIdx: -1 },
+        'assessDiet': { page: 'citizenAssessDiet', tabIdx: 0, subTabIdx: -1 },
+        'assessHappiness': { page: 'citizenAssessHappiness', tabIdx: 0, subTabIdx: -1 },
         'diabetes':  { page: 'citizenDiabetes',       tabIdx: 0, subTabIdx: -1 },
         'bedridden': { page: 'citizenBedridden',       tabIdx: 0, subTabIdx: -1 },
         'vaccine':   { page: 'citizenVaccineService',  tabIdx: 0, subTabIdx: -1 }
@@ -6915,6 +7122,9 @@
         const pageEl = document.getElementById(config.page);
         if (!pageEl) { console.warn('switchCitizenTab: page not found:', config.page); return; }
         pageEl.classList.add('active');
+        if (window.ASSESS_TAB_MAP && window.ASSESS_TAB_MAP[tabName] && typeof renderHealthAssessment === 'function') {
+          renderHealthAssessment(window.ASSESS_TAB_MAP[tabName]);
+        }
         // Re-trigger slide-in animation on already-rendered cards when switching tabs
         pageEl.querySelectorAll('.slide-in-card').forEach((el, i) => {
           el.style.animation = 'none';
@@ -6946,7 +7156,8 @@
 
       const config = sectionMap[sectionName];
       if (config) {
-        document.getElementById(config.id).classList.add('active');
+        const targetSection = document.getElementById(config.id);
+        if (targetSection) targetSection.classList.add('active');
         const tabs = document.querySelectorAll('#officerDash .sub-tab');
         if (tabs[config.idx]) tabs[config.idx].classList.add('active');
       }
@@ -7006,21 +7217,33 @@
       }
 
       // Reset text fields
-      ['reportTitle', 'reportDetail', 'reportAssignee'].forEach(id => {
+      ['reportTitle', 'reportDetail', 'reportAssignee', 'reportDate', 'reportTime', 'reportLat', 'reportLng'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = '';
       });
+      const deptEl = document.getElementById('reportDept');
+      if (deptEl) deptEl.value = '';
 
       // Reset upload preview and file array
       uploadedFiles = [];
       const preview = document.getElementById('uploadPreview');
       if (preview) preview.innerHTML = '';
+      const photoInput = document.getElementById('reportPhoto');
+      if (photoInput) photoInput.value = '';
 
       // Reset map
       const mapDiv = document.getElementById('leafletMap');
       const placeholder = document.getElementById('mapPlaceholder');
       if (mapDiv) mapDiv.style.display = 'none';
-      if (placeholder) placeholder.style.display = 'block';
+      if (placeholder) {
+        placeholder.style.display = 'flex';
+        placeholder.innerHTML = '<span class="map-placeholder-icon" style="cursor:pointer;" onclick="initMap()">📍</span><span class="map-placeholder-text">กำลังโหลดแผนที่...</span>';
+      }
+      if (leafletMapInstance) {
+        leafletMapInstance.remove();
+        leafletMapInstance = null;
+        leafletMarker = null;
+      }
     }
 
     function selectProblem(el) {
@@ -7030,21 +7253,25 @@
 
       // Auto-select department based on problem type
       const deptMap = {
-        'road': 'eng',
-        'light': 'eng',
-        'water': 'water',
-        'trash': 'health',
-        'flood': 'eng',
-        'noise': 'admin',
-        'tree': 'health',
-        'animal': 'health',
-        'other': ''
+        fever: 'clinic',
+        injury: 'emergency',
+        stomach: 'clinic',
+        allergy: 'clinic',
+        disease: 'disease',
+        mental: 'mental',
+        medicine: 'clinic',
+        vaccine: 'health',
+        sanitation: 'sanitation',
+        food: 'nutrition',
+        safety: 'emergency',
+        leave: 'clinic',
+        checkup: 'health',
+        other: ''
       };
 
       const dept = deptMap[selectedProblemType] || '';
-      if (dept) {
-        document.getElementById('reportDept').value = dept;
-      }
+      const deptEl = document.getElementById('reportDept');
+      if (deptEl) deptEl.value = dept;
     }
 
     function goReportStep(step) {
@@ -7053,6 +7280,18 @@
         if (reportStep === 1 && !selectedProblemType) {
           showToast('⚠️', 'กรุณาเลือกประเภทปัญหา');
           return;
+        }
+        if (reportStep === 2 && step === 3) {
+          const title = (document.getElementById('reportTitle') || {}).value || '';
+          const detail = (document.getElementById('reportDetail') || {}).value || '';
+          if (!title.trim()) {
+            showToast('⚠️', 'กรุณากรอกหัวข้อ');
+            return;
+          }
+          if (!detail.trim()) {
+            showToast('⚠️', 'กรุณากรอกรายละเอียดอาการ');
+            return;
+          }
         }
       }
 
@@ -7118,7 +7357,18 @@
       'งานทำความสะอาด': '🧹', 'สิ่งแวดล้อม': '🌿', 'มลพิษ': '🏭', 'โรค': '🦠',
       'สุนัข': '🐕', 'หมา': '🐕', 'ท่อ': '🚰'
     };
+    const HEALTH_PROBLEM_EMOJI = {
+      fever: '🤒', injury: '🩹', stomach: '🤢', allergy: '🤧', disease: '🦠',
+      mental: '🧠', medicine: '💊', vaccine: '💉', sanitation: '🧹', food: '🍎',
+      safety: '🚨', leave: '📋', checkup: '🩺', other: '📌'
+    };
+    function getProblemEmoji(problemType) {
+      if (problemType && HEALTH_PROBLEM_EMOJI[problemType]) return HEALTH_PROBLEM_EMOJI[problemType];
+      return null;
+    }
     function getEmojiForReport(problemType, title) {
+      const byType = getProblemEmoji(problemType);
+      if (byType) return byType;
       const text = `${problemType || ''} ${title || ''}`;
       for (const key in PROBLEM_EMOJI) {
         if (text.includes(key)) return PROBLEM_EMOJI[key];
@@ -7260,11 +7510,18 @@
 
     function renderReports() {
       const reports = getReports();
+      const searchQuery = (window._trackingSearchQuery || '').trim().toLowerCase();
 
       const citizenList = document.getElementById('citizenTrackingList');
       if (citizenList) {
         const myPhone = window.citizenData && window.citizenData.phone;
-        const myReports = myPhone ? reports.filter(r => r.phone === myPhone) : reports;
+        let myReports = myPhone ? reports.filter(r => r.phone === myPhone) : reports;
+        if (searchQuery) {
+          myReports = myReports.filter(r =>
+            (r.id || '').toLowerCase().includes(searchQuery) ||
+            (r.title || '').toLowerCase().includes(searchQuery)
+          );
+        }
         citizenList.innerHTML = myReports.length ? myReports.map((r, idx) => `
           <div class="tracking-card slide-in-card" style="animation-delay:${Math.min(idx * 0.07, 0.7)}s;">
             <div class="tracking-header">
@@ -7287,7 +7544,7 @@
               <span>📅 แจ้งเมื่อ: ${r.date}</span>
             </div>
           </div>
-        `).join('') : `<div class="empty-state">📭 ยังไม่มีรายการที่ท่านแจ้งไว้</div>`;
+        `).join('') : `<div class="empty-state">📭 ${searchQuery ? 'ไม่พบรายการที่ค้นหา' : 'ยังไม่มีรายการที่ท่านแจ้งไว้'}</div>`;
       }
 
       const officerTasks = document.getElementById('officerTasksList');
@@ -7390,7 +7647,17 @@
     let selectedUrgency = 'medium';
     const urgencyLabels = { low: 'ไม่เร่งด่วน', medium: 'ปานกลาง', high: 'เร่งด่วน' };
 
+    function filterTrackingList(query) {
+      window._trackingSearchQuery = query;
+      renderReports();
+    }
+
     async function submitReport() {
+      if (!selectedProblemType) {
+        showToast('⚠️', 'กรุณาเลือกประเภทอาการ');
+        goReportStep(1);
+        return;
+      }
       // Citizen info is collected at login
       if (!window.citizenData) {
         window.citizenData = { name: 'นักเรียนทั่วไป' };
@@ -7407,6 +7674,15 @@
       const lng = lngEl && lngEl.value ? lngEl.value : '-';
       const mapLink = (lat !== '-' && lng !== '-') ? `https://maps.google.com/?q=${lat},${lng}` : '-';
 
+      const reportDateEl = document.getElementById('reportDate');
+      const reportTimeEl = document.getElementById('reportTime');
+      const reportDate = reportDateEl && reportDateEl.value
+        ? reportDateEl.value
+        : new Date().toLocaleDateString('th-TH');
+      const reportTime = reportTimeEl && reportTimeEl.value
+        ? reportTimeEl.value
+        : new Date().toLocaleTimeString('th-TH');
+
       const ref = 'REF-' + String(Math.floor(Math.random() * 99999)).padStart(5, '0');
       document.getElementById('refNumber').textContent = ref;
 
@@ -7419,7 +7695,8 @@
         status: 'pending',
         date: 'เมื่อสักครู่',
         urgent: selectedUrgency || 'medium',
-        emoji: '📌',
+        emoji: getProblemEmoji(selectedProblemType) || '📌',
+        problemType: selectedProblemType,
         phone: window.citizenData ? window.citizenData.phone : '-',
         citizenName: window.citizenData ? window.citizenData.name : '-'
       });
@@ -7453,8 +7730,8 @@
           title: title || 'ปัญหาทั่วไป',
           detail: detail || 'ไม่ได้ระบุรายละเอียด',
           urgency: urgencyLabels[selectedUrgency] || 'ปานกลาง',
-          date: new Date().toLocaleDateString('th-TH'),
-          time: new Date().toLocaleTimeString('th-TH'),
+          date: reportDate,
+          time: reportTime,
           lat: lat,
           lng: lng,
           mapLink: mapLink,
@@ -7475,6 +7752,7 @@
 
     function closeModal() {
       document.getElementById('successModal').classList.remove('active');
+      resetReportForm();
       navigateTo('citizenDash');
       switchCitizenTab('tracking');
     }
@@ -7488,7 +7766,7 @@
       const mapDiv = document.getElementById('leafletMap');
 
       if (!mapDiv) return;
-      placeholder.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'none';
       mapDiv.style.display = 'block';
 
       // Default coordinates (Ban Phai)
@@ -7525,6 +7803,7 @@
     function useCurrentLocation() {
       const placeholder = document.getElementById('mapPlaceholder');
       const mapDiv = document.getElementById('leafletMap');
+      if (!placeholder || !mapDiv) return;
 
       if (navigator.geolocation) {
         placeholder.style.display = 'flex';
@@ -8250,7 +8529,7 @@
       const placeholder = document.getElementById('envMapPlaceholder');
       const mapDiv = document.getElementById('envLeafletMap');
       if (!mapDiv) return;
-      placeholder.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'none';
       mapDiv.style.display = 'block';
       let lat = parseFloat(document.getElementById('envReportLat').value) || 16.0592;
       let lng = parseFloat(document.getElementById('envReportLng').value) || 102.7303;
@@ -8281,6 +8560,7 @@
     function useCurrentEnvLocation() {
       const placeholder = document.getElementById('envMapPlaceholder');
       const mapDiv = document.getElementById('envLeafletMap');
+      if (!placeholder || !mapDiv) return;
       if (navigator.geolocation) {
         placeholder.style.display = 'flex';
         placeholder.innerHTML = '<span class="map-placeholder-text">กำลังหาตำแหน่งปัจจุบัน...</span>';
@@ -8321,7 +8601,7 @@
       const problemTypeNode = document.querySelector('#envProblemTypeGrid .emoji-option.selected');
       let problemLabel = selectedEnvProblemType;
       if (problemTypeNode) {
-        problemLabel = problemTypeNode.querySelector('.emoji-option-label').innerText;
+        problemLabel = problemTypeNode.querySelector('.emoji-option-label')?.innerText || problemLabel;
       }
       const dept = 'ห้องพยาบาลโรงเรียนและสิ่งแวดล้อม';
 
@@ -8508,7 +8788,7 @@
       const placeholder = document.getElementById('pollMapPlaceholder');
       const mapDiv = document.getElementById('pollLeafletMap');
       if (!mapDiv) return;
-      placeholder.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'none';
       mapDiv.style.display = 'block';
       let lat = parseFloat(document.getElementById('pollReportLat').value) || 16.0592;
       let lng = parseFloat(document.getElementById('pollReportLng').value) || 102.7303;
@@ -8538,6 +8818,7 @@
     function useCurrentPollLocation() {
       const placeholder = document.getElementById('pollMapPlaceholder');
       const mapDiv = document.getElementById('pollLeafletMap');
+      if (!placeholder || !mapDiv) return;
       if (navigator.geolocation) {
         placeholder.style.display = 'flex';
         placeholder.innerHTML = '<span class="map-placeholder-text">กำลังหาตำแหน่งปัจจุบัน...</span>';
@@ -8572,13 +8853,19 @@
       if (!window.citizenData) {
         window.citizenData = { name: 'นักเรียนทั่วไป' };
       }
-      const title = document.getElementById('pollReportTitle').value || 'ปัญหามลพิษ';
-      const detail = document.getElementById('pollReportDetail').value || '';
+      const titleEl = document.getElementById('pollReportTitle');
+      const detailEl = document.getElementById('pollReportDetail');
+      const title = titleEl ? titleEl.value : '';
+      const detail = detailEl ? detailEl.value : '';
+      if (!title.trim()) {
+        showToast('⚠️', 'กรุณากรอกหัวข้อ');
+        return;
+      }
 
       const problemTypeNode = document.querySelector('#pollProblemTypeGrid .emoji-option.selected');
       let problemLabel = selectedPollProblemType;
       if (problemTypeNode) {
-        problemLabel = problemTypeNode.querySelector('.emoji-option-label').innerText;
+        problemLabel = problemTypeNode.querySelector('.emoji-option-label')?.innerText || problemLabel;
       }
       const dept = 'ห้องพยาบาลโรงเรียนและสิ่งแวดล้อม';
 
@@ -8648,6 +8935,7 @@
       setTimeout(() => syncReports(), 1500);
     }
   </script>
+  <script src="assess-forms.js"></script>
 </body>
 
 </html>
