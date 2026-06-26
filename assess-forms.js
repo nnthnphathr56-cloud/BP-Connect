@@ -2,6 +2,11 @@
 (function () {
   const GRADES = ['ม.1', 'ม.2', 'ม.3', 'ม.4', 'ม.5', 'ม.6'];
   const SEMS = ['ภาคเรียนที่ 1', 'ภาคเรียนที่ 2'];
+  const HEALTH_STATUS_OPTS = [
+    { v: 'ปกติ', l: 'ปกติ' },
+    { v: 'ผิดปกติ', l: 'ผิดปกติ' },
+    { v: 'ไม่เคยตรวจ', l: 'ไม่เคยตรวจ' }
+  ];
   const STORAGE_PREFIX = 'bp_assess_';
 
   function esc(s) {
@@ -22,8 +27,18 @@
   }
 
   function gradeSemHeaderRow(colspan) {
+    const span = colspan || SEMS.length;
     let h = '<tr><th rowspan="2" class="row-label">อวัยวะที่ตรวจ</th><th rowspan="2" class="row-desc">ลักษณะความผิดปกติ</th>';
-    GRADES.forEach(g => { h += `<th colspan="${colspan}">${g}</th>`; });
+    GRADES.forEach(g => { h += `<th colspan="${span}">${g}</th>`; });
+    h += '</tr><tr>';
+    GRADES.forEach(() => SEMS.forEach(s => { h += `<th>${s.replace('ภาคเรียนที่ ', 'ภ.')}</th>`; }));
+    h += '</tr>';
+    return h;
+  }
+
+  function gradeSemHeaderRowVision() {
+    let h = '<tr><th rowspan="2" class="row-label">รายการตรวจ</th>';
+    GRADES.forEach(g => { h += `<th colspan="${SEMS.length}">${g}</th>`; });
     h += '</tr><tr>';
     GRADES.forEach(() => SEMS.forEach(s => { h += `<th>${s.replace('ภาคเรียนที่ ', 'ภ.')}</th>`; }));
     h += '</tr>';
@@ -44,7 +59,7 @@
     return `<input type="${type}" name="${id}" data-field="${id}" value="${esc(v)}" placeholder="${placeholder || ''}">`;
   }
 
-  function cellInput(id, data, type, placeholder) {
+  function bindForm(mount, key, onCalc) {
     const form = mount.querySelector('form');
     if (!form) return;
     function collect() {
@@ -144,25 +159,27 @@
         <td>${diseaseRefCell(ri)}</td>
         <td><label class="assess-radio-opt"><input type="radio" name="${fid}" data-field="${fid}" value="ปกติ"${v === 'ปกติ' ? ' checked' : ''}></label></td>
         <td><label class="assess-radio-opt"><input type="radio" name="${fid}" data-field="${fid}" value="ผิดปกติ"${v === 'ผิดปกติ' ? ' checked' : ''}></label></td>
+        <td><label class="assess-radio-opt"><input type="radio" name="${fid}" data-field="${fid}" value="ไม่เคยตรวจ"${v === 'ไม่เคยตรวจ' ? ' checked' : ''}></label></td>
       </tr>`;
     });
     mount.innerHTML = `
       <span class="assess-part-badge">ตอนที่ 1</span>
       <h2 class="section-title">แบบสำรวจโรค หรือ ความผิดปกติของร่างกาย</h2>
       <div class="assess-instruction">
-        <strong>คำแนะนำ:</strong> นักเรียนสำรวจร่างกายของตนเอง ทำเครื่องหมาย ✓ ในช่อง <strong>ปกติ</strong> หรือ <strong>ผิดปกติ</strong> หากพบความผิดปกติให้แจ้งครูประจำชั้นหรือครูที่ปรึกษา
+        <strong>คำแนะนำ:</strong> นักเรียนสำรวจร่างกายของตนเอง ทำเครื่องหมาย ✓ ในช่อง <strong>ปกติ</strong> <strong>ผิดปกติ</strong> หรือ <strong>ไม่เคยตรวจ</strong> หากพบความผิดปกติให้แจ้งครูประจำชั้นหรือครูที่ปรึกษา
       </div>
       <form id="assessForm-disease">
         <div class="assess-meta-row">
           <div class="form-group"><label class="form-label">วัน เดือน ปี ที่ตรวจ</label>${cellInput('check_date', data, 'date', '')}</div>
         </div>
-        <div class="assess-table-wrap"><table class="assess-table" style="min-width:520px;">
+        <div class="assess-table-wrap"><table class="assess-table" style="min-width:600px;">
           <thead><tr>
             <th class="row-label">อวัยวะที่ตรวจ</th>
             <th class="row-desc">ลักษณะความผิดปกติ</th>
             <th>รูปตัวอย่าง<br><span style="font-weight:400;font-size:0.6rem;">ปกติ / ผิดปกติ</span></th>
             <th>ปกติ</th>
             <th>ผิดปกติ</th>
+            <th>ไม่เคยตรวจ</th>
           </tr></thead>
           <tbody>${tbody}</tbody>
         </table></div>
@@ -175,7 +192,7 @@
   function renderVision(mount) {
     const key = 'vision';
     const data = loadData(key);
-    const opts = [{ v: 'ปกติ', l: 'ปกติ' }, { v: 'ผิดปกติ', l: 'ผิดปกติ' }];
+    const opts = HEALTH_STATUS_OPTS;
     const items = [
       { label: 'ตาขวา (วัดสายตา)', k: 'eye_r' },
       { label: 'ตาซ้าย (วัดสายตา)', k: 'eye_l' },
@@ -184,13 +201,13 @@
     ];
     let tbody = '';
     items.forEach(it => {
-      tbody += `<tr><td class="row-label" colspan="2">${it.label}</td>`;
+      tbody += `<tr><td class="row-label">${it.label}</td>`;
       GRADES.forEach((g, gi) => SEMS.forEach((s, si) => {
         tbody += `<td>${cellSelect(it.k + `_g${gi}_s${si}`, data, opts)}</td>`;
       }));
       tbody += '</tr>';
     });
-    tbody += `<tr><td class="row-label" colspan="2">วัน เดือน ปี ที่ตรวจ</td>`;
+    tbody += `<tr><td class="row-label">วัน เดือน ปี ที่ตรวจ</td>`;
     GRADES.forEach((g, gi) => SEMS.forEach((s, si) => {
       tbody += `<td>${cellInput('vdate_g' + gi + '_s' + si, data, 'date', '')}</td>`;
     }));
@@ -201,13 +218,14 @@
       <div class="assess-instruction">
         <strong>การวัดสายตา (แม่แบบอักษร E / ตัวเลข):</strong> ยืนห่างจากแผ่นวัด 6 เมตร ปิดตาซ้ายทดสอบตาขวาและสลับกัน อ่านบรรทัดที่ 6 ได้ ≥4 ตัว = ปกติ<br>
         <strong>การทดสอบการได้ยิน:</strong> นั่งหันหลังให้ผู้ทดสอบ ในห้องเงียบ ถูนิ้วโป้งกับนิ้วชี้ใกล้หู ได้ยิน = ปกติ ไม่ได้ยิน = ผิดปกติ (แจ้งครู)<br>
+        <strong>ตัวเลือก:</strong> เลือก <strong>ปกติ</strong> / <strong>ผิดปกติ</strong> / <strong>ไม่เคยตรวจ</strong> ในแต่ละภาคเรียน<br>
         <em>หมายเหตุ: หากสวมแว่นต้องสวมแว่นขณะทดสอบ และระบุ "สวมแว่นสายตา"</em>
       </div>
       <form id="assessForm-vision">
         <div class="form-group"><label class="form-label">หมายเหตุ (เช่น สวมแว่นสายตา)</label>
           <input type="text" class="form-input" data-field="note" value="${esc(getVal(data, 'note'))}" placeholder="สวมแว่นสายตา (ถ้ามี)">
         </div>
-        <div class="assess-table-wrap"><table class="assess-table"><thead>${gradeSemHeaderRow(1)}</thead><tbody>${tbody}</tbody></table></div>
+        <div class="assess-table-wrap"><table class="assess-table assess-vision-table"><thead>${gradeSemHeaderRowVision()}</thead><tbody>${tbody}</tbody></table></div>
         <button type="submit" class="btn btn-gold btn-full" style="margin-top:1rem;">💾 บันทึกแบบสำรวจ</button>
       </form>`;
     bindForm(mount, key);
@@ -232,20 +250,49 @@
       }));
       tbody += '</tr>';
     });
+    tbody += '<tr><td class="row-label" colspan="2">วัน เดือน ปี ที่ตรวจ</td>';
+    GRADES.forEach((g, gi) => SEMS.forEach((s, si) => {
+      tbody += `<td>${cellInput('odate_g' + gi + '_s' + si, data, 'date', '')}</td>`;
+    }));
+    tbody += '</tr>';
+    tbody += '<tr class="assess-total-row"><td class="row-label" colspan="2">รวมคะแนนทั้งหมด</td>';
+    GRADES.forEach((g, gi) => SEMS.forEach((s, si) => {
+      tbody += `<td class="assess-total-cell" id="oralTotal_g${gi}_s${si}">-</td>`;
+    }));
+    tbody += '</tr>';
     mount.innerHTML = `
       <span class="assess-part-badge">ตอนที่ 3</span>
       <h2 class="section-title">แบบสำรวจภาวะในช่องปากด้วยตนเอง</h2>
       <div class="assess-instruction">
-        ตรวจดูในปากด้วยกระจก บันทึก <strong>0 = ปกติ</strong> / <strong>1 = ผิดปกติ</strong> หากพบข้อใดเป็น 1 ควรไปพบทันตแพทย์
+        ตรวจดูในปากด้วยกระจก บันทึก <strong>0 = ปกติ</strong> / <strong>1 = ผิดปกติ</strong> หากพบข้อใดเป็น 1 ควรไปพบทันตแพทย์ — แถวล่างสุดจะรวมคะแนนอัตโนมัติ (คะแนนสูงสุด 4 ต่อภาคเรียน)
       </div>
       <form id="assessForm-oral">
-        <div class="assess-table-wrap"><table class="assess-table"><thead>${gradeSemHeaderRow(1)}</thead><tbody>${tbody}</tbody></table></div>
+        <div class="assess-table-wrap"><table class="assess-table"><thead>${gradeSemHeaderRow()}</thead><tbody>${tbody}</tbody></table></div>
         <div class="assess-instruction" style="background:#e8f5e9;border-color:#a5d6a7;">
           <strong>การแปลผล:</strong> ฟันผุ→พบทันตแพทย์ทันที | เหงือกอักเสบ→แปรงฟันเบาๆ หากเลือดออกเกิน 1 สัปดาห์พบทันตแพทย์ | แผล>4มม.หรือไม่หายใน 2 สัปดาห์→พบทันตแพทย์ | ไม่สะอาด→แปรงฟันและใช้ไหมขัดฟัน
         </div>
         <button type="submit" class="btn btn-gold btn-full" style="margin-top:1rem;">💾 บันทึกแบบสำรวจ</button>
       </form>`;
-    bindForm(mount, key);
+    bindForm(mount, key, calcOral);
+    calcOral(mount.querySelector('form'), data);
+  }
+
+  function calcOral(form, data) {
+    if (!form) return;
+    const rowCount = 4;
+    GRADES.forEach((g, gi) => SEMS.forEach((s, si) => {
+      let sum = 0;
+      let filled = 0;
+      for (let ri = 0; ri < rowCount; ri++) {
+        const v = data['o' + ri + '_g' + gi + '_s' + si];
+        if (v === '0' || v === '1') {
+          sum += parseInt(v, 10);
+          filled++;
+        }
+      }
+      const cell = form.querySelector('#oralTotal_g' + gi + '_s' + si);
+      if (cell) cell.textContent = filled ? String(sum) : '-';
+    }));
   }
 
   /* ---- Part 4: Growth ---- */
@@ -713,7 +760,7 @@
   };
 
   const rendered = {};
-  const ASSESS_RENDER_VER = 2;
+  const ASSESS_RENDER_VER = 8;
 
   window.renderHealthAssessment = function (type) {
     const cfg = RENDERERS[type];
